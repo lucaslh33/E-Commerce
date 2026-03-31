@@ -63,7 +63,6 @@ select * from Produto
 
 CREATE PROCEDURE sp_CriarPedido
 	@cliente_id INT
-
 AS
 BEGIN
 DECLARE @pedido_id INT
@@ -74,3 +73,20 @@ DECLARE @pedido_id INT
 	SET @pedido_id = SCOPE_IDENTITY()
 	SELECT @pedido_id AS pedido_id
 END
+
+CREATE PROCEDURE sp_AdicionarItemPedido
+	@pedido_id INT,
+	@produto_id INT,
+	@quantidade INT
+AS 
+BEGIN
+	DECLARE @preco DECIMAL (10,2)
+	
+	SELECT @preco = preco
+	FROM Produto
+	WHERE id = @produto_id
+
+	INSERT INTO ItemPedido (pedido_id ,produto_id, quantidade, preco)
+	VALUES (@pedido_id, @produto_id, @quantidade, @preco)
+END
+
