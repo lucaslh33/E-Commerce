@@ -15,12 +15,21 @@ cidade VARCHAR(100) NOT NULL,
 estado char (2) NOT NULL
 )
 
+INSERT INTO Cliente (nome, cpf, datanascimento, email, celular, rua, numero, cidade, estado)
+VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999999', 'Rua A', '123', 'Franca', 'SP')
+
 CREATE TABLE Produto (
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 preco DECIMAL(10,2) NOT NULL CHECK (preco > 0),
 estoque INT NOT NULL CHECK (estoque >= 0)
 )
+
+INSERT INTO Produto (nome, preco, estoque)
+VALUES ('Mouse Gamer', 150.00, 10)
+
+SELECT * FROM Produto
+SELECT * FROM Cliente
 
 CREATE TABLE Pedido (
 id INT PRIMARY KEY IDENTITY,
@@ -74,6 +83,8 @@ DECLARE @pedido_id INT
 	SELECT @pedido_id AS pedido_id
 END
 
+EXEC sp_CriarPedido 1
+
 CREATE PROCEDURE sp_AdicionarItemPedido
 	@pedido_id INT,
 	@produto_id INT,
@@ -89,4 +100,8 @@ BEGIN
 	INSERT INTO ItemPedido (pedido_id ,produto_id, quantidade, preco)
 	VALUES (@pedido_id, @produto_id, @quantidade, @preco)
 END
+EXEC sp_AdicionarItemPedido 1, 1, 3
+SELECT * FROM Pedido
+SELECT * FROM ItemPedido
+SELECT * FROM Produto
 
