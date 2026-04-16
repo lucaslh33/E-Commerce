@@ -2,47 +2,58 @@ CREATE DATABASE ecommerce
 
 USE ecommerce
 
-CREATE TABLE Cliente (
+CREATE TABLE tblcliente (
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 cpf VARCHAR(14) UNIQUE NOT NULL,
 datanascimento DATE,
 email VARCHAR (100) NOT NULL,
-celular VARCHAR (15) NOT NULL,
-rua VARCHAR(100) NOT NULL,
-numero CHAR (5) NOT NULL,
-cidade VARCHAR(100) NOT NULL,
-estado char (2) NOT NULL
+celular VARCHAR (15) NOT NULL
 )
 
-INSERT INTO Cliente (nome, cpf, datanascimento, email, celular, rua, numero, cidade, estado)
-VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999999', 'Rua A', '123', 'Franca', 'SP')
+INSERT INTO tblcliente (nome, cpf, datanascimento, email, celular)
+VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999999')
 
-CREATE TABLE Produto (
+CREATE TABLE tblcategoria(
+id INT PRIMARY KEY IDENTITY,
+nome VARCHAR(100) NOT NULL,
+descricao VARCHAR(255)
+)
+
+CREATE TABLE tblendereco(
+id INT PRIMARY KEY IDENTITY,
+cliente_id INT NOT NULL FOREIGN KEY REFERENCES tblcliente(id),
+rua VARCHAR(100) NOT NULL,
+numero CHAR (5) NOT NULL,
+complemento VARCHAR(50),
+bairro VARCHAR(100),
+cidade VARCHAR(100) NOT NULL,
+estado char (2) NOT NULL,
+cep CHAR(9) NOT NULL
+)
+
+
+CREATE TABLE tblproduto (
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 preco DECIMAL(10,2) NOT NULL CHECK (preco > 0),
-estoque INT NOT NULL CHECK (estoque >= 0)
+estoque INT NOT NULL CHECK (estoque >= 0),
+categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id) NOT NULL
 )
 
-INSERT INTO Produto (nome, preco, estoque)
-VALUES ('Mouse Gamer', 150.00, 10)
-
-SELECT * FROM Produto
-SELECT * FROM Cliente
-
-CREATE TABLE Pedido (
+CREATE TABLE tblpedido (
 id INT PRIMARY KEY IDENTITY,
 cliente_id INT NOT NULL,
 data_pedido DATETIME DEFAULT GETDATE(),
 total DECIMAL(10,2) DEFAULT 0,
+endereco_id INT NOT NULL FOREIGN KEY REFERENCES tblendereco(id),
 status VARCHAR(20) DEFAULT 'Pendente',
 
 CONSTRAINT FK_Pedido_Cliente
 FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
 )
 
-CREATE TABLE ItemPedido (
+CREATE TABLE tblitempedido (
 id INT PRIMARY KEY IDENTITY,
 pedido_id INT NOT NULL,
 produto_id INT NOT NULL,
@@ -51,11 +62,31 @@ preco DECIMAL (10,2) NOT NULL,
 data_inclusao DATETIME DEFAULT GETDATE(),
 
 CONSTRAINT FK_ItemPedido_Pedido
-FOREIGN KEY (pedido_id)REFERENCES Pedido(id),
+FOREIGN KEY (pedido_id)REFERENCES tblpedido(id),
 
 CONSTRAINT FK_ItemPedido_Produto
-FOREIGN KEY (produto_id) REFERENCES Produto(id)
+FOREIGN KEY (produto_id) REFERENCES tblproduto(id)
 )
+
+CREATE TABLE tblenvio (
+id INT PRIMARY KEY IDENTITY,
+pedido_id INT NOT NULL FOREIGN KEY REFERENCES tblpedido(id),
+endereco_id INT NOT NULL FOREIGN KEY REFERENCES tblendereco(id),
+transportadora VARCHAR(100),
+codigo_rastreio VARCHAR(100),
+data_envio DATETIME,
+data_previsao DATE,
+data_entrega DATETIME,
+status VARCHAR(30) DEFAULT 'Aguardando'
+)
+
+INSERT INTO tblproduto (nome, preco, estoque)
+VALUES ('Mouse Gamer', 150.00, 10)
+
+SELECT * FROM tblproduto
+SELECT * FROM tblcliente
+
+
 
 CREATE PROCEDURE sp_CadastrarProduto
 	@nome VARCHAR(100),
@@ -63,27 +94,27 @@ CREATE PROCEDURE sp_CadastrarProduto
 	@estoque INT
 AS
 BEGIN
-	INSERT INTO Produto (nome, preco, estoque)
+	INSERT INTO tblproduto (nome, preco, estoque)
 	VALUES (@nome, @preco, @estoque)
 END
-EXEC sp_CadastrarProduto tridente, 2.50, 10
 
-select * from Produto
+EXEC sp_CadastrarProduto 'tridente', 2.50, 10
+
+select * from tblproduto
 
 CREATE PROCEDURE sp_CriarPedido
-	@cliente_id INT
+    @cliente_id INT,
+    @endereco_id INT
 AS
 BEGIN
-DECLARE @pedido_id INT
-
-	INSERT INTO Pedido (cliente_id)
-	VALUES (@cliente_id)
-
-	SET @pedido_id = SCOPE_IDENTITY()
-	SELECT @pedido_id AS pedido_id
+    DECLARE @pedido_id INT
+    INSERT INTO tblpedido (cliente_id, endereco_id)
+    VALUES (@cliente_id, @endereco_id)
+    SET @pedido_id = SCOPE_IDENTITY()
+    SELECT @pedido_id AS pedido_id
 END
 
-EXEC sp_CriarPedido 1
+EXEC sp_CriarPedido 1, 1
 
 CREATE PROCEDURE sp_AdicionarItemPedido
 	@pedido_id INT,
@@ -94,14 +125,53 @@ BEGIN
 	DECLARE @preco DECIMAL (10,2)
 	
 	SELECT @preco = preco
-	FROM Produto
+	FROM tblproduto
 	WHERE id = @produto_id
 
-	INSERT INTO ItemPedido (pedido_id ,produto_id, quantidade, preco)
+	INSERT INTO tblitempedido (pedido_id ,produto_id, quantidade, preco)
 	VALUES (@pedido_id, @produto_id, @quantidade, @preco)
 END
 EXEC sp_AdicionarItemPedido 1, 1, 3
-SELECT * FROM Pedido
-SELECT * FROM ItemPedido
-SELECT * FROM Produto
+SELECT * FROM tblpedido
+SELECT * FROM tblitempedido
+SELECT * FROM tblproduto
 
+CREATE TRIGGER trg_BaixarEstoque
+ON tblitemPedido
+AFTER INSERT
+AS 
+BEGIN
+	UPDATE tblproduto
+	SET estoque = estoque - i.quantidade
+	FROM tblproduto p
+	INNER JOIN inserted i ON p.id = i.produto_id
+
+	-- Verifica se algum produto ficou negativo
+	IF EXISTS (SELECT 1 FROM tblproduto WHERE estoque < 0)
+	BEGIN
+		RAISERROR('Estoque insuficiente para um ou mais produtos.', 16, 1)
+		ROLLBACK TRANSACTION
+		END
+END
+
+CREATE TRIGGER trg_AtualizarTotalPedido
+ON tblitemPedido
+AFTER INSERT, DELETE, UPDATE
+AS
+BEGIN
+	UPDATE tblpedido
+	SET total = (
+		SELECT ISNULL(SUM(quantidade * preco), 0 )
+		From tblitempedido
+		WHERE pedido_id = tblpedido.id
+	)
+	WHERE id IN (
+	SELECT pedido_id FROM inserted
+	UNION
+	SELECT pedido_id FROM deleted
+	)
+END
+EXEC sp_settriggerorder
+	@triggername = 'trg_BaixarEstoque',
+	@order = 'First',
+	@stmttype = 'INSERT'
