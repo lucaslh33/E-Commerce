@@ -38,7 +38,7 @@ id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 preco DECIMAL(10,2) NOT NULL CHECK (preco > 0),
 estoque INT NOT NULL CHECK (estoque >= 0),
-categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id) NOT NULL
+categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id)
 )
 
 CREATE TABLE tblpedido (
@@ -50,7 +50,7 @@ endereco_id INT NOT NULL FOREIGN KEY REFERENCES tblendereco(id),
 status VARCHAR(20) DEFAULT 'Pendente',
 
 CONSTRAINT FK_Pedido_Cliente
-FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
+FOREIGN KEY (cliente_id) REFERENCES tblcliente(id)
 )
 
 CREATE TABLE tblitempedido (
@@ -137,7 +137,7 @@ SELECT * FROM tblitempedido
 SELECT * FROM tblproduto
 
 CREATE TRIGGER trg_BaixarEstoque
-ON tblitemPedido
+ON tblitempedido
 AFTER INSERT
 AS 
 BEGIN
