@@ -33,7 +33,6 @@
             lblObservacoes = new Label();
             txtComplemento = new TextBox();
             lblComplemento = new Label();
-            txtEstado = new TextBox();
             txtCidade = new TextBox();
             txtBairro = new TextBox();
             txtNumero = new TextBox();
@@ -44,8 +43,8 @@
             lblNumero = new Label();
             lblRua = new Label();
             mskCep = new MaskedTextBox();
-            btnCadastrar = new Button();
             lblCep = new Label();
+            btnCadastrar = new Button();
             grbinformacoescliente = new GroupBox();
             lblCelular = new Label();
             mskCelular = new MaskedTextBox();
@@ -60,11 +59,12 @@
             lblCPF = new Label();
             mskCPF = new MaskedTextBox();
             grbAcesso = new GroupBox();
-            lblSenha = new Label();
-            lblConfirmarsenha = new Label();
-            txtSenha = new TextBox();
             txtConfirmarSenha = new TextBox();
+            txtSenha = new TextBox();
+            lblConfirmarsenha = new Label();
+            lblSenha = new Label();
             btnCancelar = new Button();
+            cmbEstado = new ComboBox();
             grbInformacoesEndereco.SuspendLayout();
             grbinformacoescliente.SuspendLayout();
             grbAcesso.SuspendLayout();
@@ -72,11 +72,11 @@
             // 
             // grbInformacoesEndereco
             // 
+            grbInformacoesEndereco.Controls.Add(cmbEstado);
             grbInformacoesEndereco.Controls.Add(txtObservacoes);
             grbInformacoesEndereco.Controls.Add(lblObservacoes);
             grbInformacoesEndereco.Controls.Add(txtComplemento);
             grbInformacoesEndereco.Controls.Add(lblComplemento);
-            grbInformacoesEndereco.Controls.Add(txtEstado);
             grbInformacoesEndereco.Controls.Add(txtCidade);
             grbInformacoesEndereco.Controls.Add(txtBairro);
             grbInformacoesEndereco.Controls.Add(txtNumero);
@@ -127,13 +127,6 @@
             lblComplemento.Size = new Size(90, 15);
             lblComplemento.TabIndex = 18;
             lblComplemento.Text = "Complemento: ";
-            // 
-            // txtEstado
-            // 
-            txtEstado.Location = new Point(358, 97);
-            txtEstado.Name = "txtEstado";
-            txtEstado.Size = new Size(100, 23);
-            txtEstado.TabIndex = 17;
             // 
             // txtCidade
             // 
@@ -211,19 +204,10 @@
             // mskCep
             // 
             mskCep.Location = new Point(6, 41);
-            mskCep.Mask = "14404-249";
+            mskCep.Mask = "00000-000";
             mskCep.Name = "mskCep";
             mskCep.Size = new Size(70, 23);
             mskCep.TabIndex = 7;
-            // 
-            // btnCadastrar
-            // 
-            btnCadastrar.Location = new Point(590, 557);
-            btnCadastrar.Name = "btnCadastrar";
-            btnCadastrar.Size = new Size(75, 23);
-            btnCadastrar.TabIndex = 4;
-            btnCadastrar.Text = "Cadastrar";
-            btnCadastrar.UseVisualStyleBackColor = true;
             // 
             // lblCep
             // 
@@ -233,6 +217,15 @@
             lblCep.Size = new Size(31, 15);
             lblCep.TabIndex = 5;
             lblCep.Text = "CEP:";
+            // 
+            // btnCadastrar
+            // 
+            btnCadastrar.Location = new Point(590, 557);
+            btnCadastrar.Name = "btnCadastrar";
+            btnCadastrar.Size = new Size(75, 23);
+            btnCadastrar.TabIndex = 4;
+            btnCadastrar.Text = "Cadastrar";
+            btnCadastrar.UseVisualStyleBackColor = true;
             // 
             // grbinformacoescliente
             // 
@@ -267,7 +260,7 @@
             // mskCelular
             // 
             mskCelular.Location = new Point(392, 92);
-            mskCelular.Mask = "(16)99219-4670";
+            mskCelular.Mask = "(00) 00000-0000";
             mskCelular.Name = "mskCelular";
             mskCelular.Size = new Size(100, 23);
             mskCelular.TabIndex = 12;
@@ -275,7 +268,7 @@
             // mskTelefone
             // 
             mskTelefone.Location = new Point(267, 92);
-            mskTelefone.Mask = "3701-9471";
+            mskTelefone.Mask = "(00) 0000-0000";
             mskTelefone.Name = "mskTelefone";
             mskTelefone.Size = new Size(86, 23);
             mskTelefone.TabIndex = 11;
@@ -351,7 +344,7 @@
             // mskCPF
             // 
             mskCPF.Location = new Point(267, 37);
-            mskCPF.Mask = "111.111.111-00";
+            mskCPF.Mask = "000.000.000-00";
             mskCPF.Name = "mskCPF";
             mskCPF.Size = new Size(100, 23);
             mskCPF.TabIndex = 3;
@@ -369,14 +362,21 @@
             grbAcesso.TabStop = false;
             grbAcesso.Text = "Acesso: ";
             // 
-            // lblSenha
+            // txtConfirmarSenha
             // 
-            lblSenha.AutoSize = true;
-            lblSenha.Location = new Point(14, 20);
-            lblSenha.Name = "lblSenha";
-            lblSenha.Size = new Size(45, 15);
-            lblSenha.TabIndex = 0;
-            lblSenha.Text = "Senha: ";
+            txtConfirmarSenha.Location = new Point(231, 38);
+            txtConfirmarSenha.Name = "txtConfirmarSenha";
+            txtConfirmarSenha.PasswordChar = '*';
+            txtConfirmarSenha.Size = new Size(179, 23);
+            txtConfirmarSenha.TabIndex = 3;
+            // 
+            // txtSenha
+            // 
+            txtSenha.Location = new Point(14, 38);
+            txtSenha.Name = "txtSenha";
+            txtSenha.PasswordChar = '*';
+            txtSenha.Size = new Size(179, 23);
+            txtSenha.TabIndex = 2;
             // 
             // lblConfirmarsenha
             // 
@@ -387,21 +387,14 @@
             lblConfirmarsenha.TabIndex = 1;
             lblConfirmarsenha.Text = "Confirmar senha: ";
             // 
-            // txtSenha
+            // lblSenha
             // 
-            txtSenha.Location = new Point(14, 38);
-            txtSenha.Name = "txtSenha";
-            txtSenha.PasswordChar = '*';
-            txtSenha.Size = new Size(179, 23);
-            txtSenha.TabIndex = 2;
-            // 
-            // txtConfirmarSenha
-            // 
-            txtConfirmarSenha.Location = new Point(231, 38);
-            txtConfirmarSenha.Name = "txtConfirmarSenha";
-            txtConfirmarSenha.PasswordChar = '*';
-            txtConfirmarSenha.Size = new Size(179, 23);
-            txtConfirmarSenha.TabIndex = 3;
+            lblSenha.AutoSize = true;
+            lblSenha.Location = new Point(14, 20);
+            lblSenha.Name = "lblSenha";
+            lblSenha.Size = new Size(45, 15);
+            lblSenha.TabIndex = 0;
+            lblSenha.Text = "Senha: ";
             // 
             // btnCancelar
             // 
@@ -411,6 +404,14 @@
             btnCancelar.TabIndex = 15;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Location = new Point(358, 97);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(121, 23);
+            cmbEstado.TabIndex = 22;
             // 
             // frmCadCliente
             // 
@@ -441,7 +442,6 @@
         private Label lblObservacoes;
         private TextBox txtComplemento;
         private Label lblComplemento;
-        private TextBox txtEstado;
         private TextBox txtCidade;
         private TextBox txtBairro;
         private TextBox txtNumero;
@@ -473,5 +473,6 @@
         private Label lblConfirmarsenha;
         private Label lblSenha;
         private Button btnCancelar;
+        private ComboBox cmbEstado;
     }
 }
