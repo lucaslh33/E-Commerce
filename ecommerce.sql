@@ -8,11 +8,29 @@ nome VARCHAR(100) NOT NULL,
 cpf VARCHAR(14) UNIQUE NOT NULL,
 datanascimento DATE,
 email VARCHAR (100) NOT NULL,
-celular VARCHAR (15) NOT NULL
+celular VARCHAR (15) NOT NULL,
+telefone VARCHAR(15),
+senha VARCHAR(255) NOT NULL
 )
 
 INSERT INTO tblcliente (nome, cpf, datanascimento, email, celular)
 VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999999')
+
+CREATE TABLE tblfornecedor (
+id INT PRIMARY KEY IDENTITY,
+nome VARCHAR(100) NOT NULL,
+cnpj VARCHAR(18) UNIQUE NOT NULL,
+email VARCHAR(100),
+telefone VARCHAR(15),
+celular VARCHAR(15),
+cep CHAR(9),
+rua VARCHAR(100),
+numero CHAR(5),
+bairro VARCHAR(100),
+cidade VARCHAR(100),
+estado CHAR(2),
+observacoes VARCHAR(MAX)
+)
 
 CREATE TABLE tblcategoria(
 id INT PRIMARY KEY IDENTITY,
@@ -29,8 +47,10 @@ complemento VARCHAR(50),
 bairro VARCHAR(100),
 cidade VARCHAR(100) NOT NULL,
 estado char (2) NOT NULL,
-cep CHAR(9) NOT NULL
+cep CHAR(9) NOT NULL,
+observacoes VARCHAR(MAX)
 )
+
 
 
 CREATE TABLE tblproduto (
@@ -38,6 +58,16 @@ id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 preco DECIMAL(10,2) NOT NULL CHECK (preco > 0),
 estoque INT NOT NULL CHECK (estoque >= 0),
+peso DECIMAL(10,3),
+altura DECIMAL(10,2),
+largura DECIMAL(10,2),
+comprimento DECIMAL(10,2),
+descricao VARCHAR(MAX),
+imagem VARCHAR(255),  -- caminho ou URL da imagem
+codigo_barras VARCHAR(50),
+marca VARCHAR(100),
+fornecedor_id INT FOREIGN KEY REFERENCES tblfornecedor(id),
+ativo BIT DEFAULT 1,
 categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id)
 )
 

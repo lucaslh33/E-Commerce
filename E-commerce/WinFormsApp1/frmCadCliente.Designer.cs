@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce
 {
-    partial class frmCadastroCliente
+    partial class frmCadCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -412,7 +412,7 @@
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // frmCadastroCliente
+            // frmCadCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -422,8 +422,8 @@
             Controls.Add(grbInformacoesEndereco);
             Controls.Add(grbinformacoescliente);
             Controls.Add(btnCadastrar);
-            Name = "frmCadastroCliente";
-            Text = "frmCadastroCliente";
+            Name = "frmCadCliente";
+            Text = "frmCadCliente";
             Load += frmCadastroCliente_Load;
             grbInformacoesEndereco.ResumeLayout(false);
             grbInformacoesEndereco.PerformLayout();

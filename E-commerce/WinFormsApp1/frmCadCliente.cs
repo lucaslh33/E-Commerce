@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Ecommerce
 {
-    public partial class frmCadastroCliente : Form
+    public partial class frmCadCliente : Form
     {
-        public frmCadastroCliente()
+        public frmCadCliente()
         {
             InitializeComponent();
         }
