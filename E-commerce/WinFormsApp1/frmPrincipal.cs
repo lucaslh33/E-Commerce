@@ -19,5 +19,29 @@ namespace Ecommerce
         {
 
         }
+
+        private void cadastroProdutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadProduto frmCadProduto = new frmCadProduto();
+            frmCadProduto.ShowDialog();
+        }
+
+        private void cadastroClienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadCliente frmCadCliente = new frmCadCliente();
+            frmCadCliente.ShowDialog();
+        }
+
+        private void cadastroFornecedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadFornecedor frmCadFornecedor = new frmCadFornecedor();
+            frmCadFornecedor.ShowDialog();
+        }
+
+        private void categoriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCadCategoria frmCadCategoria = new frmCadCategoria();
+            frmCadCategoria.ShowDialog();
+        }
     }
 }

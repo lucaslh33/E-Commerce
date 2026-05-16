@@ -19,6 +19,7 @@ VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999
 CREATE TABLE tblfornecedor (
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
+nomefantasia VARCHAR(100) NOT NULL,
 cnpj VARCHAR(18) UNIQUE NOT NULL,
 email VARCHAR(100),
 telefone VARCHAR(15),
@@ -66,6 +67,11 @@ descricao VARCHAR(MAX),
 imagem VARCHAR(255),  -- caminho ou URL da imagem
 codigo_barras VARCHAR(50),
 marca VARCHAR(100),
+ean CHAR(13) UNIQUE,
+sku VARCHAR(50) UNIQUE,
+imagem1 VARCHAR(255),
+imagem2 VARCHAR(255),
+imagem3 VARCHAR(255),
 fornecedor_id INT FOREIGN KEY REFERENCES tblfornecedor(id),
 ativo BIT DEFAULT 1,
 categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id)
