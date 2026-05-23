@@ -28,12 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmConsultarProdutos";
+            grbConsultarProdutos = new GroupBox();
+            dgvConsultarProduto = new DataGridView();
+            txtPesquisa = new TextBox();
+            lblPesquisa = new Label();
+            grbConsultarProdutos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).BeginInit();
+            SuspendLayout();
+            // 
+            // grbConsultarProdutos
+            // 
+            grbConsultarProdutos.Controls.Add(dgvConsultarProduto);
+            grbConsultarProdutos.Controls.Add(txtPesquisa);
+            grbConsultarProdutos.Controls.Add(lblPesquisa);
+            grbConsultarProdutos.Location = new Point(12, 12);
+            grbConsultarProdutos.Name = "grbConsultarProdutos";
+            grbConsultarProdutos.Size = new Size(632, 500);
+            grbConsultarProdutos.TabIndex = 1;
+            grbConsultarProdutos.TabStop = false;
+            grbConsultarProdutos.Text = "Consultar Produtos: ";
+            // 
+            // dgvConsultarProduto
+            // 
+            dgvConsultarProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsultarProduto.Location = new Point(6, 76);
+            dgvConsultarProduto.Name = "dgvConsultarProduto";
+            dgvConsultarProduto.Size = new Size(557, 418);
+            dgvConsultarProduto.TabIndex = 2;
+            // 
+            // txtPesquisa
+            // 
+            txtPesquisa.Location = new Point(6, 37);
+            txtPesquisa.Name = "txtPesquisa";
+            txtPesquisa.Size = new Size(305, 23);
+            txtPesquisa.TabIndex = 1;
+            // 
+            // lblPesquisa
+            // 
+            lblPesquisa.AutoSize = true;
+            lblPesquisa.Location = new Point(6, 19);
+            lblPesquisa.Name = "lblPesquisa";
+            lblPesquisa.Size = new Size(162, 15);
+            lblPesquisa.TabIndex = 0;
+            lblPesquisa.Text = "Nome do produto, SKU, EAN:";
+            // 
+            // frmConsultarProdutos
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(825, 569);
+            Controls.Add(grbConsultarProdutos);
+            Name = "frmConsultarProdutos";
+            Text = "frmConsultarProdutos";
+            grbConsultarProdutos.ResumeLayout(false);
+            grbConsultarProdutos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox grbConsultarProdutos;
+        private DataGridView dgvConsultarProduto;
+        private TextBox txtPesquisa;
+        private Label lblPesquisa;
     }
 }

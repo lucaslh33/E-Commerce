@@ -42,6 +42,7 @@
             relatóriosToolStripMenuItem = new ToolStripMenuItem();
             vendasToolStripMenuItem = new ToolStripMenuItem();
             feedebackToolStripMenuItem = new ToolStripMenuItem();
+            pDVToolStripMenuItem = new ToolStripMenuItem();
             msMenuPrincipal.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,28 +66,28 @@
             // cadastroClienteToolStripMenuItem
             // 
             cadastroClienteToolStripMenuItem.Name = "cadastroClienteToolStripMenuItem";
-            cadastroClienteToolStripMenuItem.Size = new Size(180, 22);
+            cadastroClienteToolStripMenuItem.Size = new Size(145, 22);
             cadastroClienteToolStripMenuItem.Text = "Clientes";
             cadastroClienteToolStripMenuItem.Click += cadastroClienteToolStripMenuItem_Click;
             // 
             // cadastroFornecedorToolStripMenuItem
             // 
             cadastroFornecedorToolStripMenuItem.Name = "cadastroFornecedorToolStripMenuItem";
-            cadastroFornecedorToolStripMenuItem.Size = new Size(180, 22);
+            cadastroFornecedorToolStripMenuItem.Size = new Size(145, 22);
             cadastroFornecedorToolStripMenuItem.Text = "Fornecedores";
             cadastroFornecedorToolStripMenuItem.Click += cadastroFornecedorToolStripMenuItem_Click;
             // 
             // cadastroProdutoToolStripMenuItem
             // 
             cadastroProdutoToolStripMenuItem.Name = "cadastroProdutoToolStripMenuItem";
-            cadastroProdutoToolStripMenuItem.Size = new Size(180, 22);
+            cadastroProdutoToolStripMenuItem.Size = new Size(145, 22);
             cadastroProdutoToolStripMenuItem.Text = "Produtos";
             cadastroProdutoToolStripMenuItem.Click += cadastroProdutoToolStripMenuItem_Click;
             // 
             // categoriaToolStripMenuItem
             // 
             categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
-            categoriaToolStripMenuItem.Size = new Size(180, 22);
+            categoriaToolStripMenuItem.Size = new Size(145, 22);
             categoriaToolStripMenuItem.Text = "Categoria";
             categoriaToolStripMenuItem.Click += categoriaToolStripMenuItem_Click;
             // 
@@ -129,6 +130,7 @@
             // 
             // vendasToolStripMenuItem
             // 
+            vendasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pDVToolStripMenuItem });
             vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
             vendasToolStripMenuItem.Size = new Size(56, 20);
             vendasToolStripMenuItem.Text = "Vendas";
@@ -138,6 +140,13 @@
             feedebackToolStripMenuItem.Name = "feedebackToolStripMenuItem";
             feedebackToolStripMenuItem.Size = new Size(75, 20);
             feedebackToolStripMenuItem.Text = "Feedeback";
+            // 
+            // pDVToolStripMenuItem
+            // 
+            pDVToolStripMenuItem.Name = "pDVToolStripMenuItem";
+            pDVToolStripMenuItem.Size = new Size(180, 22);
+            pDVToolStripMenuItem.Text = "PDV";
+            pDVToolStripMenuItem.Click += pDVToolStripMenuItem_Click;
             // 
             // frmPrincipal
             // 
@@ -171,5 +180,6 @@
         private ToolStripMenuItem fornecedoresToolStripMenuItem;
         private ToolStripMenuItem produtosToolStripMenuItem;
         private ToolStripMenuItem categoriasToolStripMenuItem;
+        private ToolStripMenuItem pDVToolStripMenuItem;
     }
 }

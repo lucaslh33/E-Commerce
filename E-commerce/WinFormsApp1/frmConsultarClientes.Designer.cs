@@ -29,29 +29,44 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            grbConsultaCliente = new GroupBox();
-            lblPesquisa = new Label();
-            txtPesquisa = new TextBox();
+            grbConsultarClientes = new GroupBox();
             dgvConsultaCliente = new DataGridView();
+            txtPesquisa = new TextBox();
+            lblPesquisa = new Label();
             contextMenu = new ContextMenuStrip(components);
             alterarToolStripMenuItem = new ToolStripMenuItem();
             deletarToolStripMenuItem = new ToolStripMenuItem();
-            grbConsultaCliente.SuspendLayout();
+            grbConsultarClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaCliente).BeginInit();
             contextMenu.SuspendLayout();
             SuspendLayout();
             // 
-            // grbConsultaCliente
+            // grbConsultarClientes
             // 
-            grbConsultaCliente.Controls.Add(dgvConsultaCliente);
-            grbConsultaCliente.Controls.Add(txtPesquisa);
-            grbConsultaCliente.Controls.Add(lblPesquisa);
-            grbConsultaCliente.Location = new Point(12, 12);
-            grbConsultaCliente.Name = "grbConsultaCliente";
-            grbConsultaCliente.Size = new Size(632, 500);
-            grbConsultaCliente.TabIndex = 0;
-            grbConsultaCliente.TabStop = false;
-            grbConsultaCliente.Text = "Consulta de Clientes";
+            grbConsultarClientes.Controls.Add(dgvConsultaCliente);
+            grbConsultarClientes.Controls.Add(txtPesquisa);
+            grbConsultarClientes.Controls.Add(lblPesquisa);
+            grbConsultarClientes.Location = new Point(12, 12);
+            grbConsultarClientes.Name = "grbConsultarClientes";
+            grbConsultarClientes.Size = new Size(632, 500);
+            grbConsultarClientes.TabIndex = 0;
+            grbConsultarClientes.TabStop = false;
+            grbConsultarClientes.Text = "Consultar Clientes";
+            // 
+            // dgvConsultaCliente
+            // 
+            dgvConsultaCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsultaCliente.Location = new Point(6, 76);
+            dgvConsultaCliente.Name = "dgvConsultaCliente";
+            dgvConsultaCliente.Size = new Size(557, 418);
+            dgvConsultaCliente.TabIndex = 2;
+            // 
+            // txtPesquisa
+            // 
+            txtPesquisa.Location = new Point(6, 37);
+            txtPesquisa.Name = "txtPesquisa";
+            txtPesquisa.Size = new Size(305, 23);
+            txtPesquisa.TabIndex = 1;
             // 
             // lblPesquisa
             // 
@@ -61,21 +76,6 @@
             lblPesquisa.Size = new Size(138, 15);
             lblPesquisa.TabIndex = 0;
             lblPesquisa.Text = "Nome, CPF ou Telefone: ";
-            // 
-            // txtPesquisa
-            // 
-            txtPesquisa.Location = new Point(6, 37);
-            txtPesquisa.Name = "txtPesquisa";
-            txtPesquisa.Size = new Size(305, 23);
-            txtPesquisa.TabIndex = 1;
-            // 
-            // dgvConsultaCliente
-            // 
-            dgvConsultaCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConsultaCliente.Location = new Point(6, 76);
-            dgvConsultaCliente.Name = "dgvConsultaCliente";
-            dgvConsultaCliente.Size = new Size(557, 418);
-            dgvConsultaCliente.TabIndex = 2;
             // 
             // contextMenu
             // 
@@ -100,11 +100,11 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(681, 577);
-            Controls.Add(grbConsultaCliente);
+            Controls.Add(grbConsultarClientes);
             Name = "frmConsultarClientes";
             Text = "frmConsultarClientes";
-            grbConsultaCliente.ResumeLayout(false);
-            grbConsultaCliente.PerformLayout();
+            grbConsultarClientes.ResumeLayout(false);
+            grbConsultarClientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaCliente).EndInit();
             contextMenu.ResumeLayout(false);
             ResumeLayout(false);
@@ -112,7 +112,7 @@
 
         #endregion
 
-        private GroupBox grbConsultaCliente;
+        private GroupBox grbConsultarClientes;
         private Label lblPesquisa;
         private DataGridView dgvConsultaCliente;
         private TextBox txtPesquisa;

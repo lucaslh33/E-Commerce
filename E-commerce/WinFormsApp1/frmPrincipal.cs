@@ -43,5 +43,11 @@ namespace Ecommerce
             frmCadCategoria frmCadCategoria = new frmCadCategoria();
             frmCadCategoria.ShowDialog();
         }
+
+        private void pDVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPainelVendas frmPainelVendas = new frmPainelVendas();
+            frmPainelVendas.ShowDialog();
+        }
     }
 }

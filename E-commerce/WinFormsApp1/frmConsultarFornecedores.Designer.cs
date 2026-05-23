@@ -28,12 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmConsultarFornecedores";
+            grbConsultaFornecedores = new GroupBox();
+            dgvConsultaFornecedores = new DataGridView();
+            txtPesquisa = new TextBox();
+            lblPesquisa = new Label();
+            grbConsultaFornecedores.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvConsultaFornecedores).BeginInit();
+            SuspendLayout();
+            // 
+            // grbConsultaFornecedores
+            // 
+            grbConsultaFornecedores.Controls.Add(dgvConsultaFornecedores);
+            grbConsultaFornecedores.Controls.Add(txtPesquisa);
+            grbConsultaFornecedores.Controls.Add(lblPesquisa);
+            grbConsultaFornecedores.Location = new Point(12, 12);
+            grbConsultaFornecedores.Name = "grbConsultaFornecedores";
+            grbConsultaFornecedores.Size = new Size(632, 500);
+            grbConsultaFornecedores.TabIndex = 1;
+            grbConsultaFornecedores.TabStop = false;
+            grbConsultaFornecedores.Text = "Consultar Fornecedores";
+            // 
+            // dgvConsultaFornecedores
+            // 
+            dgvConsultaFornecedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsultaFornecedores.Location = new Point(6, 66);
+            dgvConsultaFornecedores.Name = "dgvConsultaFornecedores";
+            dgvConsultaFornecedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvConsultaFornecedores.Size = new Size(557, 418);
+            dgvConsultaFornecedores.TabIndex = 2;
+            // 
+            // txtPesquisa
+            // 
+            txtPesquisa.Location = new Point(6, 37);
+            txtPesquisa.Name = "txtPesquisa";
+            txtPesquisa.Size = new Size(305, 23);
+            txtPesquisa.TabIndex = 1;
+            // 
+            // lblPesquisa
+            // 
+            lblPesquisa.AutoSize = true;
+            lblPesquisa.Location = new Point(6, 19);
+            lblPesquisa.Name = "lblPesquisa";
+            lblPesquisa.Size = new Size(146, 15);
+            lblPesquisa.TabIndex = 0;
+            lblPesquisa.Text = "Nome, CNPJ, Razão social:";
+            // 
+            // frmConsultarFornecedores
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(841, 534);
+            Controls.Add(grbConsultaFornecedores);
+            Name = "frmConsultarFornecedores";
+            Text = "frmConsultarFornecedores";
+            grbConsultaFornecedores.ResumeLayout(false);
+            grbConsultaFornecedores.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvConsultaFornecedores).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private GroupBox grbConsultaFornecedores;
+        private DataGridView dgvConsultaFornecedores;
+        private TextBox txtPesquisa;
+        private Label lblPesquisa;
     }
 }
