@@ -211,3 +211,8 @@ EXEC sp_settriggerorder
 	@triggername = 'trg_BaixarEstoque',
 	@order = 'First',
 	@stmttype = 'INSERT'
+
+
+SELECT * FROM tblcliente
+SELECT * FROM tblcategoria
+SELECT * FROM tblfornecedor

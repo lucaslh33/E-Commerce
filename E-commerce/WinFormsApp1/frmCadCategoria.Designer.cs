@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             grbInformacoes = new GroupBox();
-            lblNome = new Label();
-            lblDescricaoCategoria = new Label();
-            txtNome = new TextBox();
             txtDescricao = new TextBox();
+            txtNome = new TextBox();
+            lblDescricaoCategoria = new Label();
+            lblNome = new Label();
             btnCadastrar = new Button();
             grbInformacoes.SuspendLayout();
             SuspendLayout();
@@ -50,14 +50,20 @@
             grbInformacoes.TabStop = false;
             grbInformacoes.Text = "Informações da Categoria: ";
             // 
-            // lblNome
+            // txtDescricao
             // 
-            lblNome.AutoSize = true;
-            lblNome.Location = new Point(19, 20);
-            lblNome.Name = "lblNome";
-            lblNome.Size = new Size(114, 15);
-            lblNome.TabIndex = 0;
-            lblNome.Text = "Nome da categoria: ";
+            txtDescricao.Location = new Point(19, 82);
+            txtDescricao.Multiline = true;
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new Size(326, 81);
+            txtDescricao.TabIndex = 3;
+            // 
+            // txtNome
+            // 
+            txtNome.Location = new Point(19, 38);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(236, 23);
+            txtNome.TabIndex = 2;
             // 
             // lblDescricaoCategoria
             // 
@@ -68,20 +74,14 @@
             lblDescricaoCategoria.TabIndex = 1;
             lblDescricaoCategoria.Text = "Descrição categoria: ";
             // 
-            // txtNome
+            // lblNome
             // 
-            txtNome.Location = new Point(19, 38);
-            txtNome.Name = "txtNome";
-            txtNome.Size = new Size(236, 23);
-            txtNome.TabIndex = 2;
-            // 
-            // txtDescricao
-            // 
-            txtDescricao.Location = new Point(19, 82);
-            txtDescricao.Multiline = true;
-            txtDescricao.Name = "txtDescricao";
-            txtDescricao.Size = new Size(326, 81);
-            txtDescricao.TabIndex = 3;
+            lblNome.AutoSize = true;
+            lblNome.Location = new Point(19, 20);
+            lblNome.Name = "lblNome";
+            lblNome.Size = new Size(114, 15);
+            lblNome.TabIndex = 0;
+            lblNome.Text = "Nome da categoria: ";
             // 
             // btnCadastrar
             // 
@@ -91,6 +91,7 @@
             btnCadastrar.TabIndex = 1;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // frmCadCategoria
             // 

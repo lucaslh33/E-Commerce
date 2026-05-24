@@ -29,13 +29,25 @@
         private void InitializeComponent()
         {
             grbInformacao = new GroupBox();
-            textBox7 = new TextBox();
-            textBox6 = new TextBox();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            textBox3 = new TextBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            cmbEstado = new ComboBox();
+            txtObservacoes = new TextBox();
+            txtCidade = new TextBox();
+            lblNumero = new Label();
+            lblRua = new Label();
+            lblObservacoes = new Label();
+            lblEstado = new Label();
+            lblCidade = new Label();
+            lblBairro = new Label();
+            mskCelular = new MaskedTextBox();
+            mskTelefone = new MaskedTextBox();
+            mskCNPJ = new MaskedTextBox();
+            txtBairro = new TextBox();
+            txtNumero = new TextBox();
+            txtRua = new TextBox();
+            txtCEP = new TextBox();
+            txtEmail = new TextBox();
+            txtNomeFantasia = new TextBox();
+            txtNome = new TextBox();
             lblCelular = new Label();
             lblCep = new Label();
             lblTelefone = new Label();
@@ -43,18 +55,6 @@
             lblNomeFantasia = new Label();
             lblCNPJ = new Label();
             lblNome = new Label();
-            maskedTextBox1 = new MaskedTextBox();
-            maskedTextBox2 = new MaskedTextBox();
-            maskedTextBox3 = new MaskedTextBox();
-            lblBairro = new Label();
-            lblCidade = new Label();
-            lblEstado = new Label();
-            lblObservacoes = new Label();
-            lblRua = new Label();
-            lblNumero = new Label();
-            textBox8 = new TextBox();
-            textBox10 = new TextBox();
-            comboBox1 = new ComboBox();
             btnCadastrar = new Button();
             btnCancelar = new Button();
             grbInformacao.SuspendLayout();
@@ -62,25 +62,25 @@
             // 
             // grbInformacao
             // 
-            grbInformacao.Controls.Add(comboBox1);
-            grbInformacao.Controls.Add(textBox10);
-            grbInformacao.Controls.Add(textBox8);
+            grbInformacao.Controls.Add(cmbEstado);
+            grbInformacao.Controls.Add(txtObservacoes);
+            grbInformacao.Controls.Add(txtCidade);
             grbInformacao.Controls.Add(lblNumero);
             grbInformacao.Controls.Add(lblRua);
             grbInformacao.Controls.Add(lblObservacoes);
             grbInformacao.Controls.Add(lblEstado);
             grbInformacao.Controls.Add(lblCidade);
             grbInformacao.Controls.Add(lblBairro);
-            grbInformacao.Controls.Add(maskedTextBox3);
-            grbInformacao.Controls.Add(maskedTextBox2);
-            grbInformacao.Controls.Add(maskedTextBox1);
-            grbInformacao.Controls.Add(textBox7);
-            grbInformacao.Controls.Add(textBox6);
-            grbInformacao.Controls.Add(textBox5);
-            grbInformacao.Controls.Add(textBox4);
-            grbInformacao.Controls.Add(textBox3);
-            grbInformacao.Controls.Add(textBox2);
-            grbInformacao.Controls.Add(textBox1);
+            grbInformacao.Controls.Add(mskCelular);
+            grbInformacao.Controls.Add(mskTelefone);
+            grbInformacao.Controls.Add(mskCNPJ);
+            grbInformacao.Controls.Add(txtBairro);
+            grbInformacao.Controls.Add(txtNumero);
+            grbInformacao.Controls.Add(txtRua);
+            grbInformacao.Controls.Add(txtCEP);
+            grbInformacao.Controls.Add(txtEmail);
+            grbInformacao.Controls.Add(txtNomeFantasia);
+            grbInformacao.Controls.Add(txtNome);
             grbInformacao.Controls.Add(lblCelular);
             grbInformacao.Controls.Add(lblCep);
             grbInformacao.Controls.Add(lblTelefone);
@@ -95,54 +95,155 @@
             grbInformacao.TabStop = false;
             grbInformacao.Text = "Informações fornecedor: ";
             // 
-            // textBox7
+            // cmbEstado
             // 
-            textBox7.Location = new Point(337, 156);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(236, 23);
-            textBox7.TabIndex = 13;
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Location = new Point(248, 212);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(121, 23);
+            cmbEstado.TabIndex = 26;
             // 
-            // textBox6
+            // txtObservacoes
             // 
-            textBox6.Location = new Point(248, 156);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(74, 23);
-            textBox6.TabIndex = 12;
+            txtObservacoes.Location = new Point(11, 272);
+            txtObservacoes.Multiline = true;
+            txtObservacoes.Name = "txtObservacoes";
+            txtObservacoes.Size = new Size(358, 88);
+            txtObservacoes.TabIndex = 25;
             // 
-            // textBox5
+            // txtCidade
             // 
-            textBox5.Location = new Point(11, 156);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(220, 23);
-            textBox5.TabIndex = 11;
+            txtCidade.Location = new Point(11, 212);
+            txtCidade.Name = "txtCidade";
+            txtCidade.Size = new Size(220, 23);
+            txtCidade.TabIndex = 23;
             // 
-            // textBox4
+            // lblNumero
             // 
-            textBox4.Location = new Point(430, 97);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(143, 23);
-            textBox4.TabIndex = 10;
+            lblNumero.AutoSize = true;
+            lblNumero.Location = new Point(248, 138);
+            lblNumero.Name = "lblNumero";
+            lblNumero.Size = new Size(57, 15);
+            lblNumero.TabIndex = 22;
+            lblNumero.Text = "Número: ";
             // 
-            // textBox3
+            // lblRua
             // 
-            textBox3.Location = new Point(11, 97);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(220, 23);
-            textBox3.TabIndex = 9;
+            lblRua.AutoSize = true;
+            lblRua.Location = new Point(11, 138);
+            lblRua.Name = "lblRua";
+            lblRua.Size = new Size(33, 15);
+            lblRua.TabIndex = 21;
+            lblRua.Text = "Rua: ";
             // 
-            // textBox2
+            // lblObservacoes
             // 
-            textBox2.Location = new Point(248, 39);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(216, 23);
-            textBox2.TabIndex = 8;
+            lblObservacoes.AutoSize = true;
+            lblObservacoes.Location = new Point(11, 254);
+            lblObservacoes.Name = "lblObservacoes";
+            lblObservacoes.Size = new Size(80, 15);
+            lblObservacoes.TabIndex = 20;
+            lblObservacoes.Text = "Observações: ";
             // 
-            // textBox1
+            // lblEstado
             // 
-            textBox1.Location = new Point(11, 39);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(220, 23);
-            textBox1.TabIndex = 7;
+            lblEstado.AutoSize = true;
+            lblEstado.Location = new Point(248, 194);
+            lblEstado.Name = "lblEstado";
+            lblEstado.Size = new Size(48, 15);
+            lblEstado.TabIndex = 19;
+            lblEstado.Text = "Estado: ";
+            // 
+            // lblCidade
+            // 
+            lblCidade.AutoSize = true;
+            lblCidade.Location = new Point(11, 194);
+            lblCidade.Name = "lblCidade";
+            lblCidade.Size = new Size(50, 15);
+            lblCidade.TabIndex = 18;
+            lblCidade.Text = "Cidade: ";
+            // 
+            // lblBairro
+            // 
+            lblBairro.AutoSize = true;
+            lblBairro.Location = new Point(337, 138);
+            lblBairro.Name = "lblBairro";
+            lblBairro.Size = new Size(44, 15);
+            lblBairro.TabIndex = 17;
+            lblBairro.Text = "Bairro: ";
+            // 
+            // mskCelular
+            // 
+            mskCelular.Location = new Point(337, 97);
+            mskCelular.Mask = "(00) 00000-0000";
+            mskCelular.Name = "mskCelular";
+            mskCelular.Size = new Size(79, 23);
+            mskCelular.TabIndex = 16;
+            // 
+            // mskTelefone
+            // 
+            mskTelefone.Location = new Point(248, 97);
+            mskTelefone.Mask = "(00) 0000-0000";
+            mskTelefone.Name = "mskTelefone";
+            mskTelefone.Size = new Size(74, 23);
+            mskTelefone.TabIndex = 15;
+            // 
+            // mskCNPJ
+            // 
+            mskCNPJ.Location = new Point(477, 39);
+            mskCNPJ.Mask = "00.000.000/0000-00";
+            mskCNPJ.Name = "mskCNPJ";
+            mskCNPJ.Size = new Size(96, 23);
+            mskCNPJ.TabIndex = 14;
+            // 
+            // txtBairro
+            // 
+            txtBairro.Location = new Point(337, 156);
+            txtBairro.Name = "txtBairro";
+            txtBairro.Size = new Size(236, 23);
+            txtBairro.TabIndex = 13;
+            // 
+            // txtNumero
+            // 
+            txtNumero.Location = new Point(248, 156);
+            txtNumero.Name = "txtNumero";
+            txtNumero.Size = new Size(74, 23);
+            txtNumero.TabIndex = 12;
+            // 
+            // txtRua
+            // 
+            txtRua.Location = new Point(11, 156);
+            txtRua.Name = "txtRua";
+            txtRua.Size = new Size(220, 23);
+            txtRua.TabIndex = 11;
+            // 
+            // txtCEP
+            // 
+            txtCEP.Location = new Point(430, 97);
+            txtCEP.Name = "txtCEP";
+            txtCEP.Size = new Size(143, 23);
+            txtCEP.TabIndex = 10;
+            // 
+            // txtEmail
+            // 
+            txtEmail.Location = new Point(11, 97);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(220, 23);
+            txtEmail.TabIndex = 9;
+            // 
+            // txtNomeFantasia
+            // 
+            txtNomeFantasia.Location = new Point(248, 39);
+            txtNomeFantasia.Name = "txtNomeFantasia";
+            txtNomeFantasia.Size = new Size(216, 23);
+            txtNomeFantasia.TabIndex = 8;
+            // 
+            // txtNome
+            // 
+            txtNome.Location = new Point(11, 39);
+            txtNome.Name = "txtNome";
+            txtNome.Size = new Size(220, 23);
+            txtNome.TabIndex = 7;
             // 
             // lblCelular
             // 
@@ -207,107 +308,6 @@
             lblNome.TabIndex = 0;
             lblNome.Text = "Nome: ";
             // 
-            // maskedTextBox1
-            // 
-            maskedTextBox1.Location = new Point(477, 39);
-            maskedTextBox1.Mask = "00.000.000/0000-00";
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(96, 23);
-            maskedTextBox1.TabIndex = 14;
-            // 
-            // maskedTextBox2
-            // 
-            maskedTextBox2.Location = new Point(248, 97);
-            maskedTextBox2.Mask = "(00) 0000-0000";
-            maskedTextBox2.Name = "maskedTextBox2";
-            maskedTextBox2.Size = new Size(74, 23);
-            maskedTextBox2.TabIndex = 15;
-            // 
-            // maskedTextBox3
-            // 
-            maskedTextBox3.Location = new Point(337, 97);
-            maskedTextBox3.Mask = "(00) 00000-0000";
-            maskedTextBox3.Name = "maskedTextBox3";
-            maskedTextBox3.Size = new Size(79, 23);
-            maskedTextBox3.TabIndex = 16;
-            // 
-            // lblBairro
-            // 
-            lblBairro.AutoSize = true;
-            lblBairro.Location = new Point(337, 138);
-            lblBairro.Name = "lblBairro";
-            lblBairro.Size = new Size(44, 15);
-            lblBairro.TabIndex = 17;
-            lblBairro.Text = "Bairro: ";
-            // 
-            // lblCidade
-            // 
-            lblCidade.AutoSize = true;
-            lblCidade.Location = new Point(11, 194);
-            lblCidade.Name = "lblCidade";
-            lblCidade.Size = new Size(50, 15);
-            lblCidade.TabIndex = 18;
-            lblCidade.Text = "Cidade: ";
-            // 
-            // lblEstado
-            // 
-            lblEstado.AutoSize = true;
-            lblEstado.Location = new Point(248, 194);
-            lblEstado.Name = "lblEstado";
-            lblEstado.Size = new Size(48, 15);
-            lblEstado.TabIndex = 19;
-            lblEstado.Text = "Estado: ";
-            // 
-            // lblObservacoes
-            // 
-            lblObservacoes.AutoSize = true;
-            lblObservacoes.Location = new Point(11, 254);
-            lblObservacoes.Name = "lblObservacoes";
-            lblObservacoes.Size = new Size(80, 15);
-            lblObservacoes.TabIndex = 20;
-            lblObservacoes.Text = "Observações: ";
-            // 
-            // lblRua
-            // 
-            lblRua.AutoSize = true;
-            lblRua.Location = new Point(11, 138);
-            lblRua.Name = "lblRua";
-            lblRua.Size = new Size(33, 15);
-            lblRua.TabIndex = 21;
-            lblRua.Text = "Rua: ";
-            // 
-            // lblNumero
-            // 
-            lblNumero.AutoSize = true;
-            lblNumero.Location = new Point(248, 138);
-            lblNumero.Name = "lblNumero";
-            lblNumero.Size = new Size(57, 15);
-            lblNumero.TabIndex = 22;
-            lblNumero.Text = "Número: ";
-            // 
-            // textBox8
-            // 
-            textBox8.Location = new Point(11, 212);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(220, 23);
-            textBox8.TabIndex = 23;
-            // 
-            // textBox10
-            // 
-            textBox10.Location = new Point(11, 272);
-            textBox10.Multiline = true;
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(358, 88);
-            textBox10.TabIndex = 25;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(248, 212);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 26;
-            // 
             // btnCadastrar
             // 
             btnCadastrar.Location = new Point(597, 402);
@@ -316,6 +316,7 @@
             btnCadastrar.TabIndex = 1;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // btnCancelar
             // 
@@ -330,7 +331,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(709, 450);
             Controls.Add(btnCancelar);
             Controls.Add(btnCadastrar);
             Controls.Add(grbInformacao);
@@ -351,25 +352,25 @@
         private Label lblNomeFantasia;
         private Label lblCNPJ;
         private Label lblNome;
-        private TextBox textBox7;
-        private TextBox textBox6;
-        private TextBox textBox5;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private MaskedTextBox maskedTextBox1;
-        private MaskedTextBox maskedTextBox3;
-        private MaskedTextBox maskedTextBox2;
+        private TextBox txtBairro;
+        private TextBox txtNumero;
+        private TextBox txtRua;
+        private TextBox txtCEP;
+        private TextBox txtEmail;
+        private TextBox txtNomeFantasia;
+        private TextBox txtNome;
+        private MaskedTextBox mskCNPJ;
+        private MaskedTextBox mskCelular;
+        private MaskedTextBox mskTelefone;
         private Label lblNumero;
         private Label lblRua;
         private Label lblObservacoes;
         private Label lblEstado;
         private Label lblCidade;
         private Label lblBairro;
-        private ComboBox comboBox1;
-        private TextBox textBox10;
-        private TextBox textBox8;
+        private ComboBox cmbEstado;
+        private TextBox txtObservacoes;
+        private TextBox txtCidade;
         private Button btnCadastrar;
         private Button btnCancelar;
     }

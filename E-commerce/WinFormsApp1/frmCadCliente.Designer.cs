@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             grbInformacoesEndereco = new GroupBox();
+            cmbEstado = new ComboBox();
             txtObservacoes = new TextBox();
             lblObservacoes = new Label();
             txtComplemento = new TextBox();
@@ -64,7 +65,6 @@
             lblConfirmarsenha = new Label();
             lblSenha = new Label();
             btnCancelar = new Button();
-            cmbEstado = new ComboBox();
             grbInformacoesEndereco.SuspendLayout();
             grbinformacoescliente.SuspendLayout();
             grbAcesso.SuspendLayout();
@@ -94,6 +94,14 @@
             grbInformacoesEndereco.TabIndex = 13;
             grbInformacoesEndereco.TabStop = false;
             grbInformacoesEndereco.Text = "Informações endereço:";
+            // 
+            // cmbEstado
+            // 
+            cmbEstado.FormattingEnabled = true;
+            cmbEstado.Location = new Point(358, 97);
+            cmbEstado.Name = "cmbEstado";
+            cmbEstado.Size = new Size(121, 23);
+            cmbEstado.TabIndex = 22;
             // 
             // txtObservacoes
             // 
@@ -226,6 +234,7 @@
             btnCadastrar.TabIndex = 4;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // grbinformacoescliente
             // 
@@ -404,14 +413,6 @@
             btnCancelar.TabIndex = 15;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
-            // 
-            // cmbEstado
-            // 
-            cmbEstado.FormattingEnabled = true;
-            cmbEstado.Location = new Point(358, 97);
-            cmbEstado.Name = "cmbEstado";
-            cmbEstado.Size = new Size(121, 23);
-            cmbEstado.TabIndex = 22;
             // 
             // frmCadCliente
             // 

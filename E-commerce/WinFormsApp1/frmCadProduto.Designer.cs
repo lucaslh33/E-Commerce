@@ -45,11 +45,11 @@
             lblSKU = new Label();
             lblEan = new Label();
             txtDescricao = new TextBox();
-            numericUpDown5 = new NumericUpDown();
-            numericUpDown3 = new NumericUpDown();
-            numericUpDown4 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
-            numericUpDown1 = new NumericUpDown();
+            numComprimento = new NumericUpDown();
+            numLargura = new NumericUpDown();
+            numAltura = new NumericUpDown();
+            numPeso = new NumericUpDown();
+            numEstoque = new NumericUpDown();
             numPreco = new NumericUpDown();
             txtNome = new TextBox();
             lblDescricao = new Label();
@@ -64,11 +64,11 @@
             ((System.ComponentModel.ISupportInitialize)picImagem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picImagem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picImagem1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numComprimento).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numLargura).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numAltura).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numPeso).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numEstoque).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numPreco).BeginInit();
             SuspendLayout();
             // 
@@ -90,11 +90,11 @@
             grbInformacoes.Controls.Add(lblSKU);
             grbInformacoes.Controls.Add(lblEan);
             grbInformacoes.Controls.Add(txtDescricao);
-            grbInformacoes.Controls.Add(numericUpDown5);
-            grbInformacoes.Controls.Add(numericUpDown3);
-            grbInformacoes.Controls.Add(numericUpDown4);
-            grbInformacoes.Controls.Add(numericUpDown2);
-            grbInformacoes.Controls.Add(numericUpDown1);
+            grbInformacoes.Controls.Add(numComprimento);
+            grbInformacoes.Controls.Add(numLargura);
+            grbInformacoes.Controls.Add(numAltura);
+            grbInformacoes.Controls.Add(numPeso);
+            grbInformacoes.Controls.Add(numEstoque);
             grbInformacoes.Controls.Add(numPreco);
             grbInformacoes.Controls.Add(txtNome);
             grbInformacoes.Controls.Add(lblDescricao);
@@ -129,6 +129,7 @@
             btnCadastrar.TabIndex = 30;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // txtMarca
             // 
@@ -244,50 +245,50 @@
             txtDescricao.Size = new Size(288, 115);
             txtDescricao.TabIndex = 16;
             // 
-            // numericUpDown5
+            // numComprimento
             // 
-            numericUpDown5.DecimalPlaces = 2;
-            numericUpDown5.Location = new Point(547, 98);
-            numericUpDown5.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            numericUpDown5.Name = "numericUpDown5";
-            numericUpDown5.Size = new Size(90, 23);
-            numericUpDown5.TabIndex = 15;
+            numComprimento.DecimalPlaces = 2;
+            numComprimento.Location = new Point(547, 98);
+            numComprimento.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numComprimento.Name = "numComprimento";
+            numComprimento.Size = new Size(90, 23);
+            numComprimento.TabIndex = 15;
             // 
-            // numericUpDown3
+            // numLargura
             // 
-            numericUpDown3.DecimalPlaces = 2;
-            numericUpDown3.Location = new Point(443, 98);
-            numericUpDown3.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new Size(80, 23);
-            numericUpDown3.TabIndex = 14;
+            numLargura.DecimalPlaces = 2;
+            numLargura.Location = new Point(443, 98);
+            numLargura.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numLargura.Name = "numLargura";
+            numLargura.Size = new Size(80, 23);
+            numLargura.TabIndex = 14;
             // 
-            // numericUpDown4
+            // numAltura
             // 
-            numericUpDown4.DecimalPlaces = 2;
-            numericUpDown4.Location = new Point(343, 98);
-            numericUpDown4.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            numericUpDown4.Name = "numericUpDown4";
-            numericUpDown4.Size = new Size(80, 23);
-            numericUpDown4.TabIndex = 13;
+            numAltura.DecimalPlaces = 2;
+            numAltura.Location = new Point(343, 98);
+            numAltura.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numAltura.Name = "numAltura";
+            numAltura.Size = new Size(80, 23);
+            numAltura.TabIndex = 13;
             // 
-            // numericUpDown2
+            // numPeso
             // 
-            numericUpDown2.DecimalPlaces = 3;
-            numericUpDown2.Location = new Point(233, 99);
-            numericUpDown2.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(85, 23);
-            numericUpDown2.TabIndex = 11;
+            numPeso.DecimalPlaces = 3;
+            numPeso.Location = new Point(233, 99);
+            numPeso.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numPeso.Name = "numPeso";
+            numPeso.Size = new Size(85, 23);
+            numPeso.TabIndex = 11;
             // 
-            // numericUpDown1
+            // numEstoque
             // 
-            numericUpDown1.Location = new Point(115, 99);
-            numericUpDown1.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(90, 23);
-            numericUpDown1.TabIndex = 10;
-            numericUpDown1.ThousandsSeparator = true;
+            numEstoque.Location = new Point(115, 99);
+            numEstoque.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
+            numEstoque.Name = "numEstoque";
+            numEstoque.Size = new Size(90, 23);
+            numEstoque.TabIndex = 10;
+            numEstoque.ThousandsSeparator = true;
             // 
             // numPreco
             // 
@@ -391,11 +392,11 @@
             ((System.ComponentModel.ISupportInitialize)picImagem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)picImagem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)picImagem1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numComprimento).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numLargura).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numAltura).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numPeso).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numEstoque).EndInit();
             ((System.ComponentModel.ISupportInitialize)numPreco).EndInit();
             ResumeLayout(false);
         }
@@ -413,11 +414,11 @@
         private Label lblNome;
         private NumericUpDown numPreco;
         private TextBox txtNome;
-        private NumericUpDown numericUpDown3;
-        private NumericUpDown numericUpDown4;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
-        private NumericUpDown numericUpDown5;
+        private NumericUpDown numLargura;
+        private NumericUpDown numAltura;
+        private NumericUpDown numPeso;
+        private NumericUpDown numEstoque;
+        private NumericUpDown numComprimento;
         private TextBox txtDescricao;
         private ComboBox cmbCategoria;
         private ComboBox cmbFornecedor;

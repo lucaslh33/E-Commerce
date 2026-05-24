@@ -20,14 +20,6 @@ namespace Ecommerce
 
         }
 
-        private void btnNovaVenda_Enter(object sender, EventArgs e)
-        {
-            btnNovaVenda.BackColor = Color.FromArgb(245, 158, 11);
-        }
-
-        private void btnNovaVenda_Leave(object sender, EventArgs e)
-        {
-            btnNovaVenda.BackColor = Color.FromArgb(30, 41, 59);
-        }
+        
     }
 }
