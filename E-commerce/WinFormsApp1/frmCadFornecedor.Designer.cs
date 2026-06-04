@@ -337,6 +337,7 @@
             Controls.Add(grbInformacao);
             Name = "frmCadFornecedor";
             Text = "frmCadFornecedor";
+            Load += frmCadFornecedor_Load;
             grbInformacao.ResumeLayout(false);
             grbInformacao.PerformLayout();
             ResumeLayout(false);

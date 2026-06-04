@@ -96,7 +96,7 @@
             // lnkRecuperarSenha
             // 
             lnkRecuperarSenha.AutoSize = true;
-            lnkRecuperarSenha.Location = new Point(394, 261);
+            lnkRecuperarSenha.Location = new Point(394, 283);
             lnkRecuperarSenha.Name = "lnkRecuperarSenha";
             lnkRecuperarSenha.Size = new Size(118, 15);
             lnkRecuperarSenha.TabIndex = 6;
@@ -106,7 +106,7 @@
             // lnkSuporte
             // 
             lnkSuporte.AutoSize = true;
-            lnkSuporte.Location = new Point(42, 296);
+            lnkSuporte.Location = new Point(42, 283);
             lnkSuporte.Name = "lnkSuporte";
             lnkSuporte.Size = new Size(48, 15);
             lnkSuporte.TabIndex = 7;
@@ -115,7 +115,7 @@
             // 
             // btnCadastrar
             // 
-            btnCadastrar.Location = new Point(394, 224);
+            btnCadastrar.Location = new Point(394, 240);
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(125, 23);
             btnCadastrar.TabIndex = 8;

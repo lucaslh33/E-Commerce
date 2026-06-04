@@ -50,8 +50,11 @@
             // 
             // dgvConsultaFornecedores
             // 
+            dgvConsultaFornecedores.AllowUserToAddRows = false;
+            dgvConsultaFornecedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultaFornecedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConsultaFornecedores.Location = new Point(6, 66);
+            dgvConsultaFornecedores.MultiSelect = false;
             dgvConsultaFornecedores.Name = "dgvConsultaFornecedores";
             dgvConsultaFornecedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultaFornecedores.Size = new Size(557, 418);
@@ -61,8 +64,9 @@
             // 
             txtPesquisa.Location = new Point(6, 37);
             txtPesquisa.Name = "txtPesquisa";
-            txtPesquisa.Size = new Size(305, 23);
+            txtPesquisa.Size = new Size(351, 23);
             txtPesquisa.TabIndex = 1;
+            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -81,6 +85,7 @@
             Controls.Add(grbConsultaFornecedores);
             Name = "frmConsultarFornecedores";
             Text = "frmConsultarFornecedores";
+            Load += frmConsultarFornecedores_Load;
             grbConsultaFornecedores.ResumeLayout(false);
             grbConsultaFornecedores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaFornecedores).EndInit();

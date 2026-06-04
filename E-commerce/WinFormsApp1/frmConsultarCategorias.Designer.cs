@@ -50,9 +50,14 @@
             // 
             // dgvConsultarCategorias
             // 
+            dgvConsultarCategorias.AllowUserToAddRows = false;
+            dgvConsultarCategorias.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvConsultarCategorias.BorderStyle = BorderStyle.None;
             dgvConsultarCategorias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConsultarCategorias.Location = new Point(6, 76);
             dgvConsultarCategorias.Name = "dgvConsultarCategorias";
+            dgvConsultarCategorias.ScrollBars = ScrollBars.None;
+            dgvConsultarCategorias.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultarCategorias.Size = new Size(557, 418);
             dgvConsultarCategorias.TabIndex = 2;
             // 
@@ -62,6 +67,7 @@
             txtPesquisa.Name = "txtPesquisa";
             txtPesquisa.Size = new Size(305, 23);
             txtPesquisa.TabIndex = 1;
+            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -80,6 +86,7 @@
             Controls.Add(grbConsultarCategorias);
             Name = "frmConsultarCategorias";
             Text = "frmConsultarCategorias";
+            Load += frmConsultarCategorias_Load;
             grbConsultarCategorias.ResumeLayout(false);
             grbConsultarCategorias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarCategorias).EndInit();

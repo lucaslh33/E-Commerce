@@ -23,11 +23,19 @@ namespace Ecommerce
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
+            int clienteId = 0;
+            string senha = txtSenha.Text;
+            if (senha.Length < 6)
+            {
+                MessageBox.Show("A senha dever ter no mínimo 6 caracteres");
+                return;
+            }
+
             try
             {
                 Conexao conexao = new Conexao();
 
-                string sql = "INSERT INTO tblcliente VALUES(@nome, @cpf, @datanascimento, @email, @celular, @telefone, @senha)";
+                string sql = "INSERT INTO tblcliente (nome, cpf, datanascimento, email, celular, telefone, senha) OUTPUT INSERTED.id VALUES(@nome, @cpf, @datanascimento, @email, @celular, @telefone, @senha)";
 
                 using (SqlConnection conn = conexao.Conectar())
                 {
@@ -40,7 +48,7 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("@celular", mskCelular.Text);
                         cmd.Parameters.AddWithValue("@telefone", mskTelefone.Text);
                         cmd.Parameters.AddWithValue("@senha", txtSenha.Text);
-                        cmd.ExecuteNonQuery();
+                        clienteId = (int)cmd.ExecuteScalar();
 
                         MessageBox.Show("Cliente cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -58,26 +66,28 @@ namespace Ecommerce
             {
                 MessageBox.Show("Erro ao cadastrar cliente: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = ("INSERT INTO tblendereco VALUES(@rua,@numero,@complemento,@bairro,@cidade,@estado,@cep,@observacoes)");
+                string sql = ("INSERT INTO tblendereco VALUES(@cliente_id,@rua,@numero,@complemento,@bairro,@cidade,@estado,@cep,@observacoes)");
 
                 using (SqlConnection conn = conexao.Conectar())
                 {
                     using(SqlCommand cmd = new SqlCommand(sql, conn))
                     {
+                        cmd.Parameters.AddWithValue("@cliente_id", clienteId);
                         cmd.Parameters.AddWithValue("@rua", txtRua.Text);
                         cmd.Parameters.AddWithValue("@numero", txtNumero.Text);
                         cmd.Parameters.AddWithValue("@complemento", txtComplemento.Text);
                         cmd.Parameters.AddWithValue("@bairro", txtBairro.Text);
                         cmd.Parameters.AddWithValue("@cidade", txtCidade.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
-                        cmd.Parameters.AddWithValue(@"cep",mskCep.Text);
+                        cmd.Parameters.AddWithValue("@cep",mskCep.Text);
                         cmd.Parameters.AddWithValue("@observacoes", txtObservacoes.Text);
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Endereço cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
 
                         txtRua.Clear();
                         txtNumero.Clear();
@@ -89,9 +99,9 @@ namespace Ecommerce
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Erro ao cadastrar endereço: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             
             }
         }
     }

@@ -55,9 +55,14 @@
             // 
             // dgvConsultaCliente
             // 
+            dgvConsultaCliente.AllowUserToAddRows = false;
+            dgvConsultaCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultaCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvConsultaCliente.Location = new Point(6, 76);
+            dgvConsultaCliente.MultiSelect = false;
             dgvConsultaCliente.Name = "dgvConsultaCliente";
+            dgvConsultaCliente.ReadOnly = true;
+            dgvConsultaCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultaCliente.Size = new Size(557, 418);
             dgvConsultaCliente.TabIndex = 2;
             // 
@@ -65,8 +70,9 @@
             // 
             txtPesquisa.Location = new Point(6, 37);
             txtPesquisa.Name = "txtPesquisa";
-            txtPesquisa.Size = new Size(305, 23);
+            txtPesquisa.Size = new Size(335, 23);
             txtPesquisa.TabIndex = 1;
+            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -103,6 +109,7 @@
             Controls.Add(grbConsultarClientes);
             Name = "frmConsultarClientes";
             Text = "frmConsultarClientes";
+            Load += frmConsultarClientes_Load;
             grbConsultarClientes.ResumeLayout(false);
             grbConsultarClientes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaCliente).EndInit();

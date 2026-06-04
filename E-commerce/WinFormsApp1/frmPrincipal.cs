@@ -49,5 +49,29 @@ namespace Ecommerce
             frmPainelVendas frmPainelVendas = new frmPainelVendas();
             frmPainelVendas.ShowDialog();
         }
+
+        private void categoriasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultarCategorias frmConsultarCategorias = new frmConsultarCategorias();
+            frmConsultarCategorias.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmConsultarClientes frmConsultarClientes = new frmConsultarClientes();
+            frmConsultarClientes.ShowDialog();
+        }
+
+        private void fornecedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultarFornecedores frmConsultarFornecedores = new frmConsultarFornecedores();
+            frmConsultarFornecedores.ShowDialog();
+        }
+
+        private void produtosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultarProdutos frmConsultarProdutos = new frmConsultarProdutos();
+            frmConsultarProdutos.ShowDialog();
+        }
     }
 }

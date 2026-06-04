@@ -65,5 +65,10 @@ namespace Ecommerce
                 MessageBox.Show("Erro ao cadastrar fornecedor: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void frmCadFornecedor_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
