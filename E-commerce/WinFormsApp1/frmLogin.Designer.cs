@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
-            pictureBox1 = new PictureBox();
+            pcbLogin = new PictureBox();
             lblLogin = new Label();
             lblSenha = new Label();
             txtLogin = new TextBox();
@@ -38,23 +38,24 @@
             lnkRecuperarSenha = new LinkLabel();
             lnkSuporte = new LinkLabel();
             btnCadastrar = new Button();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            chkMostrarSenha = new CheckBox();
+            ((System.ComponentModel.ISupportInitialize)pcbLogin).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // pcbLogin
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(42, 38);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(225, 225);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pcbLogin.Image = (Image)resources.GetObject("pcbLogin.Image");
+            pcbLogin.Location = new Point(42, 38);
+            pcbLogin.Name = "pcbLogin";
+            pcbLogin.Size = new Size(225, 225);
+            pcbLogin.SizeMode = PictureBoxSizeMode.AutoSize;
+            pcbLogin.TabIndex = 0;
+            pcbLogin.TabStop = false;
             // 
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.Location = new Point(342, 77);
+            lblLogin.Location = new Point(323, 78);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(112, 15);
             lblLogin.TabIndex = 1;
@@ -63,7 +64,7 @@
             // lblSenha
             // 
             lblSenha.AutoSize = true;
-            lblSenha.Location = new Point(342, 136);
+            lblSenha.Location = new Point(323, 137);
             lblSenha.Name = "lblSenha";
             lblSenha.Size = new Size(45, 15);
             lblSenha.TabIndex = 2;
@@ -71,14 +72,14 @@
             // 
             // txtLogin
             // 
-            txtLogin.Location = new Point(347, 97);
+            txtLogin.Location = new Point(323, 96);
             txtLogin.Name = "txtLogin";
             txtLogin.Size = new Size(222, 23);
             txtLogin.TabIndex = 3;
             // 
             // txtSenha
             // 
-            txtSenha.Location = new Point(347, 154);
+            txtSenha.Location = new Point(323, 155);
             txtSenha.Name = "txtSenha";
             txtSenha.PasswordChar = '*';
             txtSenha.Size = new Size(222, 23);
@@ -86,7 +87,7 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(394, 195);
+            btnLogin.Location = new Point(373, 195);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(125, 23);
             btnLogin.TabIndex = 5;
@@ -96,7 +97,7 @@
             // lnkRecuperarSenha
             // 
             lnkRecuperarSenha.AutoSize = true;
-            lnkRecuperarSenha.Location = new Point(394, 283);
+            lnkRecuperarSenha.Location = new Point(373, 283);
             lnkRecuperarSenha.Name = "lnkRecuperarSenha";
             lnkRecuperarSenha.Size = new Size(118, 15);
             lnkRecuperarSenha.TabIndex = 6;
@@ -115,18 +116,29 @@
             // 
             // btnCadastrar
             // 
-            btnCadastrar.Location = new Point(394, 240);
+            btnCadastrar.Location = new Point(373, 240);
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(125, 23);
             btnCadastrar.TabIndex = 8;
             btnCadastrar.Text = "Cadastre-se";
             btnCadastrar.UseVisualStyleBackColor = true;
             // 
+            // chkMostrarSenha
+            // 
+            chkMostrarSenha.AutoSize = true;
+            chkMostrarSenha.Location = new Point(551, 157);
+            chkMostrarSenha.Name = "chkMostrarSenha";
+            chkMostrarSenha.Size = new Size(102, 19);
+            chkMostrarSenha.TabIndex = 9;
+            chkMostrarSenha.Text = "Mostrar Senha";
+            chkMostrarSenha.UseVisualStyleBackColor = true;
+            // 
             // frmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(655, 320);
+            Controls.Add(chkMostrarSenha);
             Controls.Add(btnCadastrar);
             Controls.Add(lnkSuporte);
             Controls.Add(lnkRecuperarSenha);
@@ -135,17 +147,17 @@
             Controls.Add(txtLogin);
             Controls.Add(lblSenha);
             Controls.Add(lblLogin);
-            Controls.Add(pictureBox1);
+            Controls.Add(pcbLogin);
             Name = "frmLogin";
             Text = "frmLogin";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pcbLogin).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox pcbLogin;
         private Label lblLogin;
         private Label lblSenha;
         private TextBox txtLogin;
@@ -154,5 +166,6 @@
         private LinkLabel lnkRecuperarSenha;
         private LinkLabel lnkSuporte;
         private Button btnCadastrar;
+        private CheckBox chkMostrarSenha;
     }
 }

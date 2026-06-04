@@ -62,6 +62,7 @@
             txtPesquisa.Name = "txtPesquisa";
             txtPesquisa.Size = new Size(305, 23);
             txtPesquisa.TabIndex = 1;
+            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -80,6 +81,7 @@
             Controls.Add(grbConsultarProdutos);
             Name = "frmConsultarProdutos";
             Text = "frmConsultarProdutos";
+            Load += frmConsultarProdutos_Load;
             grbConsultarProdutos.ResumeLayout(false);
             grbConsultarProdutos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).EndInit();

@@ -20,6 +20,9 @@ namespace Ecommerce
 
         }
 
-        
+        private void mskData_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            
+        }
     }
 }

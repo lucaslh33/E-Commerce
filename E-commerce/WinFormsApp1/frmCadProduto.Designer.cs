@@ -186,6 +186,7 @@
             cmbFornecedor.Name = "cmbFornecedor";
             cmbFornecedor.Size = new Size(121, 23);
             cmbFornecedor.TabIndex = 23;
+            cmbFornecedor.SelectedIndexChanged += cmbFornecedor_SelectedIndexChanged;
             // 
             // lblCategoria
             // 
@@ -387,6 +388,7 @@
             Controls.Add(grbInformacoes);
             Name = "frmCadProduto";
             Text = "frmCadProduto";
+            Load += frmCadProduto_Load_1;
             grbInformacoes.ResumeLayout(false);
             grbInformacoes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picImagem3).EndInit();

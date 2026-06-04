@@ -73,7 +73,7 @@
             btnAdicionarNovaVenda = new Button();
             panel3 = new Panel();
             btnBuscar = new Button();
-            textBox1 = new TextBox();
+            txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
             txtDesconto = new TextBox();
@@ -138,6 +138,7 @@
             mskData.Size = new Size(100, 23);
             mskData.TabIndex = 5;
             mskData.ValidatingType = typeof(DateTime);
+            mskData.MaskInputRejected += mskData_MaskInputRejected;
             // 
             // lblNomeOperador
             // 
@@ -550,7 +551,7 @@
             // 
             panel3.BackColor = Color.White;
             panel3.Controls.Add(btnBuscar);
-            panel3.Controls.Add(textBox1);
+            panel3.Controls.Add(txtCodigoBarras);
             panel3.Controls.Add(lblAdicionarProdutoVenda);
             panel3.Location = new Point(6, 3);
             panel3.Name = "panel3";
@@ -569,15 +570,15 @@
             btnBuscar.Text = "Buscar ";
             btnBuscar.UseVisualStyleBackColor = false;
             // 
-            // textBox1
+            // txtCodigoBarras
             // 
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = SystemColors.ScrollBar;
-            textBox1.Location = new Point(12, 27);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(456, 29);
-            textBox1.TabIndex = 1;
-            textBox1.Text = "Digite o código de barras ou nome do produto";
+            txtCodigoBarras.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtCodigoBarras.ForeColor = SystemColors.ScrollBar;
+            txtCodigoBarras.Location = new Point(12, 27);
+            txtCodigoBarras.Name = "txtCodigoBarras";
+            txtCodigoBarras.Size = new Size(456, 29);
+            txtCodigoBarras.TabIndex = 1;
+            txtCodigoBarras.Text = "Digite o código de barras ou nome do produto";
             // 
             // lblAdicionarProdutoVenda
             // 
@@ -863,7 +864,7 @@
         private Panel panel6;
         private Panel panel5;
         private Panel panel3;
-        private TextBox textBox1;
+        private TextBox txtCodigoBarras;
         private Label lblAdicionarProdutoVenda;
         private Panel panel8;
         private PictureBox pcbProduto;
