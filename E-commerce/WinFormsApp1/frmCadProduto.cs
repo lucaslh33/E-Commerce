@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -19,7 +19,7 @@ namespace Ecommerce
         {
             Conexao conexao = new Conexao();
 
-            string sql = "SELECT id, nomefantasia FROM tblfornecedor";
+            string sql = "SELECT id, nomefantasia FROM tblfornecedor WHERE (status_ativo = 'A')";
 
             using (SqlConnection con = conexao.Conectar())
             {
@@ -35,7 +35,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "INSERT INTO tblproduto VALUES (@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@fornecedor_id,@categoria_id,@imagem1,@imagem2,@imagem3)";
+                string sql = "INSERT INTO tblproduto VALUES (@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@fornecedor.id,@categoria.id,@imagem1,@imagem2,@imagem3,@status_ativo)";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -52,8 +52,9 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
                         cmd.Parameters.AddWithValue("@ean", txtEAN.Text);
                         cmd.Parameters.AddWithValue("@sku", txtSKU.Text);
-                        cmd.Parameters.AddWithValue("@fornecedor_id", cmbFornecedor.SelectedValue);
-                        cmd.Parameters.AddWithValue("@categoria_id", cmbCategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@fornecedor.id", cmbFornecedor.SelectedValue);
+                        cmd.Parameters.AddWithValue("@categoria.id", cmbCategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("status_ativo", 'A');
                         cmd.Parameters.AddWithValue("@imagem1", "");
                         cmd.Parameters.AddWithValue("@imagem2", "");
                         cmd.Parameters.AddWithValue("@imagem3", "");
@@ -85,12 +86,38 @@ namespace Ecommerce
         {
         }
 
+
+        public DataTable CarregarCategoria()
+        {
+            Conexao conexao = new Conexao();
+
+            string sql = "SELECT id, nome FROM tblcategoria WHERE (status_ativo = 'A')";
+
+            using (SqlConnection con = conexao.Conectar())
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
         private void frmCadProduto_Load_1(object sender, EventArgs e)
         {
             DataTable dt = CarregarFornecedor();
             cmbFornecedor.DataSource = dt;
             cmbFornecedor.DisplayMember = "nomefantasia";
             cmbFornecedor.ValueMember = "id";
+            cmbFornecedor.SelectedIndex = -1;
+
+            cmbCategoria.DataSource = CarregarCategoria();
+            cmbCategoria.DisplayMember = "nome";
+            cmbCategoria.ValueMember = "id";
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

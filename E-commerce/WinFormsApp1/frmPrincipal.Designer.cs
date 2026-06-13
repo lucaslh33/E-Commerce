@@ -39,6 +39,11 @@
             fornecedoresToolStripMenuItem = new ToolStripMenuItem();
             produtosToolStripMenuItem = new ToolStripMenuItem();
             categoriasToolStripMenuItem = new ToolStripMenuItem();
+            consultarInativosToolStripMenuItem = new ToolStripMenuItem();
+            clienteToolStripMenuItem = new ToolStripMenuItem();
+            fornecedorToolStripMenuItem = new ToolStripMenuItem();
+            produtoToolStripMenuItem = new ToolStripMenuItem();
+            categoriaToolStripMenuItem1 = new ToolStripMenuItem();
             relatoriosToolStripMenuItem = new ToolStripMenuItem();
             vendasToolStripMenuItem = new ToolStripMenuItem();
             PDVToolStripMenuItem = new ToolStripMenuItem();
@@ -49,7 +54,7 @@
             // msMenuPrincipal
             // 
             msMenuPrincipal.AllowItemReorder = true;
-            msMenuPrincipal.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, consultarToolStripMenuItem, relatoriosToolStripMenuItem, vendasToolStripMenuItem, feedebackToolStripMenuItem });
+            msMenuPrincipal.Items.AddRange(new ToolStripItem[] { cadastroToolStripMenuItem, consultarToolStripMenuItem, consultarInativosToolStripMenuItem, relatoriosToolStripMenuItem, vendasToolStripMenuItem, feedebackToolStripMenuItem });
             msMenuPrincipal.Location = new Point(0, 0);
             msMenuPrincipal.Name = "msMenuPrincipal";
             msMenuPrincipal.Size = new Size(800, 24);
@@ -66,28 +71,28 @@
             // cadastroClienteToolStripMenuItem
             // 
             cadastroClienteToolStripMenuItem.Name = "cadastroClienteToolStripMenuItem";
-            cadastroClienteToolStripMenuItem.Size = new Size(180, 22);
+            cadastroClienteToolStripMenuItem.Size = new Size(145, 22);
             cadastroClienteToolStripMenuItem.Text = "Clientes";
             cadastroClienteToolStripMenuItem.Click += cadastroClienteToolStripMenuItem_Click;
             // 
             // cadastroFornecedorToolStripMenuItem
             // 
             cadastroFornecedorToolStripMenuItem.Name = "cadastroFornecedorToolStripMenuItem";
-            cadastroFornecedorToolStripMenuItem.Size = new Size(180, 22);
+            cadastroFornecedorToolStripMenuItem.Size = new Size(145, 22);
             cadastroFornecedorToolStripMenuItem.Text = "Fornecedores";
             cadastroFornecedorToolStripMenuItem.Click += cadastroFornecedorToolStripMenuItem_Click;
             // 
             // cadastroProdutoToolStripMenuItem
             // 
             cadastroProdutoToolStripMenuItem.Name = "cadastroProdutoToolStripMenuItem";
-            cadastroProdutoToolStripMenuItem.Size = new Size(180, 22);
+            cadastroProdutoToolStripMenuItem.Size = new Size(145, 22);
             cadastroProdutoToolStripMenuItem.Text = "Produtos";
             cadastroProdutoToolStripMenuItem.Click += cadastroProdutoToolStripMenuItem_Click;
             // 
             // categoriaToolStripMenuItem
             // 
             categoriaToolStripMenuItem.Name = "categoriaToolStripMenuItem";
-            categoriaToolStripMenuItem.Size = new Size(180, 22);
+            categoriaToolStripMenuItem.Size = new Size(145, 22);
             categoriaToolStripMenuItem.Text = "Categoria";
             categoriaToolStripMenuItem.Click += categoriaToolStripMenuItem_Click;
             // 
@@ -126,6 +131,39 @@
             categoriasToolStripMenuItem.Text = "Categorias";
             categoriasToolStripMenuItem.Click += categoriasToolStripMenuItem_Click;
             // 
+            // consultarInativosToolStripMenuItem
+            // 
+            consultarInativosToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clienteToolStripMenuItem, fornecedorToolStripMenuItem, produtoToolStripMenuItem, categoriaToolStripMenuItem1 });
+            consultarInativosToolStripMenuItem.Name = "consultarInativosToolStripMenuItem";
+            consultarInativosToolStripMenuItem.Size = new Size(114, 20);
+            consultarInativosToolStripMenuItem.Text = "Consultar inativos";
+            // 
+            // clienteToolStripMenuItem
+            // 
+            clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            clienteToolStripMenuItem.Size = new Size(180, 22);
+            clienteToolStripMenuItem.Text = "Clientes";
+            clienteToolStripMenuItem.Click += clienteToolStripMenuItem_Click;
+            // 
+            // fornecedorToolStripMenuItem
+            // 
+            fornecedorToolStripMenuItem.Name = "fornecedorToolStripMenuItem";
+            fornecedorToolStripMenuItem.Size = new Size(180, 22);
+            fornecedorToolStripMenuItem.Text = "Fornecedors";
+            // 
+            // produtoToolStripMenuItem
+            // 
+            produtoToolStripMenuItem.Name = "produtoToolStripMenuItem";
+            produtoToolStripMenuItem.Size = new Size(180, 22);
+            produtoToolStripMenuItem.Text = "Produtos";
+            // 
+            // categoriaToolStripMenuItem1
+            // 
+            categoriaToolStripMenuItem1.Name = "categoriaToolStripMenuItem1";
+            categoriaToolStripMenuItem1.Size = new Size(180, 22);
+            categoriaToolStripMenuItem1.Text = "Categorias";
+            categoriaToolStripMenuItem1.Click += categoriaToolStripMenuItem1_Click;
+            // 
             // relatoriosToolStripMenuItem
             // 
             relatoriosToolStripMenuItem.Name = "relatoriosToolStripMenuItem";
@@ -142,7 +180,7 @@
             // PDVToolStripMenuItem
             // 
             PDVToolStripMenuItem.Name = "PDVToolStripMenuItem";
-            PDVToolStripMenuItem.Size = new Size(180, 22);
+            PDVToolStripMenuItem.Size = new Size(96, 22);
             PDVToolStripMenuItem.Text = "PDV";
             PDVToolStripMenuItem.Click += pDVToolStripMenuItem_Click;
             // 
@@ -185,5 +223,10 @@
         private ToolStripMenuItem produtosToolStripMenuItem;
         private ToolStripMenuItem categoriasToolStripMenuItem;
         private ToolStripMenuItem PDVToolStripMenuItem;
+        private ToolStripMenuItem consultarInativosToolStripMenuItem;
+        private ToolStripMenuItem clienteToolStripMenuItem;
+        private ToolStripMenuItem fornecedorToolStripMenuItem;
+        private ToolStripMenuItem produtoToolStripMenuItem;
+        private ToolStripMenuItem categoriaToolStripMenuItem1;
     }
 }

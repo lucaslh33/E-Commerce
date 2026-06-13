@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce
 {
-    partial class frmConsultarCategorias
+    partial class frmConsultarCategoriaInativa
     {
         /// <summary>
         /// Required designer variable.
@@ -31,11 +31,10 @@
             components = new System.ComponentModel.Container();
             grbConsultarCategorias = new GroupBox();
             dgvConsultarCategorias = new DataGridView();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            reativarToolStripMenuItem = new ToolStripMenuItem();
             txtPesquisa = new TextBox();
             lblPesquisa = new Label();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            editarToolStripMenuItem = new ToolStripMenuItem();
-            deletarToolStripMenuItem = new ToolStripMenuItem();
             grbConsultarCategorias.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarCategorias).BeginInit();
             contextMenuStrip1.SuspendLayout();
@@ -49,9 +48,9 @@
             grbConsultarCategorias.Location = new Point(12, 12);
             grbConsultarCategorias.Name = "grbConsultarCategorias";
             grbConsultarCategorias.Size = new Size(577, 500);
-            grbConsultarCategorias.TabIndex = 1;
+            grbConsultarCategorias.TabIndex = 2;
             grbConsultarCategorias.TabStop = false;
-            grbConsultarCategorias.Text = "Consultar categorias:";
+            grbConsultarCategorias.Text = "Consultar categorias inativas:";
             // 
             // dgvConsultarCategorias
             // 
@@ -67,13 +66,25 @@
             dgvConsultarCategorias.Size = new Size(557, 418);
             dgvConsultarCategorias.TabIndex = 2;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { reativarToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(181, 48);
+            // 
+            // reativarToolStripMenuItem
+            // 
+            reativarToolStripMenuItem.Name = "reativarToolStripMenuItem";
+            reativarToolStripMenuItem.Size = new Size(180, 22);
+            reativarToolStripMenuItem.Text = "Restaurar";
+            reativarToolStripMenuItem.Click += reativarToolStripMenuItem_Click;
+            // 
             // txtPesquisa
             // 
             txtPesquisa.Location = new Point(6, 37);
             txtPesquisa.Name = "txtPesquisa";
             txtPesquisa.Size = new Size(305, 23);
             txtPesquisa.TabIndex = 1;
-            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -84,34 +95,15 @@
             lblPesquisa.TabIndex = 0;
             lblPesquisa.Text = "Nome, Descrição:";
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { editarToolStripMenuItem, deletarToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 70);
-            // 
-            // editarToolStripMenuItem
-            // 
-            editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            editarToolStripMenuItem.Size = new Size(180, 22);
-            editarToolStripMenuItem.Text = "Editar";
-            // 
-            // deletarToolStripMenuItem
-            // 
-            deletarToolStripMenuItem.Name = "deletarToolStripMenuItem";
-            deletarToolStripMenuItem.Size = new Size(180, 22);
-            deletarToolStripMenuItem.Text = "Deletar";
-            deletarToolStripMenuItem.Click += deletarToolStripMenuItem_Click;
-            // 
-            // frmConsultarCategorias
+            // frmConsultarCategoriaInativa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(603, 532);
+            ClientSize = new Size(613, 533);
             Controls.Add(grbConsultarCategorias);
-            Name = "frmConsultarCategorias";
-            Text = "frmConsultarCategorias";
-            Load += frmConsultarCategorias_Load;
+            Name = "frmConsultarCategoriaInativa";
+            Text = "frmConsultarCategoriaInativa";
+            Load += frmConsultarCategoriaInativa_Load;
             grbConsultarCategorias.ResumeLayout(false);
             grbConsultarCategorias.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarCategorias).EndInit();
@@ -123,10 +115,9 @@
 
         private GroupBox grbConsultarCategorias;
         private DataGridView dgvConsultarCategorias;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem reativarToolStripMenuItem;
         private TextBox txtPesquisa;
         private Label lblPesquisa;
-        private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem editarToolStripMenuItem;
-        private ToolStripMenuItem deletarToolStripMenuItem;
     }
 }

@@ -413,11 +413,13 @@
             btnCancelar.TabIndex = 15;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // frmCadCliente
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(677, 592);
             Controls.Add(btnCancelar);
             Controls.Add(grbAcesso);

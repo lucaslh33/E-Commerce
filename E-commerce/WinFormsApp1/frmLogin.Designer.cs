@@ -150,6 +150,7 @@
             Controls.Add(pcbLogin);
             Name = "frmLogin";
             Text = "frmLogin";
+            Load += frmLogin_Load;
             ((System.ComponentModel.ISupportInitialize)pcbLogin).EndInit();
             ResumeLayout(false);
             PerformLayout();

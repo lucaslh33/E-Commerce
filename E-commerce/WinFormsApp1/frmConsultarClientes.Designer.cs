@@ -58,6 +58,7 @@
             dgvConsultaCliente.AllowUserToAddRows = false;
             dgvConsultaCliente.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultaCliente.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsultaCliente.ContextMenuStrip = contextMenu;
             dgvConsultaCliente.Location = new Point(6, 76);
             dgvConsultaCliente.MultiSelect = false;
             dgvConsultaCliente.Name = "dgvConsultaCliente";
@@ -87,7 +88,7 @@
             // 
             contextMenu.Items.AddRange(new ToolStripItem[] { alterarToolStripMenuItem, deletarToolStripMenuItem });
             contextMenu.Name = "contextMenuStrip1";
-            contextMenu.Size = new Size(112, 48);
+            contextMenu.Size = new Size(181, 70);
             // 
             // alterarToolStripMenuItem
             // 
@@ -98,8 +99,9 @@
             // deletarToolStripMenuItem
             // 
             deletarToolStripMenuItem.Name = "deletarToolStripMenuItem";
-            deletarToolStripMenuItem.Size = new Size(111, 22);
+            deletarToolStripMenuItem.Size = new Size(180, 22);
             deletarToolStripMenuItem.Text = "Deletar";
+            deletarToolStripMenuItem.Click += deletarToolStripMenuItem_Click;
             // 
             // frmConsultarClientes
             // 

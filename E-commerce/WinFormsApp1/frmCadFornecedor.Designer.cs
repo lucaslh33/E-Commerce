@@ -44,7 +44,6 @@
             txtBairro = new TextBox();
             txtNumero = new TextBox();
             txtRua = new TextBox();
-            txtCEP = new TextBox();
             txtEmail = new TextBox();
             txtNomeFantasia = new TextBox();
             txtNome = new TextBox();
@@ -57,11 +56,13 @@
             lblNome = new Label();
             btnCadastrar = new Button();
             btnCancelar = new Button();
+            mskCEP = new MaskedTextBox();
             grbInformacao.SuspendLayout();
             SuspendLayout();
             // 
             // grbInformacao
             // 
+            grbInformacao.Controls.Add(mskCEP);
             grbInformacao.Controls.Add(cmbEstado);
             grbInformacao.Controls.Add(txtObservacoes);
             grbInformacao.Controls.Add(txtCidade);
@@ -77,7 +78,6 @@
             grbInformacao.Controls.Add(txtBairro);
             grbInformacao.Controls.Add(txtNumero);
             grbInformacao.Controls.Add(txtRua);
-            grbInformacao.Controls.Add(txtCEP);
             grbInformacao.Controls.Add(txtEmail);
             grbInformacao.Controls.Add(txtNomeFantasia);
             grbInformacao.Controls.Add(txtNome);
@@ -217,13 +217,6 @@
             txtRua.Size = new Size(220, 23);
             txtRua.TabIndex = 11;
             // 
-            // txtCEP
-            // 
-            txtCEP.Location = new Point(430, 97);
-            txtCEP.Name = "txtCEP";
-            txtCEP.Size = new Size(143, 23);
-            txtCEP.TabIndex = 10;
-            // 
             // txtEmail
             // 
             txtEmail.Location = new Point(11, 97);
@@ -326,6 +319,15 @@
             btnCancelar.TabIndex = 2;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // mskCEP
+            // 
+            mskCEP.Location = new Point(430, 97);
+            mskCEP.Mask = "00000-000";
+            mskCEP.Name = "mskCEP";
+            mskCEP.Size = new Size(87, 23);
+            mskCEP.TabIndex = 27;
             // 
             // frmCadFornecedor
             // 
@@ -356,7 +358,6 @@
         private TextBox txtBairro;
         private TextBox txtNumero;
         private TextBox txtRua;
-        private TextBox txtCEP;
         private TextBox txtEmail;
         private TextBox txtNomeFantasia;
         private TextBox txtNome;
@@ -374,5 +375,6 @@
         private TextBox txtCidade;
         private Button btnCadastrar;
         private Button btnCancelar;
+        private MaskedTextBox mskCEP;
     }
 }

@@ -102,6 +102,7 @@
             Controls.Add(grbInformacoes);
             Name = "frmCadCategoria";
             Text = "frmCadCategoria";
+            Load += frmCadCategoria_Load;
             grbInformacoes.ResumeLayout(false);
             grbInformacoes.PerformLayout();
             ResumeLayout(false);

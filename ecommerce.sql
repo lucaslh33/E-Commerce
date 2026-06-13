@@ -215,3 +215,17 @@ SELECT * FROM tblcliente
 SELECT * FROM tblendereco
 SELECT * FROM tblcategoria
 SELECT * FROM tblfornecedor
+SELECT * FROM tblproduto
+SELECT id, nomefantasia FROM tblfornecedor
+
+ALTER TABLE tblcliente
+ADD status_ativo CHAR(1) DEFAULT 'A'
+
+ALTER TABLE tblfornecedor
+ADD status_ativo CHAR(1) DEFAULT 'A'
+
+ALTER TABLE tblproduto
+ADD status_ativo CHAR(1) DEFAULT 'A'
+
+ALTER TABLE tblcategoria
+ADD status_ativo CHAR(1) DEFAULT 'A'

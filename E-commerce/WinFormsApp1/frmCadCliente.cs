@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -66,7 +66,7 @@ namespace Ecommerce
             {
                 MessageBox.Show("Erro ao cadastrar cliente: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             try
             {
                 Conexao conexao = new Conexao();
@@ -74,7 +74,7 @@ namespace Ecommerce
 
                 using (SqlConnection conn = conexao.Conectar())
                 {
-                    using(SqlCommand cmd = new SqlCommand(sql, conn))
+                    using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
                         cmd.Parameters.AddWithValue("@cliente_id", clienteId);
                         cmd.Parameters.AddWithValue("@rua", txtRua.Text);
@@ -83,11 +83,11 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("@bairro", txtBairro.Text);
                         cmd.Parameters.AddWithValue("@cidade", txtCidade.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
-                        cmd.Parameters.AddWithValue("@cep",mskCep.Text);
+                        cmd.Parameters.AddWithValue("@cep", mskCep.Text);
                         cmd.Parameters.AddWithValue("@observacoes", txtObservacoes.Text);
 
                         cmd.ExecuteNonQuery();
-                        
+
 
                         txtRua.Clear();
                         txtNumero.Clear();
@@ -101,8 +101,13 @@ namespace Ecommerce
             }
             catch
             {
-             
+
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

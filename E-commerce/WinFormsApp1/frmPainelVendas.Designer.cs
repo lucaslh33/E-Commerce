@@ -831,6 +831,7 @@
             Controls.Add(panel4);
             Name = "frmPainelVendas";
             Text = "Painel de Vendas - Ecommerce";
+            Load += frmPainelVendas_Load;
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).EndInit();

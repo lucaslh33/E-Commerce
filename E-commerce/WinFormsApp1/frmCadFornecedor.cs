@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -22,7 +22,7 @@ namespace Ecommerce
             {
                 Conexao conexao = new Conexao();
 
-                string sql = "INSERT INTO tblfornecedor VALUES (@nome, @nomefantasia, @cnpj, @email, @telefone, @celular, @cep, @rua, @numero, @bairro, @cidade, @estado, @observacoes)";
+                string sql = "INSERT INTO tblfornecedor VALUES (@nome, @nomefantasia, @cnpj, @email, @telefone, @celular, @cep, @rua, @numero, @bairro, @cidade, @estado, @observacoes,@status_ativo)";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -34,13 +34,14 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                         cmd.Parameters.AddWithValue("@telefone", mskTelefone.Text);
                         cmd.Parameters.AddWithValue("@celular", mskCelular.Text);
-                        cmd.Parameters.AddWithValue("@cep", txtCEP.Text);
+                        cmd.Parameters.AddWithValue("@cep", mskCEP.Text);
                         cmd.Parameters.AddWithValue("@rua", txtRua.Text);
                         cmd.Parameters.AddWithValue("@numero", txtNumero.Text);
                         cmd.Parameters.AddWithValue("@bairro", txtBairro.Text);
                         cmd.Parameters.AddWithValue("@cidade", txtCidade.Text);
                         cmd.Parameters.AddWithValue("@estado", cmbEstado.Text);
                         cmd.Parameters.AddWithValue("@observacoes", txtObservacoes.Text);
+                        cmd.Parameters.AddWithValue("@status_ativo", "A");
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Fornecedor cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -50,12 +51,12 @@ namespace Ecommerce
                         txtEmail.Clear();
                         mskTelefone.Clear();
                         mskCelular.Clear();
-                        txtCEP.Clear();
+                        mskCEP.Clear();
                         txtRua.Clear();
                         txtNumero.Clear();
                         txtBairro.Clear();
                         txtCidade.Clear();
-                        cmbEstado.SelectedIndex = 0;
+                        cmbEstado.SelectedIndex = -1;
                         txtObservacoes.Clear();
                     }
                 }
@@ -69,6 +70,11 @@ namespace Ecommerce
         private void frmCadFornecedor_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

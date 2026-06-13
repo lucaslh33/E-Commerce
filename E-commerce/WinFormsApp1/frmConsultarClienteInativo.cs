@@ -9,19 +9,19 @@ using System.Windows.Forms;
 
 namespace Ecommerce
 {
-    public partial class frmConsultarClientes : Form
+    public partial class frmConsultarClienteInativo : Form
     {
-        public frmConsultarClientes()
+        public frmConsultarClienteInativo()
         {
             InitializeComponent();
         }
 
-        public DataTable CarregarCliente()
+        public DataTable CarregarClienteInativo()
         {
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = ("SELECT tblcliente.id AS CÓDIGO, nome AS NOME, rua AS RUA, email AS EMAIL FROM tblcliente INNER JOIN tblendereco ON tblcliente.id = tblendereco.cliente_id WHERE (nome LIKE @filtro OR rua LIKE @filtro OR email LIKE @filtro) AND status_ativo = 'A' ");
+                string sql = ("SELECT tblcliente.id AS CÓDIGO, nome AS NOME, rua AS RUA, email AS EMAIL FROM tblcliente INNER JOIN tblendereco ON tblcliente.id = tblendereco.cliente_id WHERE (nome LIKE @filtro OR rua LIKE @filtro OR email LIKE @filtro) AND status_ativo = 'I' ");
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -32,7 +32,7 @@ namespace Ecommerce
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
-                        dgvConsultaCliente.DataSource = dt;
+                        dgvConsultarClientes.DataSource = dt;
                         return dt;
                     }
                 }
@@ -44,44 +44,34 @@ namespace Ecommerce
             }
         }
 
-        private void menuStrip1_MouseClick(object sender, MouseEventArgs e)
+        private void frmConsultarClienteInativo_Load(object sender, EventArgs e)
         {
-
+            CarregarClienteInativo();
         }
 
-        private void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarCliente();
-        }
-
-        private void frmConsultarClientes_Load(object sender, EventArgs e)
-        {
-            CarregarCliente();
-        }
-
-        private void deletarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void restaurarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string idCliente = Convert.ToString(dgvConsultaCliente.CurrentRow.Cells["CÓDIGO"].Value);
+                string idCategoria = Convert.ToString(dgvConsultarClientes.CurrentRow.Cells["CÓDIGO"].Value);
 
-                DialogResult result = MessageBox.Show($"Tem certeza que deseja remover o cliente: {dgvConsultaCliente.CurrentRow.Cells["NOME"].Value}", "Confirmação de remoção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar a categoria: {dgvConsultarClientes.CurrentRow.Cells["NOME"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
                     Conexao conexao = new Conexao();
-                    string sql = "UPDATE tblcliente SET status_ativo = 'I' WHERE id = @id";
+                    string sql = "UPDATE tblcliente SET status_ativo = 'A' WHERE id = @id";
 
                     using (SqlConnection con = conexao.Conectar())
                     {
                         using (SqlCommand cmd = new SqlCommand(sql, con))
                         {
-                            cmd.Parameters.AddWithValue("@id", idCliente);
+                            cmd.Parameters.AddWithValue("@id", idCategoria);
                             cmd.ExecuteNonQuery();
-                            CarregarCliente();
+                            CarregarClienteInativo();
                         }
                     }
-                    MessageBox.Show("Cliente rEMOVIDO com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cliente restaurado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)

@@ -73,5 +73,17 @@ namespace Ecommerce
             frmConsultarProdutos frmConsultarProdutos = new frmConsultarProdutos();
             frmConsultarProdutos.ShowDialog();
         }
+
+        private void categoriaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmConsultarCategoriaInativa frmConsultarCategoriaInativa = new frmConsultarCategoriaInativa();
+            frmConsultarCategoriaInativa.ShowDialog();
+        }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultarClienteInativo frmConsultarClienteInativo = new frmConsultarClienteInativo();
+            frmConsultarClienteInativo.ShowDialog();
+        }
     }
 }

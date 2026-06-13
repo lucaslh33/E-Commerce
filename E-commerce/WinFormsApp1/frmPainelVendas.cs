@@ -22,7 +22,12 @@ namespace Ecommerce
 
         private void mskData_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-            
+
+        }
+
+        private void frmPainelVendas_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
