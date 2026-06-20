@@ -53,9 +53,9 @@ namespace Ecommerce
         {
             try
             {
-                string idCategoria = Convert.ToString(dgvConsultarClientes.CurrentRow.Cells["CÓDIGO"].Value);
+                string idCLiente = Convert.ToString(dgvConsultarClientes.CurrentRow.Cells["CÓDIGO"].Value);
 
-                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar a categoria: {dgvConsultarClientes.CurrentRow.Cells["NOME"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar o cliente: {dgvConsultarClientes.CurrentRow.Cells["NOME"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
@@ -66,7 +66,7 @@ namespace Ecommerce
                     {
                         using (SqlCommand cmd = new SqlCommand(sql, con))
                         {
-                            cmd.Parameters.AddWithValue("@id", idCategoria);
+                            cmd.Parameters.AddWithValue("@id", idCLiente);
                             cmd.ExecuteNonQuery();
                             CarregarClienteInativo();
                         }

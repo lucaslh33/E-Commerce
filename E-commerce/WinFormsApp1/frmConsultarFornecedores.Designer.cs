@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             grbConsultaFornecedores = new GroupBox();
             dgvConsultaFornecedores = new DataGridView();
             txtPesquisa = new TextBox();
             lblPesquisa = new Label();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            editarToolStripMenuItem = new ToolStripMenuItem();
+            removerToolStripMenuItem = new ToolStripMenuItem();
             grbConsultaFornecedores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaFornecedores).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // grbConsultaFornecedores
@@ -43,7 +48,7 @@
             grbConsultaFornecedores.Controls.Add(lblPesquisa);
             grbConsultaFornecedores.Location = new Point(12, 12);
             grbConsultaFornecedores.Name = "grbConsultaFornecedores";
-            grbConsultaFornecedores.Size = new Size(632, 500);
+            grbConsultaFornecedores.Size = new Size(580, 500);
             grbConsultaFornecedores.TabIndex = 1;
             grbConsultaFornecedores.TabStop = false;
             grbConsultaFornecedores.Text = "Consultar Fornecedores";
@@ -53,6 +58,7 @@
             dgvConsultaFornecedores.AllowUserToAddRows = false;
             dgvConsultaFornecedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultaFornecedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvConsultaFornecedores.ContextMenuStrip = contextMenuStrip1;
             dgvConsultaFornecedores.Location = new Point(6, 66);
             dgvConsultaFornecedores.MultiSelect = false;
             dgvConsultaFornecedores.Name = "dgvConsultaFornecedores";
@@ -77,11 +83,30 @@
             lblPesquisa.TabIndex = 0;
             lblPesquisa.Text = "Nome, CNPJ, Razão social:";
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { editarToolStripMenuItem, removerToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(181, 70);
+            // 
+            // editarToolStripMenuItem
+            // 
+            editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            editarToolStripMenuItem.Size = new Size(180, 22);
+            editarToolStripMenuItem.Text = "Editar";
+            // 
+            // removerToolStripMenuItem
+            // 
+            removerToolStripMenuItem.Name = "removerToolStripMenuItem";
+            removerToolStripMenuItem.Size = new Size(180, 22);
+            removerToolStripMenuItem.Text = "Remover";
+            removerToolStripMenuItem.Click += removerToolStripMenuItem_Click;
+            // 
             // frmConsultarFornecedores
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(841, 534);
+            ClientSize = new Size(605, 534);
             Controls.Add(grbConsultaFornecedores);
             Name = "frmConsultarFornecedores";
             Text = "frmConsultarFornecedores";
@@ -89,6 +114,7 @@
             grbConsultaFornecedores.ResumeLayout(false);
             grbConsultaFornecedores.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaFornecedores).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -98,5 +124,8 @@
         private DataGridView dgvConsultaFornecedores;
         private TextBox txtPesquisa;
         private Label lblPesquisa;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem editarToolStripMenuItem;
+        private ToolStripMenuItem removerToolStripMenuItem;
     }
 }

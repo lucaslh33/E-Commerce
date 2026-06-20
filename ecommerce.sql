@@ -70,8 +70,8 @@ sku VARCHAR(50) UNIQUE,
 imagem1 VARCHAR(255),
 imagem2 VARCHAR(255),
 imagem3 VARCHAR(255),
-fornecedor_id INT FOREIGN KEY REFERENCES tblfornecedor(id),
-categoria_id INT FOREIGN KEY REFERENCES tblcategoria(id)
+fornecedor_id INT NOT NULL FOREIGN KEY REFERENCES tblfornecedor(id),
+categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id)
 )
 
 

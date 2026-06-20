@@ -1,6 +1,6 @@
 ﻿namespace Ecommerce
 {
-    partial class frmConsultarProdutos
+    partial class frmConsultarProdutoInativo
     {
         /// <summary>
         /// Required designer variable.
@@ -32,8 +32,7 @@
             grbConsultarProdutos = new GroupBox();
             dgvConsultarProduto = new DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            editarToolStripMenuItem = new ToolStripMenuItem();
-            removerToolStripMenuItem = new ToolStripMenuItem();
+            restaurarToolStripMenuItem = new ToolStripMenuItem();
             txtPesquisa = new TextBox();
             lblPesquisa = new Label();
             grbConsultarProdutos.SuspendLayout();
@@ -49,41 +48,35 @@
             grbConsultarProdutos.Location = new Point(12, 12);
             grbConsultarProdutos.Name = "grbConsultarProdutos";
             grbConsultarProdutos.Size = new Size(579, 500);
-            grbConsultarProdutos.TabIndex = 1;
+            grbConsultarProdutos.TabIndex = 2;
             grbConsultarProdutos.TabStop = false;
-            grbConsultarProdutos.Text = "Consultar Produtos: ";
+            grbConsultarProdutos.Text = "Consultar Produtos Inativos: ";
             // 
             // dgvConsultarProduto
             // 
             dgvConsultarProduto.AllowUserToAddRows = false;
             dgvConsultarProduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultarProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConsultarProduto.ColumnHeadersVisible = false;
             dgvConsultarProduto.ContextMenuStrip = contextMenuStrip1;
             dgvConsultarProduto.Location = new Point(6, 76);
             dgvConsultarProduto.Name = "dgvConsultarProduto";
             dgvConsultarProduto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultarProduto.Size = new Size(557, 418);
             dgvConsultarProduto.TabIndex = 2;
+            dgvConsultarProduto.CellContentClick += dgvConsultarProduto_CellContentClick;
             // 
             // contextMenuStrip1
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { editarToolStripMenuItem, removerToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { restaurarToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(122, 48);
+            contextMenuStrip1.Size = new Size(124, 26);
             // 
-            // editarToolStripMenuItem
+            // restaurarToolStripMenuItem
             // 
-            editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            editarToolStripMenuItem.Size = new Size(121, 22);
-            editarToolStripMenuItem.Text = "Editar";
-            // 
-            // removerToolStripMenuItem
-            // 
-            removerToolStripMenuItem.Name = "removerToolStripMenuItem";
-            removerToolStripMenuItem.Size = new Size(121, 22);
-            removerToolStripMenuItem.Text = "Remover";
-            removerToolStripMenuItem.Click += removerToolStripMenuItem_Click;
+            restaurarToolStripMenuItem.Name = "restaurarToolStripMenuItem";
+            restaurarToolStripMenuItem.Size = new Size(123, 22);
+            restaurarToolStripMenuItem.Text = "Restaurar";
+            restaurarToolStripMenuItem.Click += restaurarToolStripMenuItem_Click;
             // 
             // txtPesquisa
             // 
@@ -91,7 +84,6 @@
             txtPesquisa.Name = "txtPesquisa";
             txtPesquisa.Size = new Size(305, 23);
             txtPesquisa.TabIndex = 1;
-            txtPesquisa.TextChanged += txtPesquisa_TextChanged;
             // 
             // lblPesquisa
             // 
@@ -102,15 +94,15 @@
             lblPesquisa.TabIndex = 0;
             lblPesquisa.Text = "Nome do produto, SKU, EAN:";
             // 
-            // frmConsultarProdutos
+            // frmConsultarProdutoInativo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(603, 517);
+            ClientSize = new Size(608, 527);
             Controls.Add(grbConsultarProdutos);
-            Name = "frmConsultarProdutos";
-            Text = "frmConsultarProdutos";
-            Load += frmConsultarProdutos_Load;
+            Name = "frmConsultarProdutoInativo";
+            Text = "frmConsultarProdutoInativo";
+            Load += frmConsultarProdutoInativo_Load;
             grbConsultarProdutos.ResumeLayout(false);
             grbConsultarProdutos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).EndInit();
@@ -125,7 +117,6 @@
         private TextBox txtPesquisa;
         private Label lblPesquisa;
         private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem editarToolStripMenuItem;
-        private ToolStripMenuItem removerToolStripMenuItem;
+        private ToolStripMenuItem restaurarToolStripMenuItem;
     }
 }

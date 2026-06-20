@@ -81,12 +81,12 @@ namespace Ecommerce
                             CarregarCliente();
                         }
                     }
-                    MessageBox.Show("Cliente rEMOVIDO com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cliente removido com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao restaurar cliente " + ex.Message);
+                MessageBox.Show("Erro ao remover cliente " + ex.Message);
             }
         }
     }

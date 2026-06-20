@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Ecommerce
 {
-    public partial class frmConsultarFornecedores : Form
+    public partial class frmConsultarFornecedoresInativos : Form
     {
-        public frmConsultarFornecedores()
+        public frmConsultarFornecedoresInativos()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = ("SELECT id AS CÓDIGO, nome AS NOME, cnpj AS CNPJ FROM tblfornecedor WHERE (nome LIKE @filtro OR nomefantasia LIKE @filtro) AND status_ativo ='A'");
+                string sql = ("SELECT id AS CÓDIGO, nome AS NOME, cnpj AS CNPJ FROM tblfornecedor WHERE (nome LIKE @filtro OR nomefantasia LIKE @filtro) AND status_ativo ='I'");
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -32,7 +32,7 @@ namespace Ecommerce
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
-                        dgvConsultaFornecedores.DataSource = dt;
+                        dgvConsultarFornecedores.DataSource = dt;
                         return dt;
                     }
                 }
@@ -44,28 +44,23 @@ namespace Ecommerce
             }
         }
 
-        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        private void frmConsultarFornecedoresInativos_Load(object sender, EventArgs e)
         {
             CarregarFornecedor();
         }
 
-        private void frmConsultarFornecedores_Load(object sender, EventArgs e)
-        {
-            CarregarFornecedor();
-        }
-
-        private void removerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void restaurarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string id = Convert.ToString(dgvConsultaFornecedores.CurrentRow.Cells["CÓDIGO"].Value);
+                string id = Convert.ToString(dgvConsultarFornecedores.CurrentRow.Cells["CÓDIGO"].Value);
 
-                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar o cliente: {dgvConsultaFornecedores.CurrentRow.Cells["NOME"].Value}", "Confirmação de remoção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar o fornecedor: {dgvConsultarFornecedores.CurrentRow.Cells["NOME"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
                     Conexao conexao = new Conexao();
-                    string sql = "UPDATE tblfornecedor SET status_ativo = 'I' WHERE id = @id";
+                    string sql = "UPDATE tblfornecedor SET status_ativo = 'A' WHERE id = @id";
 
                     using (SqlConnection con = conexao.Conectar())
                     {
@@ -76,12 +71,12 @@ namespace Ecommerce
                             CarregarFornecedor();
                         }
                     }
-                    MessageBox.Show("Fornecedor removido com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Fornecedor restaurado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao remover o fornecedor " + ex.Message);
+                MessageBox.Show("Erro ao restaurar fornecedor " + ex.Message);
             }
         }
     }

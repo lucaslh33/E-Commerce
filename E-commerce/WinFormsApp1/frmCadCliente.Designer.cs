@@ -216,6 +216,7 @@
             mskCep.Name = "mskCep";
             mskCep.Size = new Size(70, 23);
             mskCep.TabIndex = 7;
+            mskCep.Leave += mskCep_Leave;
             // 
             // lblCep
             // 

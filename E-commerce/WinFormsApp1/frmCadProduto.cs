@@ -35,7 +35,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "INSERT INTO tblproduto VALUES (@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@fornecedor.id,@categoria.id,@imagem1,@imagem2,@imagem3,@status_ativo)";
+                string sql = "INSERT INTO tblproduto (nome, preco, estoque, peso, altura, largura, comprimento, descricao, marca, ean, sku, fornecedor_id, categoria_id, imagem1, imagem2, imagem3, status_ativo)VALUES(@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@imagem1,@imagem2,@imagem3,@fornecedor_id,@categoria_id,@status_ativo)";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -52,12 +52,12 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("@marca", txtMarca.Text);
                         cmd.Parameters.AddWithValue("@ean", txtEAN.Text);
                         cmd.Parameters.AddWithValue("@sku", txtSKU.Text);
-                        cmd.Parameters.AddWithValue("@fornecedor.id", cmbFornecedor.SelectedValue);
-                        cmd.Parameters.AddWithValue("@categoria.id", cmbCategoria.SelectedValue);
-                        cmd.Parameters.AddWithValue("status_ativo", 'A');
-                        cmd.Parameters.AddWithValue("@imagem1", "");
-                        cmd.Parameters.AddWithValue("@imagem2", "");
-                        cmd.Parameters.AddWithValue("@imagem3", "");
+                        cmd.Parameters.AddWithValue("@fornecedor_id", cmbFornecedor.SelectedValue);
+                        cmd.Parameters.AddWithValue("@categoria_id", cmbCategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@imagem1", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@imagem2", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@imagem3", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@status_ativo", "A");
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Produto cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);

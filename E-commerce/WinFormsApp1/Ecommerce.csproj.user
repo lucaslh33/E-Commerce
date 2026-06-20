@@ -28,6 +28,12 @@
     <Compile Update="frmConsultarFornecedores.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="frmConsultarFornecedoresInativos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmConsultarProdutoInativo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmConsultarProdutos.cs">
       <SubType>Form</SubType>
     </Compile>

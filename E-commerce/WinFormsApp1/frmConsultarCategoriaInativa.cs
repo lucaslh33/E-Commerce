@@ -53,30 +53,25 @@ namespace Ecommerce
         {
             try
             {
-                string idCategoria = Convert.ToString(dgvConsultarCategorias.CurrentRow.Cells["CATEGORIA"].Value);
+                int id = Convert.ToInt32(dgvConsultarCategorias.CurrentRow.Cells["id"].Value);
+                Conexao conexao = new Conexao();
+                string sql = "UPDATE tblcategoria SET status_ativo = 'A' WHERE id = @id";
 
-                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar a categoria: {dgvConsultarCategorias.CurrentRow.Cells["CATEGORIA"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
+                using (SqlConnection con = conexao.Conectar())
                 {
-                    Conexao conexao = new Conexao();
-                    string sql = "UPDATE tblcliente SET status_categoria = 'A' WHERE id_categoria = @id";
-
-                    using (SqlConnection con = conexao.Conectar())
+                    using (SqlCommand cmd = new SqlCommand(sql, con))
                     {
-                        using (SqlCommand cmd = new SqlCommand(sql, con))
-                        {
-                            cmd.Parameters.AddWithValue("@id", idCategoria);
-                            cmd.ExecuteNonQuery();
-                            CarregarCategoriaInativa();
-                        }
+                        cmd.Parameters.AddWithValue("id", id);
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Categoria restaurada!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CarregarCategoriaInativa();
                     }
-                    MessageBox.Show("Categoria restaurada com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao cadastrar categoria " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
         }
     }

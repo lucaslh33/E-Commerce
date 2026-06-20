@@ -69,7 +69,7 @@ namespace Ecommerce
                         cmd.Parameters.AddWithValue("id",id);
                         cmd.ExecuteNonQuery();
 
-                        MessageBox.Show("Categoria deletada!");
+                        MessageBox.Show("Categoria deletada!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         CarregarCategoria();
                     }
                 }

@@ -235,7 +235,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Green;
-            label5.Location = new Point(421, 89);
+            label5.Location = new Point(420, 88);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 12;
@@ -293,7 +293,7 @@
             // 
             lblCategoria.AutoSize = true;
             lblCategoria.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCategoria.Location = new Point(157, 89);
+            lblCategoria.Location = new Point(158, 90);
             lblCategoria.Name = "lblCategoria";
             lblCategoria.Size = new Size(60, 15);
             lblCategoria.TabIndex = 6;
@@ -303,7 +303,7 @@
             // 
             lblCodigo.AutoSize = true;
             lblCodigo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCodigo.Location = new Point(156, 62);
+            lblCodigo.Location = new Point(158, 62);
             lblCodigo.Name = "lblCodigo";
             lblCodigo.Size = new Size(48, 15);
             lblCodigo.TabIndex = 5;
@@ -322,7 +322,7 @@
             // 
             lblProduto.AutoSize = true;
             lblProduto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblProduto.Location = new Point(156, 9);
+            lblProduto.Location = new Point(158, 9);
             lblProduto.Name = "lblProduto";
             lblProduto.Size = new Size(50, 15);
             lblProduto.TabIndex = 3;

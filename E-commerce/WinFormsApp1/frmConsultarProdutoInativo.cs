@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using Microsoft.Data.SqlClient;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace Ecommerce
 {
-    public partial class frmConsultarProdutos : Form
+    public partial class frmConsultarProdutoInativo : Form
     {
-        public frmConsultarProdutos()
+        public frmConsultarProdutoInativo()
         {
             InitializeComponent();
         }
@@ -21,7 +15,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "SELECT id AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA' FROM tblproduto WHERE (id LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro) AND status_ativo = 'A'";
+                string sql = "SELECT id AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA' FROM tblproduto WHERE (id LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro) AND status_ativo = 'I'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -44,28 +38,18 @@ namespace Ecommerce
             }
         }
 
-        private void frmConsultarProdutos_Load(object sender, EventArgs e)
-        {
-            CarregarProduto();
-        }
-
-        private void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            CarregarProduto();
-        }
-
-        private void removerToolStripMenuItem_Click(object sender, EventArgs e)
+        private void restaurarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 string id = Convert.ToString(dgvConsultarProduto.CurrentRow.Cells["CÓDIGO"].Value);
 
-                DialogResult result = MessageBox.Show($"Tem certeza que deseja remover o produto: {dgvConsultarProduto.CurrentRow.Cells["NOME"].Value}", "Confirmação de remoção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"Tem certeza que deseja restaurar o produto: {dgvConsultarProduto.CurrentRow.Cells["NOME"].Value}", "Confirmação de restauração", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
                     Conexao conexao = new Conexao();
-                    string sql = "UPDATE tblproduto SET status_ativo = 'I' WHERE id = @id";
+                    string sql = "UPDATE tblproduto SET status_ativo = 'A' WHERE id = @id";
 
                     using (SqlConnection con = conexao.Conectar())
                     {
@@ -76,13 +60,23 @@ namespace Ecommerce
                             CarregarProduto();
                         }
                     }
-                    MessageBox.Show("Produto removido com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Produto restaurado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao remover produto " + ex.Message);
+                MessageBox.Show("Erro ao restaurar produto " + ex.Message);
             }
+        }
+
+        private void dgvConsultarProduto_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void frmConsultarProdutoInativo_Load(object sender, EventArgs e)
+        {
+            CarregarProduto();
         }
     }
 }
