@@ -39,11 +39,6 @@ namespace Ecommerce
             cmbEstado.Text = endereco.Uf;
         }
 
-        private void frmCadastroCliente_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
 
@@ -51,7 +46,7 @@ namespace Ecommerce
             if (senha.Length < 6)
             {
                 MessageBox.Show("A senha dever ter no mínimo 6 caracteres");
-                return;
+               
             }
 
 

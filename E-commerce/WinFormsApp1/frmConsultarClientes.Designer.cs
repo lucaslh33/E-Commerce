@@ -31,11 +31,11 @@
             components = new System.ComponentModel.Container();
             grbConsultarClientes = new GroupBox();
             dgvConsultaCliente = new DataGridView();
-            txtPesquisa = new TextBox();
-            lblPesquisa = new Label();
             contextMenu = new ContextMenuStrip(components);
             alterarToolStripMenuItem = new ToolStripMenuItem();
             deletarToolStripMenuItem = new ToolStripMenuItem();
+            txtPesquisa = new TextBox();
+            lblPesquisa = new Label();
             grbConsultarClientes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvConsultaCliente).BeginInit();
             contextMenu.SuspendLayout();
@@ -66,6 +66,26 @@
             dgvConsultaCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultaCliente.Size = new Size(557, 418);
             dgvConsultaCliente.TabIndex = 2;
+            dgvConsultaCliente.CellContentClick += dgvConsultaCliente_CellContentClick;
+            // 
+            // contextMenu
+            // 
+            contextMenu.Items.AddRange(new ToolStripItem[] { alterarToolStripMenuItem, deletarToolStripMenuItem });
+            contextMenu.Name = "contextMenuStrip1";
+            contextMenu.Size = new Size(112, 48);
+            // 
+            // alterarToolStripMenuItem
+            // 
+            alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
+            alterarToolStripMenuItem.Size = new Size(111, 22);
+            alterarToolStripMenuItem.Text = "Alterar";
+            // 
+            // deletarToolStripMenuItem
+            // 
+            deletarToolStripMenuItem.Name = "deletarToolStripMenuItem";
+            deletarToolStripMenuItem.Size = new Size(111, 22);
+            deletarToolStripMenuItem.Text = "Deletar";
+            deletarToolStripMenuItem.Click += deletarToolStripMenuItem_Click;
             // 
             // txtPesquisa
             // 
@@ -83,25 +103,6 @@
             lblPesquisa.Size = new Size(138, 15);
             lblPesquisa.TabIndex = 0;
             lblPesquisa.Text = "Nome, CPF ou Telefone: ";
-            // 
-            // contextMenu
-            // 
-            contextMenu.Items.AddRange(new ToolStripItem[] { alterarToolStripMenuItem, deletarToolStripMenuItem });
-            contextMenu.Name = "contextMenuStrip1";
-            contextMenu.Size = new Size(181, 70);
-            // 
-            // alterarToolStripMenuItem
-            // 
-            alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
-            alterarToolStripMenuItem.Size = new Size(111, 22);
-            alterarToolStripMenuItem.Text = "Alterar";
-            // 
-            // deletarToolStripMenuItem
-            // 
-            deletarToolStripMenuItem.Name = "deletarToolStripMenuItem";
-            deletarToolStripMenuItem.Size = new Size(180, 22);
-            deletarToolStripMenuItem.Text = "Deletar";
-            deletarToolStripMenuItem.Click += deletarToolStripMenuItem_Click;
             // 
             // frmConsultarClientes
             // 

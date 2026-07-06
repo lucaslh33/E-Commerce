@@ -16,6 +16,8 @@ namespace Ecommerce
             InitializeComponent();
         }
 
+     
+
         public DataTable CarregarProduto()
         {
             try
@@ -47,11 +49,13 @@ namespace Ecommerce
         private void frmConsultarProdutos_Load(object sender, EventArgs e)
         {
             CarregarProduto();
+           
         }
 
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             CarregarProduto();
+            
         }
 
         private void removerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +87,11 @@ namespace Ecommerce
             {
                 MessageBox.Show("Erro ao remover produto " + ex.Message);
             }
+        }
+
+        private void dgvConsultarProduto_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+   
         }
     }
 }

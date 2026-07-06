@@ -41,13 +41,13 @@
             panel8 = new Panel();
             label5 = new Label();
             lblEstoque = new Label();
-            label4 = new Label();
+            lblRetornoPrecoUnitario = new Label();
             lblPrecoUnitario = new Label();
-            label3 = new Label();
+            lblRetornoCategoria = new Label();
             label2 = new Label();
             lblCategoria = new Label();
             lblCodigo = new Label();
-            label1 = new Label();
+            lblRetornoProduto = new Label();
             lblProduto = new Label();
             pcbProduto = new PictureBox();
             panel7 = new Panel();
@@ -64,7 +64,7 @@
             label6 = new Label();
             lblQtdeItens = new Label();
             btnCancelarItem = new Button();
-            dataGridView1 = new DataGridView();
+            dgvItemVenda = new DataGridView();
             lbItensVenda = new Label();
             panel5 = new Panel();
             btnFinalizarVenda = new Button();
@@ -72,7 +72,7 @@
             btnLimparVenda = new Button();
             btnAdicionarNovaVenda = new Button();
             panel3 = new Panel();
-            btnBuscar = new Button();
+            btnAdicionarItem = new Button();
             txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
@@ -80,7 +80,7 @@
             lblValorDesconto = new Label();
             lblSubTotalRecebido = new Label();
             lblDesconto = new Label();
-            label8 = new Label();
+            lblRetornoTotal = new Label();
             lblTotal = new Label();
             lblSubTotal = new Label();
             lblResumoVenda = new Label();
@@ -89,6 +89,7 @@
             lblPdv = new Label();
             lblCarrinho = new Label();
             panel11 = new Panel();
+            button1 = new Button();
             btnSair = new Button();
             btnConfiguracoes = new Button();
             btnRelatorio = new Button();
@@ -96,7 +97,6 @@
             btnProdutos = new Button();
             btnCLientes = new Button();
             btnConsultarVendas = new Button();
-            btnNovaVenda = new Button();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             panel1.SuspendLayout();
@@ -104,7 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)pcbProduto).BeginInit();
             panel7.SuspendLayout();
             panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvItemVenda).BeginInit();
             panel5.SuspendLayout();
             panel3.SuspendLayout();
             panel2.SuspendLayout();
@@ -138,7 +138,6 @@
             mskData.Size = new Size(100, 23);
             mskData.TabIndex = 5;
             mskData.ValidatingType = typeof(DateTime);
-            mskData.MaskInputRejected += mskData_MaskInputRejected;
             // 
             // lblNomeOperador
             // 
@@ -215,20 +214,19 @@
             panel8.BackColor = Color.White;
             panel8.Controls.Add(label5);
             panel8.Controls.Add(lblEstoque);
-            panel8.Controls.Add(label4);
+            panel8.Controls.Add(lblRetornoPrecoUnitario);
             panel8.Controls.Add(lblPrecoUnitario);
-            panel8.Controls.Add(label3);
+            panel8.Controls.Add(lblRetornoCategoria);
             panel8.Controls.Add(label2);
             panel8.Controls.Add(lblCategoria);
             panel8.Controls.Add(lblCodigo);
-            panel8.Controls.Add(label1);
+            panel8.Controls.Add(lblRetornoProduto);
             panel8.Controls.Add(lblProduto);
             panel8.Controls.Add(pcbProduto);
             panel8.Location = new Point(6, 70);
             panel8.Name = "panel8";
             panel8.Size = new Size(593, 121);
             panel8.TabIndex = 3;
-            panel8.Paint += panel8_Paint;
             // 
             // label5
             // 
@@ -251,15 +249,15 @@
             lblEstoque.TabIndex = 11;
             lblEstoque.Text = "Estoque";
             // 
-            // label4
+            // lblRetornoPrecoUnitario
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.FromArgb(255, 128, 0);
-            label4.Location = new Point(420, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(0, 20);
-            label4.TabIndex = 10;
+            lblRetornoPrecoUnitario.AutoSize = true;
+            lblRetornoPrecoUnitario.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRetornoPrecoUnitario.ForeColor = Color.FromArgb(255, 128, 0);
+            lblRetornoPrecoUnitario.Location = new Point(420, 33);
+            lblRetornoPrecoUnitario.Name = "lblRetornoPrecoUnitario";
+            lblRetornoPrecoUnitario.Size = new Size(0, 20);
+            lblRetornoPrecoUnitario.TabIndex = 10;
             // 
             // lblPrecoUnitario
             // 
@@ -271,14 +269,14 @@
             lblPrecoUnitario.TabIndex = 9;
             lblPrecoUnitario.Text = "Preço unitário";
             // 
-            // label3
+            // lblRetornoCategoria
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(223, 89);
-            label3.Name = "label3";
-            label3.Size = new Size(0, 15);
-            label3.TabIndex = 8;
+            lblRetornoCategoria.AutoSize = true;
+            lblRetornoCategoria.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRetornoCategoria.Location = new Point(223, 89);
+            lblRetornoCategoria.Name = "lblRetornoCategoria";
+            lblRetornoCategoria.Size = new Size(0, 15);
+            lblRetornoCategoria.TabIndex = 8;
             // 
             // label2
             // 
@@ -309,14 +307,14 @@
             lblCodigo.TabIndex = 5;
             lblCodigo.Text = "Código:";
             // 
-            // label1
+            // lblRetornoProduto
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(156, 33);
-            label1.Name = "label1";
-            label1.Size = new Size(0, 20);
-            label1.TabIndex = 4;
+            lblRetornoProduto.AutoSize = true;
+            lblRetornoProduto.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRetornoProduto.Location = new Point(156, 33);
+            lblRetornoProduto.Name = "lblRetornoProduto";
+            lblRetornoProduto.Size = new Size(0, 20);
+            lblRetornoProduto.TabIndex = 4;
             // 
             // lblProduto
             // 
@@ -439,7 +437,7 @@
             panel6.Controls.Add(label6);
             panel6.Controls.Add(lblQtdeItens);
             panel6.Controls.Add(btnCancelarItem);
-            panel6.Controls.Add(dataGridView1);
+            panel6.Controls.Add(dgvItemVenda);
             panel6.Controls.Add(lbItensVenda);
             panel6.Location = new Point(7, 197);
             panel6.Name = "panel6";
@@ -477,14 +475,19 @@
             btnCancelarItem.Text = "Cancelar item selecionado";
             btnCancelarItem.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // dgvItemVenda
             // 
-            dataGridView1.BackgroundColor = Color.White;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 30);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(571, 219);
-            dataGridView1.TabIndex = 1;
+            dgvItemVenda.AllowUserToAddRows = false;
+            dgvItemVenda.AllowUserToDeleteRows = false;
+            dgvItemVenda.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvItemVenda.BackgroundColor = Color.White;
+            dgvItemVenda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvItemVenda.Location = new Point(12, 30);
+            dgvItemVenda.Name = "dgvItemVenda";
+            dgvItemVenda.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvItemVenda.Size = new Size(571, 219);
+            dgvItemVenda.TabIndex = 1;
+            dgvItemVenda.CellContentClick += dgvItemVenda_CellContentClick;
             // 
             // lbItensVenda
             // 
@@ -550,7 +553,7 @@
             // panel3
             // 
             panel3.BackColor = Color.White;
-            panel3.Controls.Add(btnBuscar);
+            panel3.Controls.Add(btnAdicionarItem);
             panel3.Controls.Add(txtCodigoBarras);
             panel3.Controls.Add(lblAdicionarProdutoVenda);
             panel3.Location = new Point(6, 3);
@@ -558,17 +561,18 @@
             panel3.Size = new Size(593, 70);
             panel3.TabIndex = 1;
             // 
-            // btnBuscar
+            // btnAdicionarItem
             // 
-            btnBuscar.BackColor = Color.FromArgb(255, 128, 0);
-            btnBuscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnBuscar.ForeColor = Color.Snow;
-            btnBuscar.Location = new Point(486, 27);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(97, 29);
-            btnBuscar.TabIndex = 2;
-            btnBuscar.Text = "Buscar ";
-            btnBuscar.UseVisualStyleBackColor = false;
+            btnAdicionarItem.BackColor = Color.FromArgb(255, 128, 0);
+            btnAdicionarItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAdicionarItem.ForeColor = Color.Snow;
+            btnAdicionarItem.Location = new Point(486, 27);
+            btnAdicionarItem.Name = "btnAdicionarItem";
+            btnAdicionarItem.Size = new Size(97, 29);
+            btnAdicionarItem.TabIndex = 2;
+            btnAdicionarItem.Text = "Adicionar Item";
+            btnAdicionarItem.UseVisualStyleBackColor = false;
+            btnAdicionarItem.Click += btnAdicionarItem_Click;
             // 
             // txtCodigoBarras
             // 
@@ -578,7 +582,10 @@
             txtCodigoBarras.Name = "txtCodigoBarras";
             txtCodigoBarras.Size = new Size(456, 29);
             txtCodigoBarras.TabIndex = 1;
-            txtCodigoBarras.Text = "Digite o código de barras ou nome do produto";
+            txtCodigoBarras.TextChanged += txtCodigoBarras_TextChanged;
+            txtCodigoBarras.Enter += txtCodigoBarras_Enter;
+            txtCodigoBarras.KeyDown += txtCodigoBarras_KeyDown;
+            txtCodigoBarras.Leave += txtCodigoBarras_Leave;
             // 
             // lblAdicionarProdutoVenda
             // 
@@ -597,7 +604,7 @@
             panel2.Controls.Add(lblValorDesconto);
             panel2.Controls.Add(lblSubTotalRecebido);
             panel2.Controls.Add(lblDesconto);
-            panel2.Controls.Add(label8);
+            panel2.Controls.Add(lblRetornoTotal);
             panel2.Controls.Add(lblTotal);
             panel2.Controls.Add(lblSubTotal);
             panel2.Controls.Add(lblResumoVenda);
@@ -639,15 +646,15 @@
             lblDesconto.TabIndex = 15;
             lblDesconto.Text = "Desconto";
             // 
-            // label8
+            // lblRetornoTotal
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.FromArgb(0, 192, 0);
-            label8.Location = new Point(172, 151);
-            label8.Name = "label8";
-            label8.Size = new Size(0, 20);
-            label8.TabIndex = 14;
+            lblRetornoTotal.AutoSize = true;
+            lblRetornoTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRetornoTotal.ForeColor = Color.FromArgb(0, 192, 0);
+            lblRetornoTotal.Location = new Point(172, 151);
+            lblRetornoTotal.Name = "lblRetornoTotal";
+            lblRetornoTotal.Size = new Size(0, 20);
+            lblRetornoTotal.TabIndex = 14;
             // 
             // lblTotal
             // 
@@ -725,6 +732,7 @@
             // panel11
             // 
             panel11.BackColor = Color.FromArgb(37, 50, 75);
+            panel11.Controls.Add(button1);
             panel11.Controls.Add(btnSair);
             panel11.Controls.Add(btnConfiguracoes);
             panel11.Controls.Add(btnRelatorio);
@@ -732,11 +740,20 @@
             panel11.Controls.Add(btnProdutos);
             panel11.Controls.Add(btnCLientes);
             panel11.Controls.Add(btnConsultarVendas);
-            panel11.Controls.Add(btnNovaVenda);
             panel11.Location = new Point(0, 66);
             panel11.Name = "panel11";
             panel11.Size = new Size(210, 563);
             panel11.TabIndex = 7;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(12, 11);
+            button1.Name = "button1";
+            button1.Size = new Size(162, 49);
+            button1.TabIndex = 8;
+            button1.Text = "\U0001f6d2 Nova Venda";
+            button1.UseVisualStyleBackColor = true;
             // 
             // btnSair
             // 
@@ -808,18 +825,6 @@
             btnConsultarVendas.Text = "🔍 Consultar Venda";
             btnConsultarVendas.UseVisualStyleBackColor = true;
             // 
-            // btnNovaVenda
-            // 
-            btnNovaVenda.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnNovaVenda.ForeColor = Color.Black;
-            btnNovaVenda.Location = new Point(12, 11);
-            btnNovaVenda.Name = "btnNovaVenda";
-            btnNovaVenda.Size = new Size(162, 49);
-            btnNovaVenda.TabIndex = 0;
-            btnNovaVenda.Text = "\U0001f6d2 Nova Venda";
-            btnNovaVenda.UseVisualStyleBackColor = true;
-            btnNovaVenda.Paint += panel8_Paint;
-            // 
             // frmPainelVendas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -843,7 +848,7 @@
             panel7.PerformLayout();
             panel6.ResumeLayout(false);
             panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvItemVenda).EndInit();
             panel5.ResumeLayout(false);
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
@@ -869,20 +874,20 @@
         private Label lblAdicionarProdutoVenda;
         private Panel panel8;
         private PictureBox pcbProduto;
-        private Button btnBuscar;
+        private Button btnAdicionarItem;
         private Label lblCodigo;
-        private Label label1;
+        private Label lblRetornoProduto;
         private Label lblProduto;
         private Label lblEstoque;
-        private Label label4;
+        private Label lblRetornoPrecoUnitario;
         private Label lblPrecoUnitario;
-        private Label label3;
+        private Label lblRetornoCategoria;
         private Label label2;
         private Label lblCategoria;
         private Label label5;
         private Label lbItensVenda;
         private Button btnCancelarItem;
-        private DataGridView dataGridView1;
+        private DataGridView dgvItemVenda;
         private Panel panel9;
         private Label lblCarrinho;
         private Label lblPdv;
@@ -895,11 +900,10 @@
         private Button btnProdutos;
         private Button btnCLientes;
         private Button btnConsultarVendas;
-        private Button btnNovaVenda;
         private Label label6;
         private Label lblQtdeItens;
         private Label lblDesconto;
-        private Label label8;
+        private Label lblRetornoTotal;
         private Label lblTotal;
         private Label lblSubTotal;
         private Label lblResumoVenda;
@@ -925,5 +929,6 @@
         private Label lblReceberCaixa;
         private Label lblOperador;
         private MaskedTextBox mskData;
+        private Button button1;
     }
 }

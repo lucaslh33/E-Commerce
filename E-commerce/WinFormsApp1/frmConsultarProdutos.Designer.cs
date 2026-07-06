@@ -58,13 +58,13 @@
             dgvConsultarProduto.AllowUserToAddRows = false;
             dgvConsultarProduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvConsultarProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvConsultarProduto.ColumnHeadersVisible = false;
             dgvConsultarProduto.ContextMenuStrip = contextMenuStrip1;
             dgvConsultarProduto.Location = new Point(6, 76);
             dgvConsultarProduto.Name = "dgvConsultarProduto";
             dgvConsultarProduto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvConsultarProduto.Size = new Size(557, 418);
             dgvConsultarProduto.TabIndex = 2;
+            dgvConsultarProduto.CellContentClick += dgvConsultarProduto_CellContentClick;
             // 
             // contextMenuStrip1
             // 
@@ -107,6 +107,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(603, 517);
+            ContextMenuStrip = contextMenuStrip1;
             Controls.Add(grbConsultarProdutos);
             Name = "frmConsultarProdutos";
             Text = "frmConsultarProdutos";

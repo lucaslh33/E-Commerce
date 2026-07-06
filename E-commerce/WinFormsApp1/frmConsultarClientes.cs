@@ -89,5 +89,10 @@ namespace Ecommerce
                 MessageBox.Show("Erro ao remover cliente " + ex.Message);
             }
         }
+
+        private void dgvConsultaCliente_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

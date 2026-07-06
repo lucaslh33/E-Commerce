@@ -39,6 +39,7 @@ nome VARCHAR(100) NOT NULL,
 descricao VARCHAR(255)
 )
 
+
 CREATE TABLE tblendereco(
 id INT PRIMARY KEY IDENTITY,
 cliente_id INT NOT NULL FOREIGN KEY REFERENCES tblcliente(id),
@@ -73,6 +74,7 @@ imagem3 VARCHAR(255),
 fornecedor_id INT NOT NULL FOREIGN KEY REFERENCES tblfornecedor(id),
 categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id)
 )
+
 
 
 CREATE TABLE tblpedido (
@@ -226,6 +228,9 @@ ADD status_ativo CHAR(1) DEFAULT 'A'
 
 ALTER TABLE tblproduto
 ADD status_ativo CHAR(1) DEFAULT 'A'
+UPDATE tblproduto
+SET categoria_id = 1
+WHERE id = 1;
 
 ALTER TABLE tblcategoria
 ADD status_ativo CHAR(1) DEFAULT 'A'

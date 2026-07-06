@@ -429,7 +429,6 @@
             Controls.Add(btnCadastrar);
             Name = "frmCadCliente";
             Text = "frmCadCliente";
-            Load += frmCadastroCliente_Load;
             grbInformacoesEndereco.ResumeLayout(false);
             grbInformacoesEndereco.PerformLayout();
             grbinformacoescliente.ResumeLayout(false);

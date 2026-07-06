@@ -35,7 +35,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "INSERT INTO tblproduto (nome, preco, estoque, peso, altura, largura, comprimento, descricao, marca, ean, sku, fornecedor_id, categoria_id, imagem1, imagem2, imagem3, status_ativo)VALUES(@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@imagem1,@imagem2,@imagem3,@fornecedor_id,@categoria_id,@status_ativo)";
+                string sql = "INSERT INTO tblproduto (nome, preco, estoque, peso, altura, largura, comprimento, descricao, marca, ean, sku, fornecedor_id, categoria_id, imagem1, imagem2, imagem3, status_ativo)VALUES(@nome,@preco,@estoque,@peso,@altura,@largura,@comprimento,@descricao,@marca,@ean,@sku,@fornecedor_id,@categoria_id,@imagem1,@imagem2,@imagem3,@status_ativo)";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -113,6 +113,7 @@ namespace Ecommerce
             cmbCategoria.DataSource = CarregarCategoria();
             cmbCategoria.DisplayMember = "nome";
             cmbCategoria.ValueMember = "id";
+            cmbCategoria.SelectedIndex = -1;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
