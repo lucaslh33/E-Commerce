@@ -20,10 +20,24 @@ namespace Ecommerce
             InitializeComponent();
         }
 
+        private void AtualizarSubTotal()
+        {
+            decimal subtotal = itens.Sum(x => x.Total);
+
+            lblSubTotalRecebido.Text = subtotal.ToString("C2");
+            lblRetornoTotal.Text = subtotal.ToString("C2");
+
+
+        }
+
         private void AtualizarGrid()
         {
             dgvItemVenda.DataSource = null;
             dgvItemVenda.DataSource = itens;
+
+            lblRetornoQuantidade.Text = itens.Sum(x => x.Quantidade).ToString();
+
+            AtualizarSubTotal();
         }
 
         private void AdicionarItem()
@@ -34,7 +48,7 @@ namespace Ecommerce
                 return;
             }
 
-            ItemVenda itemExistente = itens.FirstOrDefault(x => x.Codigo == ProdutoSelecionado["CÓDIGO"].ToString());
+            ItemVenda itemExistente = itens.FirstOrDefault(x => x.Codigo.Trim() == ProdutoSelecionado["CÓDIGO"].ToString().Trim());
 
             if (itemExistente == null)
             {
@@ -44,6 +58,7 @@ namespace Ecommerce
                 item.Categoria = ProdutoSelecionado["CATEGORIA"].ToString();
                 item.Preco = Convert.ToDecimal(ProdutoSelecionado["PREÇO"]);
                 item.Quantidade = 1;
+                lblRetornoQuantidade.Text = item.Quantidade.ToString();
 
                 itens.Add(item);
                 AtualizarGrid();
@@ -51,25 +66,26 @@ namespace Ecommerce
 
             else
             {
-                 itemExistente.Quantidade ++;
+                itemExistente.Quantidade++;
+                lblRetornoQuantidade.Text = itemExistente.Quantidade.ToString();
                 AtualizarGrid();
             }
 
 
         }
 
-        public DataTable CarregarItem()
+        public bool CarregarItem()
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(txtCodigoBarras.Text))
                 {
-                    dgvItemVenda.DataSource = null;
-                    return null;
+
+                    return false;
                 }
 
                 Conexao conexao = new Conexao();
-                string sql = "SELECT p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro) AND p.status_ativo = 'A'";
+                string sql = "SELECT p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO', p.estoque as 'ESTOQUE' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro OR p.estoque LIKE @filtro) AND p.status_ativo = 'A'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -82,21 +98,25 @@ namespace Ecommerce
                         DataTable dt = new DataTable();
                         da.Fill(dt);
 
-                        dgvItemVenda.DataSource = dt;
+
 
                         if (dt.Rows.Count > 0)
                         {
                             ProdutoSelecionado = dt.Rows[0];
+
                             lblRetornoProduto.Text = dt.Rows[0]["NOME"].ToString();
                             lblRetornoPrecoUnitario.Text = Convert.ToDecimal(dt.Rows[0]["PREÇO"]).ToString("C2");
 
                             lblRetornoCategoria.Text = dt.Rows[0]["CATEGORIA"].ToString();
-                            
+                            lblRetornoCodigo.Text = dt.Rows[0]["CÓDIGO"].ToString();
+                            lblRetornoEstoque.Text = dt.Rows[0]["ESTOQUE"].ToString();
+
+                            return true;
                         }
 
-                        
 
-                        return dt;
+                        ProdutoSelecionado = null;
+                        return false;
 
 
                     }
@@ -105,7 +125,7 @@ namespace Ecommerce
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao consultar produto! ", "ERRO!" + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
+                return false;
             }
         }
 
@@ -123,6 +143,7 @@ namespace Ecommerce
         {
             txtCodigoBarras.Text = "Digite o código de barras";
             txtCodigoBarras.ForeColor = Color.Gray;
+
 
         }
 
@@ -148,17 +169,37 @@ namespace Ecommerce
         {
             if (e.KeyCode == Keys.Enter)
             {
-                CarregarItem();
-                
+                if (CarregarItem())
+                {
+                    AdicionarItem();
+
+                    txtCodigoBarras.Clear();
+                    txtCodigoBarras.Focus();
+                }
             }
+
         }
 
         private void btnAdicionarItem_Click(object sender, EventArgs e)
         {
-            if (CarregarItem() != null)
-            {
-                AdicionarItem();
-            }
+
+        }
+
+        private void btnCLientes_Click(object sender, EventArgs e)
+        {
+            frmConsultarClientes frmConsultarClientes = new frmConsultarClientes();
+            frmConsultarClientes.ShowDialog();
+        }
+
+        private void btnProdutos_MouseClick(object sender, MouseEventArgs e)
+        {
+            frmConsultarProdutos frmConsultarProdutos = new frmConsultarProdutos();
+            frmConsultarProdutos.ShowDialog();
+        }
+
+        private void btnSair_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -39,6 +39,8 @@
             txtNovaVenda = new Label();
             panel1 = new Panel();
             panel8 = new Panel();
+            lblRetornoEstoque = new Label();
+            lblRetornoCodigo = new Label();
             label5 = new Label();
             lblEstoque = new Label();
             lblRetornoPrecoUnitario = new Label();
@@ -61,7 +63,7 @@
             btnDinheiro = new Button();
             lblFormaPagamento = new Label();
             panel6 = new Panel();
-            label6 = new Label();
+            lblRetornoQuantidade = new Label();
             lblQtdeItens = new Label();
             btnCancelarItem = new Button();
             dgvItemVenda = new DataGridView();
@@ -212,6 +214,8 @@
             // panel8
             // 
             panel8.BackColor = Color.White;
+            panel8.Controls.Add(lblRetornoEstoque);
+            panel8.Controls.Add(lblRetornoCodigo);
             panel8.Controls.Add(label5);
             panel8.Controls.Add(lblEstoque);
             panel8.Controls.Add(lblRetornoPrecoUnitario);
@@ -227,6 +231,24 @@
             panel8.Name = "panel8";
             panel8.Size = new Size(593, 121);
             panel8.TabIndex = 3;
+            // 
+            // lblRetornoEstoque
+            // 
+            lblRetornoEstoque.AutoSize = true;
+            lblRetornoEstoque.Location = new Point(474, 62);
+            lblRetornoEstoque.Name = "lblRetornoEstoque";
+            lblRetornoEstoque.Size = new Size(38, 15);
+            lblRetornoEstoque.TabIndex = 14;
+            lblRetornoEstoque.Text = "label1";
+            // 
+            // lblRetornoCodigo
+            // 
+            lblRetornoCodigo.AutoSize = true;
+            lblRetornoCodigo.Location = new Point(474, 87);
+            lblRetornoCodigo.Name = "lblRetornoCodigo";
+            lblRetornoCodigo.Size = new Size(38, 15);
+            lblRetornoCodigo.TabIndex = 13;
+            lblRetornoCodigo.Text = "label1";
             // 
             // label5
             // 
@@ -245,9 +267,9 @@
             lblEstoque.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblEstoque.Location = new Point(420, 62);
             lblEstoque.Name = "lblEstoque";
-            lblEstoque.Size = new Size(49, 15);
+            lblEstoque.Size = new Size(52, 15);
             lblEstoque.TabIndex = 11;
-            lblEstoque.Text = "Estoque";
+            lblEstoque.Text = "Estoque:";
             // 
             // lblRetornoPrecoUnitario
             // 
@@ -434,7 +456,7 @@
             // panel6
             // 
             panel6.BackColor = Color.White;
-            panel6.Controls.Add(label6);
+            panel6.Controls.Add(lblRetornoQuantidade);
             panel6.Controls.Add(lblQtdeItens);
             panel6.Controls.Add(btnCancelarItem);
             panel6.Controls.Add(dgvItemVenda);
@@ -444,14 +466,13 @@
             panel6.Size = new Size(593, 289);
             panel6.TabIndex = 2;
             // 
-            // label6
+            // lblRetornoQuantidade
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(560, 259);
-            label6.Name = "label6";
-            label6.Size = new Size(13, 15);
-            label6.TabIndex = 4;
-            label6.Text = "6";
+            lblRetornoQuantidade.AutoSize = true;
+            lblRetornoQuantidade.Location = new Point(560, 259);
+            lblRetornoQuantidade.Name = "lblRetornoQuantidade";
+            lblRetornoQuantidade.Size = new Size(0, 15);
+            lblRetornoQuantidade.TabIndex = 4;
             // 
             // lblQtdeItens
             // 
@@ -651,7 +672,7 @@
             lblRetornoTotal.AutoSize = true;
             lblRetornoTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRetornoTotal.ForeColor = Color.FromArgb(0, 192, 0);
-            lblRetornoTotal.Location = new Point(172, 151);
+            lblRetornoTotal.Location = new Point(149, 150);
             lblRetornoTotal.Name = "lblRetornoTotal";
             lblRetornoTotal.Size = new Size(0, 20);
             lblRetornoTotal.TabIndex = 14;
@@ -764,6 +785,7 @@
             btnSair.TabIndex = 7;
             btnSair.Text = "🚪 Sair";
             btnSair.UseVisualStyleBackColor = true;
+            btnSair.Click += btnSair_Click;
             // 
             // btnConfiguracoes
             // 
@@ -804,6 +826,7 @@
             btnProdutos.TabIndex = 3;
             btnProdutos.Text = "🛍️ Produtos";
             btnProdutos.UseVisualStyleBackColor = true;
+            btnProdutos.MouseClick += btnProdutos_MouseClick;
             // 
             // btnCLientes
             // 
@@ -814,6 +837,7 @@
             btnCLientes.TabIndex = 2;
             btnCLientes.Text = "👥 Clientes";
             btnCLientes.UseVisualStyleBackColor = true;
+            btnCLientes.Click += btnCLientes_Click;
             // 
             // btnConsultarVendas
             // 
@@ -900,7 +924,7 @@
         private Button btnProdutos;
         private Button btnCLientes;
         private Button btnConsultarVendas;
-        private Label label6;
+        private Label lblRetornoQuantidade;
         private Label lblQtdeItens;
         private Label lblDesconto;
         private Label lblRetornoTotal;
@@ -930,5 +954,7 @@
         private Label lblOperador;
         private MaskedTextBox mskData;
         private Button button1;
+        private Label lblRetornoEstoque;
+        private Label lblRetornoCodigo;
     }
 }

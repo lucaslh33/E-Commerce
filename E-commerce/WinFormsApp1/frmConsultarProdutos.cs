@@ -23,7 +23,7 @@ namespace Ecommerce
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "SELECT id AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA' FROM tblproduto WHERE (id LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro) AND status_ativo = 'A'";
+                string sql = "SELECT ean AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA', estoque AS 'ESTOQUE' FROM tblproduto WHERE (ean LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro or estoque LIKE @filtro) AND status_ativo = 'A'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {

@@ -2,6 +2,7 @@ CREATE DATABASE ecommerce
 
 USE ecommerce
 
+
 CREATE TABLE tblcliente (
 id INT PRIMARY KEY IDENTITY(1,1),
 nome VARCHAR(100) NOT NULL,
@@ -10,11 +11,9 @@ datanascimento DATE,
 email VARCHAR (100) NOT NULL,
 celular VARCHAR (15) NOT NULL,
 telefone VARCHAR(15),
-senha VARCHAR(255) NOT NULL
+senha VARCHAR(255) NOT NULL,
+status_ativo CHAR(1) DEFAULT 'A'
 )
-
-INSERT INTO tblcliente (nome, cpf, datanascimento, email, celular)
-VALUES ('Lucas Teste', '12345678900', '2000-01-01', 'lucas@email.com', '16999999999')
 
 CREATE TABLE tblfornecedor (
 id INT PRIMARY KEY IDENTITY(1,1),
@@ -30,13 +29,15 @@ numero CHAR(5),
 bairro VARCHAR(100),
 cidade VARCHAR(100),
 estado CHAR(2),
-observacoes VARCHAR(MAX)
+observacoes VARCHAR(MAX),
+status_ativo CHAR(1) DEFAULT 'A'
 )
 
 CREATE TABLE tblcategoria(
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
-descricao VARCHAR(255)
+descricao VARCHAR(255),
+status_ativo CHAR(1) NOT NULL DEFAULT 'A'
 )
 
 
@@ -72,7 +73,8 @@ imagem1 VARCHAR(255),
 imagem2 VARCHAR(255),
 imagem3 VARCHAR(255),
 fornecedor_id INT NOT NULL FOREIGN KEY REFERENCES tblfornecedor(id),
-categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id)
+categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id),
+status_ativo CHAR(1) DEFAULT 'A'
 )
 
 
