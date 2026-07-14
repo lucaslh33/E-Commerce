@@ -20,6 +20,20 @@ namespace Ecommerce
             InitializeComponent();
         }
 
+        private void LimparTela()
+        {
+            txtCodigoBarras.Clear();
+            txtCodigoBarras.Focus();
+
+            lblRetornoProduto.Text = "";
+            lblRetornoCategoria.Text = "";
+            lblRetornoCodigo.Text = "";
+            lblRetornoPrecoUnitario.Text = "";
+            lblRetornoEstoque.Text = "";
+
+            ProdutoSelecionado = null;
+        }
+
         private void AtualizarSubTotal()
         {
             decimal subtotal = itens.Sum(x => x.Total);
@@ -58,7 +72,9 @@ namespace Ecommerce
                 item.Categoria = ProdutoSelecionado["CATEGORIA"].ToString();
                 item.Preco = Convert.ToDecimal(ProdutoSelecionado["PREÇO"]);
                 item.Quantidade = 1;
+
                 lblRetornoQuantidade.Text = item.Quantidade.ToString();
+
 
                 itens.Add(item);
                 AtualizarGrid();
@@ -182,7 +198,13 @@ namespace Ecommerce
 
         private void btnAdicionarItem_Click(object sender, EventArgs e)
         {
+            if (CarregarItem())
+            {
+                AdicionarItem();
 
+                txtCodigoBarras.Clear();
+                txtCodigoBarras.Focus();
+            }
         }
 
         private void btnCLientes_Click(object sender, EventArgs e)
@@ -200,6 +222,46 @@ namespace Ecommerce
         private void btnSair_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnLimparVenda_Click(object sender, EventArgs e)
+        {
+            itens.Clear();
+            AtualizarGrid();
+        }
+
+        private void btnCancelarItem_Click(object sender, EventArgs e)
+        {
+            ItemVenda itemExistente = itens.FirstOrDefault(x => x.Codigo.Trim() == ProdutoSelecionado["CÓDIGO"].ToString().Trim());
+            if (itemExistente != null)
+            {
+                itemExistente.Quantidade--;
+                lblRetornoQuantidade.Text = itemExistente.Quantidade.ToString();
+
+                if (itemExistente.Quantidade <= 0)
+                {
+                    itens.Remove(itemExistente);
+
+                }
+                AtualizarGrid();
+            }
+
+        }
+
+        private void btnAdicionarNovaVenda_Click(object sender, EventArgs e)
+        {
+            itens.Clear();
+
+            AtualizarGrid();
+            LimparTela();
+        }
+
+        private void btnNovaVenda_Click(object sender, EventArgs e)
+        {
+            itens.Clear();
+
+            AtualizarGrid();
+            LimparTela();
         }
     }
 }

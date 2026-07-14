@@ -46,9 +46,7 @@
             lblRetornoPrecoUnitario = new Label();
             lblPrecoUnitario = new Label();
             lblRetornoCategoria = new Label();
-            label2 = new Label();
             lblCategoria = new Label();
-            lblCodigo = new Label();
             lblRetornoProduto = new Label();
             lblProduto = new Label();
             pcbProduto = new PictureBox();
@@ -91,7 +89,7 @@
             lblPdv = new Label();
             lblCarrinho = new Label();
             panel11 = new Panel();
-            button1 = new Button();
+            btnNovaVenda = new Button();
             btnSair = new Button();
             btnConfiguracoes = new Button();
             btnRelatorio = new Button();
@@ -221,9 +219,7 @@
             panel8.Controls.Add(lblRetornoPrecoUnitario);
             panel8.Controls.Add(lblPrecoUnitario);
             panel8.Controls.Add(lblRetornoCategoria);
-            panel8.Controls.Add(label2);
             panel8.Controls.Add(lblCategoria);
-            panel8.Controls.Add(lblCodigo);
             panel8.Controls.Add(lblRetornoProduto);
             panel8.Controls.Add(lblProduto);
             panel8.Controls.Add(pcbProduto);
@@ -235,27 +231,26 @@
             // lblRetornoEstoque
             // 
             lblRetornoEstoque.AutoSize = true;
-            lblRetornoEstoque.Location = new Point(474, 62);
+            lblRetornoEstoque.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblRetornoEstoque.Location = new Point(472, 84);
             lblRetornoEstoque.Name = "lblRetornoEstoque";
-            lblRetornoEstoque.Size = new Size(38, 15);
+            lblRetornoEstoque.Size = new Size(0, 15);
             lblRetornoEstoque.TabIndex = 14;
-            lblRetornoEstoque.Text = "label1";
             // 
             // lblRetornoCodigo
             // 
             lblRetornoCodigo.AutoSize = true;
-            lblRetornoCodigo.Location = new Point(474, 87);
+            lblRetornoCodigo.Location = new Point(210, 62);
             lblRetornoCodigo.Name = "lblRetornoCodigo";
-            lblRetornoCodigo.Size = new Size(38, 15);
+            lblRetornoCodigo.Size = new Size(0, 15);
             lblRetornoCodigo.TabIndex = 13;
-            lblRetornoCodigo.Text = "label1";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Green;
-            label5.Location = new Point(420, 88);
+            label5.Location = new Point(158, 62);
             label5.Name = "label5";
             label5.Size = new Size(48, 15);
             label5.TabIndex = 12;
@@ -265,7 +260,7 @@
             // 
             lblEstoque.AutoSize = true;
             lblEstoque.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstoque.Location = new Point(420, 62);
+            lblEstoque.Location = new Point(420, 83);
             lblEstoque.Name = "lblEstoque";
             lblEstoque.Size = new Size(52, 15);
             lblEstoque.TabIndex = 11;
@@ -287,9 +282,9 @@
             lblPrecoUnitario.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPrecoUnitario.Location = new Point(420, 9);
             lblPrecoUnitario.Name = "lblPrecoUnitario";
-            lblPrecoUnitario.Size = new Size(81, 15);
+            lblPrecoUnitario.Size = new Size(84, 15);
             lblPrecoUnitario.TabIndex = 9;
-            lblPrecoUnitario.Text = "Preço unitário";
+            lblPrecoUnitario.Text = "Preço unitário:";
             // 
             // lblRetornoCategoria
             // 
@@ -300,15 +295,6 @@
             lblRetornoCategoria.Size = new Size(0, 15);
             lblRetornoCategoria.TabIndex = 8;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(210, 62);
-            label2.Name = "label2";
-            label2.Size = new Size(0, 15);
-            label2.TabIndex = 7;
-            // 
             // lblCategoria
             // 
             lblCategoria.AutoSize = true;
@@ -318,16 +304,6 @@
             lblCategoria.Size = new Size(60, 15);
             lblCategoria.TabIndex = 6;
             lblCategoria.Text = "Categória:";
-            // 
-            // lblCodigo
-            // 
-            lblCodigo.AutoSize = true;
-            lblCodigo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblCodigo.Location = new Point(158, 62);
-            lblCodigo.Name = "lblCodigo";
-            lblCodigo.Size = new Size(48, 15);
-            lblCodigo.TabIndex = 5;
-            lblCodigo.Text = "Código:";
             // 
             // lblRetornoProduto
             // 
@@ -344,9 +320,9 @@
             lblProduto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblProduto.Location = new Point(158, 9);
             lblProduto.Name = "lblProduto";
-            lblProduto.Size = new Size(50, 15);
+            lblProduto.Size = new Size(53, 15);
             lblProduto.TabIndex = 3;
-            lblProduto.Text = "Produto";
+            lblProduto.Text = "Produto:";
             // 
             // pcbProduto
             // 
@@ -495,6 +471,7 @@
             btnCancelarItem.TabIndex = 2;
             btnCancelarItem.Text = "Cancelar item selecionado";
             btnCancelarItem.UseVisualStyleBackColor = false;
+            btnCancelarItem.Click += btnCancelarItem_Click;
             // 
             // dgvItemVenda
             // 
@@ -559,6 +536,7 @@
             btnLimparVenda.TabIndex = 1;
             btnLimparVenda.Text = "🗑️ Limpar venda";
             btnLimparVenda.UseVisualStyleBackColor = true;
+            btnLimparVenda.Click += btnLimparVenda_Click;
             // 
             // btnAdicionarNovaVenda
             // 
@@ -570,6 +548,7 @@
             btnAdicionarNovaVenda.TabIndex = 0;
             btnAdicionarNovaVenda.Text = "➕ Nova venda";
             btnAdicionarNovaVenda.UseVisualStyleBackColor = false;
+            btnAdicionarNovaVenda.Click += btnAdicionarNovaVenda_Click;
             // 
             // panel3
             // 
@@ -753,7 +732,7 @@
             // panel11
             // 
             panel11.BackColor = Color.FromArgb(37, 50, 75);
-            panel11.Controls.Add(button1);
+            panel11.Controls.Add(btnNovaVenda);
             panel11.Controls.Add(btnSair);
             panel11.Controls.Add(btnConfiguracoes);
             panel11.Controls.Add(btnRelatorio);
@@ -766,15 +745,16 @@
             panel11.Size = new Size(210, 563);
             panel11.TabIndex = 7;
             // 
-            // button1
+            // btnNovaVenda
             // 
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(12, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(162, 49);
-            button1.TabIndex = 8;
-            button1.Text = "\U0001f6d2 Nova Venda";
-            button1.UseVisualStyleBackColor = true;
+            btnNovaVenda.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnNovaVenda.Location = new Point(12, 11);
+            btnNovaVenda.Name = "btnNovaVenda";
+            btnNovaVenda.Size = new Size(162, 49);
+            btnNovaVenda.TabIndex = 8;
+            btnNovaVenda.Text = "\U0001f6d2 Nova Venda";
+            btnNovaVenda.UseVisualStyleBackColor = true;
+            btnNovaVenda.Click += btnNovaVenda_Click;
             // 
             // btnSair
             // 
@@ -899,14 +879,12 @@
         private Panel panel8;
         private PictureBox pcbProduto;
         private Button btnAdicionarItem;
-        private Label lblCodigo;
         private Label lblRetornoProduto;
         private Label lblProduto;
         private Label lblEstoque;
         private Label lblRetornoPrecoUnitario;
         private Label lblPrecoUnitario;
         private Label lblRetornoCategoria;
-        private Label label2;
         private Label lblCategoria;
         private Label label5;
         private Label lbItensVenda;
@@ -953,7 +931,7 @@
         private Label lblReceberCaixa;
         private Label lblOperador;
         private MaskedTextBox mskData;
-        private Button button1;
+        private Button btnNovaVenda;
         private Label lblRetornoEstoque;
         private Label lblRetornoCodigo;
     }
