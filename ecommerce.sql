@@ -3,6 +3,7 @@ CREATE DATABASE ecommerce
 USE ecommerce
 
 
+
 CREATE TABLE tblcliente (
 id INT PRIMARY KEY IDENTITY(1,1),
 nome VARCHAR(100) NOT NULL,
@@ -12,7 +13,7 @@ email VARCHAR (100) NOT NULL,
 celular VARCHAR (15) NOT NULL,
 telefone VARCHAR(15),
 senha VARCHAR(255) NOT NULL,
-status_ativo CHAR(1) DEFAULT 'A'
+status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
 
 CREATE TABLE tblfornecedor (
@@ -30,14 +31,14 @@ bairro VARCHAR(100),
 cidade VARCHAR(100),
 estado CHAR(2),
 observacoes VARCHAR(MAX),
-status_ativo CHAR(1) DEFAULT 'A'
+status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
 
 CREATE TABLE tblcategoria(
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 descricao VARCHAR(255),
-status_ativo CHAR(1) NOT NULL DEFAULT 'A'
+status_ativo CHAR(1) NOT NULL DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
 
 
@@ -74,21 +75,42 @@ imagem2 VARCHAR(255),
 imagem3 VARCHAR(255),
 fornecedor_id INT NOT NULL FOREIGN KEY REFERENCES tblfornecedor(id),
 categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id),
-status_ativo CHAR(1) DEFAULT 'A'
+status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
 
+CREATE TABLE tblformapagamento (
+id INT PRIMARY KEY IDENTITY,
+descricao VARCHAR(50) NOT NULL,
+status_ativo CHAR(1) NOT NULL DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
+)
+INSERT INTO tblformapagamento (descricao)
+VALUES
+('PIX'),
+('Cartão de Crédito'),
+('Cartão de Débito'),
+('Boleto'),
+('Dinheiro');
 
 
 CREATE TABLE tblpedido (
 id INT PRIMARY KEY IDENTITY,
 cliente_id INT NOT NULL,
-data_pedido DATETIME DEFAULT GETDATE(),
-total DECIMAL(10,2) DEFAULT 0,
+data_pedido DATETIME NOT NULL DEFAULT GETDATE(),
+subtotal DECIMAL(10,2) NOT NULL DEFAULT 0,
+desconto DECIMAL(10,2) NOT NULL DEFAULT 0,
+total DECIMAL(10,2) NOT NULL DEFAULT 0,
 endereco_id INT NOT NULL FOREIGN KEY REFERENCES tblendereco(id),
-status VARCHAR(20) DEFAULT 'Pendente',
-
+status VARCHAR(20) NOT NULL DEFAULT 'Pendente',
+forma_pagamento_id INT NULL,
 CONSTRAINT FK_Pedido_Cliente
-FOREIGN KEY (cliente_id) REFERENCES tblcliente(id)
+FOREIGN KEY (cliente_id) REFERENCES tblcliente(id),
+
+CONSTRAINT FK_Pedido_Endereco
+FOREIGN KEY (endereco_id) REFERENCES tblendereco(id),
+
+CONSTRAINT FK_Pedido_FormaPagamento 
+FOREIGN KEY (forma_pagamento_id) REFERENCES tblformapagamento(id)
+
 )
 
 CREATE TABLE tblitempedido (
@@ -115,44 +137,47 @@ codigo_rastreio VARCHAR(100),
 data_envio DATETIME,
 data_previsao DATE,
 data_entrega DATETIME,
-status VARCHAR(30) DEFAULT 'Aguardando'
+status VARCHAR(30) DEFAULT 'Aguardando' 
 )
-
-INSERT INTO tblproduto (nome, preco, estoque)
-VALUES ('Mouse Gamer', 150.00, 10)
-
-SELECT * FROM tblproduto
-SELECT * FROM tblcliente
-
-
 
 CREATE PROCEDURE sp_CadastrarProduto
 	@nome VARCHAR(100),
 	@preco DECIMAL(10,2),
-	@estoque INT
+	@estoque INT,
+	@fornecedor_id INT,
+	@categoria_id INT
 AS
 BEGIN
-	INSERT INTO tblproduto (nome, preco, estoque)
-	VALUES (@nome, @preco, @estoque)
+	INSERT INTO tblproduto (nome, preco, estoque, fornecedor_id, categoria_id)
+	VALUES (@nome, @preco, @estoque, @fornecedor_id, @categoria_id)
 END
 
-EXEC sp_CadastrarProduto 'tridente', 2.50, 10
+EXEC sp_CadastrarProduto
+    @nome = 'Headset Gamer',
+    @preco = 299.90,
+    @estoque = 15,
+    @fornecedor_id = 1,
+    @categoria_id = 1;
 
 select * from tblproduto
 
 CREATE PROCEDURE sp_CriarPedido
     @cliente_id INT,
-    @endereco_id INT
+    @endereco_id INT,
+	@forma_pagamento_id INT
 AS
 BEGIN
     DECLARE @pedido_id INT
-    INSERT INTO tblpedido (cliente_id, endereco_id)
-    VALUES (@cliente_id, @endereco_id)
+    INSERT INTO tblpedido (cliente_id, endereco_id, forma_pagamento_id)
+    VALUES (@cliente_id, @endereco_id, @forma_pagamento_id)
     SET @pedido_id = SCOPE_IDENTITY()
     SELECT @pedido_id AS pedido_id
 END
 
-EXEC sp_CriarPedido 1, 1
+EXEC sp_CriarPedido
+    @cliente_id = 1,
+    @endereco_id = 1,
+    @forma_pagamento_id = 1;
 
 CREATE PROCEDURE sp_AdicionarItemPedido
 	@pedido_id INT,
@@ -169,7 +194,10 @@ BEGIN
 	INSERT INTO tblitempedido (pedido_id ,produto_id, quantidade, preco)
 	VALUES (@pedido_id, @produto_id, @quantidade, @preco)
 END
-EXEC sp_AdicionarItemPedido 1, 1, 3
+EXEC sp_AdicionarItemPedido
+    @pedido_id = 1,
+    @produto_id = 1,
+    @quantidade = 2;
 SELECT * FROM tblpedido
 SELECT * FROM tblitempedido
 SELECT * FROM tblproduto
@@ -213,12 +241,3 @@ EXEC sp_settriggerorder
 	@triggername = 'trg_BaixarEstoque',
 	@order = 'First',
 	@stmttype = 'INSERT'
-
-
-SELECT * FROM tblcliente
-SELECT * FROM tblendereco
-SELECT * FROM tblcategoria
-SELECT * FROM tblfornecedor
-SELECT * FROM tblproduto
-SELECT id, nomefantasia FROM tblfornecedor
-

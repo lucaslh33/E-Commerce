@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing.Text;
 
 namespace Ecommerce
 {
@@ -20,16 +21,72 @@ namespace Ecommerce
             InitializeComponent();
         }
 
+        private decimal descontoAplicado = 0;
+
+        private void AplicarDesconto()
+        {
+
+
+            
+            decimal total = itens.Sum(x => x.Total);
+            
+
+            if (string.IsNullOrWhiteSpace(txtDesconto.Text))
+            {
+                MessageBox.Show("Informe o desconto.");
+                return;
+            }
+
+            decimal valor = Convert.ToDecimal(txtDesconto.Text);
+
+            if (rdbPorcentagem.Checked)
+            {
+                descontoAplicado = total * (valor / 100m);
+            }
+
+            else if (rdbValor.Checked)
+            {
+                descontoAplicado = valor;
+            }
+
+            else
+            {
+                MessageBox.Show("Selecione o tipo de desconto.");
+                return;
+            }
+
+            if (descontoAplicado > total)
+            {
+                MessageBox.Show("O desconto não pode ser maior que o valor total da venda.", "Erro ao aplicar o desconto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal totalFinal = total - descontoAplicado;
+            lblRetornoTotal.Text = totalFinal.ToString("C2");
+
+        }
+
+        private decimal ObterTotalVenda()
+        {
+            decimal subtotal = itens.Sum(x => x.Total);
+
+            return subtotal - descontoAplicado;
+        }
+
         private void LimparTela()
         {
             txtCodigoBarras.Clear();
             txtCodigoBarras.Focus();
+            txtDesconto.Clear();
+            txtValorRecebido.Clear();
 
             lblRetornoProduto.Text = "";
             lblRetornoCategoria.Text = "";
             lblRetornoCodigo.Text = "";
             lblRetornoPrecoUnitario.Text = "";
             lblRetornoEstoque.Text = "";
+            lblRetornoTroco.Text = "";
+            lblRetornoTotal.Text = "";
 
             ProdutoSelecionado = null;
         }
@@ -39,7 +96,7 @@ namespace Ecommerce
             decimal subtotal = itens.Sum(x => x.Total);
 
             lblSubTotalRecebido.Text = subtotal.ToString("C2");
-            lblRetornoTotal.Text = subtotal.ToString("C2");
+            lblRetornoTotal.Text = ObterTotalVenda().ToString("C2");
 
 
         }
@@ -232,7 +289,16 @@ namespace Ecommerce
 
         private void btnCancelarItem_Click(object sender, EventArgs e)
         {
-            ItemVenda itemExistente = itens.FirstOrDefault(x => x.Codigo.Trim() == ProdutoSelecionado["CÓDIGO"].ToString().Trim());
+
+            if (dgvItemVenda.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um item.");
+                return;
+            }
+
+            string codigo = dgvItemVenda.SelectedRows[0].Cells["Codigo"].Value.ToString();
+            ItemVenda itemExistente = itens.FirstOrDefault(x => x.Codigo == codigo);
+
             if (itemExistente != null)
             {
                 itemExistente.Quantidade--;
@@ -262,6 +328,146 @@ namespace Ecommerce
 
             AtualizarGrid();
             LimparTela();
+        }
+
+        private void SelecionarPagamento(Button botao)
+        {
+            btnPix.BackColor = SystemColors.Control;
+            btnCartao.BackColor = SystemColors.Control;
+            btnDinheiro.BackColor = SystemColors.Control;
+            btnBoleto.BackColor = SystemColors.Control;
+
+            botao.BackColor = Color.LightGreen;
+            botao.Focus();
+        }
+
+        private int? formaPagamento = null;
+        private void btnPix_Click(object sender, EventArgs e)
+        {
+            formaPagamento = 1;//☑️
+            SelecionarPagamento(btnPix);
+        }
+
+        private void btnCartao_Click(object sender, EventArgs e)
+        {
+            formaPagamento = 2;
+
+            SelecionarPagamento(btnCartao);
+        }
+
+        private void btnBoleto_Click(object sender, EventArgs e)
+        {
+            formaPagamento = 4;
+            SelecionarPagamento(btnBoleto);
+        }
+
+        private void btnDinheiro_Click(object sender, EventArgs e)
+        {
+            formaPagamento = 5; //☑️
+            SelecionarPagamento(btnDinheiro);
+
+        }
+
+        private void btnFinalizarVenda_Click(object sender, EventArgs e)
+        {
+            
+            if (itens.Count == 0)
+            {
+                MessageBox.Show("Adicione pelo menos um item à venda.", "Venda vazia!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (formaPagamento == null)
+            {
+                MessageBox.Show("Selecione um forma de pagamento", "Pagamento!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (formaPagamento == 5)
+            {
+                if (string.IsNullOrWhiteSpace(txtValorRecebido.Text))
+                {
+                    MessageBox.Show("Informe o valor recebido!");
+                    return;
+                }
+                decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+                decimal total = ObterTotalVenda();
+                decimal troco = valorRecebido - total;
+                lblRetornoTroco.Text = troco.ToString("C2");
+
+                if (valorRecebido < ObterTotalVenda())
+                {
+                    MessageBox.Show("Valor recebido insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                MessageBox.Show($"Deve retornar {troco} ao cliente!", "Venda realizada!");
+                itens.Clear();
+                AtualizarGrid();
+                LimparTela();
+            }
+
+            if (formaPagamento == 1) //☑️
+            {
+                if (string.IsNullOrWhiteSpace(txtValorRecebido.Text))
+                {
+                    MessageBox.Show("Informe o valor recebido!");
+                    return;
+                }
+                decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+                decimal total = ObterTotalVenda();
+
+                if (valorRecebido < ObterTotalVenda())
+                {
+                    MessageBox.Show("Valor recebido insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
+                itens.Clear();
+                AtualizarGrid();
+                LimparTela();
+            }
+
+            if (formaPagamento == 2) //☑️
+            {
+                decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
+                decimal total = ObterTotalVenda();
+                lblRetornoTroco.Text = "R$ 0,00";
+
+                if (valorRecebido < ObterTotalVenda())
+                {
+                    MessageBox.Show("Limite do cartão insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
+                }
+                itens.Clear();
+                AtualizarGrid();
+                LimparTela();
+
+
+            }
+
+            if (formaPagamento == 4)
+            {
+
+                decimal total = ObterTotalVenda();
+                lblRetornoTroco.Text = "R$ 0,00";
+
+                MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
+                itens.Clear();
+                AtualizarGrid();
+                LimparTela();
+            }
+
+
+        }
+
+        private void btnAplicarDesconto_Click(object sender, EventArgs e)
+        {
+            AplicarDesconto();
         }
     }
 }

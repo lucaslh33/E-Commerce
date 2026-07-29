@@ -51,7 +51,7 @@
             lblProduto = new Label();
             pcbProduto = new PictureBox();
             panel7 = new Panel();
-            label7 = new Label();
+            lblRetornoTroco = new Label();
             txtValorRecebido = new TextBox();
             lblTroco = new Label();
             lblValorRecebido = new Label();
@@ -76,8 +76,9 @@
             txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
+            rdbPorcentagem = new RadioButton();
+            rdbValor = new RadioButton();
             txtDesconto = new TextBox();
-            lblValorDesconto = new Label();
             lblSubTotalRecebido = new Label();
             lblDesconto = new Label();
             lblRetornoTotal = new Label();
@@ -97,6 +98,7 @@
             btnProdutos = new Button();
             btnCLientes = new Button();
             btnConsultarVendas = new Button();
+            btnAplicarDesconto = new Button();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             panel1.SuspendLayout();
@@ -335,7 +337,7 @@
             // panel7
             // 
             panel7.BackColor = Color.White;
-            panel7.Controls.Add(label7);
+            panel7.Controls.Add(lblRetornoTroco);
             panel7.Controls.Add(txtValorRecebido);
             panel7.Controls.Add(lblTroco);
             panel7.Controls.Add(lblValorRecebido);
@@ -349,18 +351,18 @@
             panel7.Size = new Size(233, 289);
             panel7.TabIndex = 1;
             // 
-            // label7
+            // lblRetornoTroco
             // 
-            label7.AutoSize = true;
-            label7.ForeColor = Color.FromArgb(0, 192, 0);
-            label7.Location = new Point(172, 199);
-            label7.Name = "label7";
-            label7.Size = new Size(0, 15);
-            label7.TabIndex = 20;
+            lblRetornoTroco.AutoSize = true;
+            lblRetornoTroco.ForeColor = Color.FromArgb(0, 192, 0);
+            lblRetornoTroco.Location = new Point(172, 199);
+            lblRetornoTroco.Name = "lblRetornoTroco";
+            lblRetornoTroco.Size = new Size(0, 15);
+            lblRetornoTroco.TabIndex = 20;
             // 
             // txtValorRecebido
             // 
-            txtValorRecebido.Location = new Point(148, 154);
+            txtValorRecebido.Location = new Point(142, 159);
             txtValorRecebido.Name = "txtValorRecebido";
             txtValorRecebido.Size = new Size(68, 23);
             txtValorRecebido.TabIndex = 19;
@@ -370,18 +372,18 @@
             lblTroco.AutoSize = true;
             lblTroco.Location = new Point(9, 199);
             lblTroco.Name = "lblTroco";
-            lblTroco.Size = new Size(37, 15);
+            lblTroco.Size = new Size(40, 15);
             lblTroco.TabIndex = 13;
-            lblTroco.Text = "Troco";
+            lblTroco.Text = "Troco:";
             // 
             // lblValorRecebido
             // 
             lblValorRecebido.AutoSize = true;
             lblValorRecebido.Location = new Point(9, 162);
             lblValorRecebido.Name = "lblValorRecebido";
-            lblValorRecebido.Size = new Size(82, 15);
+            lblValorRecebido.Size = new Size(85, 15);
             lblValorRecebido.TabIndex = 12;
-            lblValorRecebido.Text = "Valor recebido";
+            lblValorRecebido.Text = "Valor recebido:";
             // 
             // btnBoleto
             // 
@@ -391,6 +393,7 @@
             btnBoleto.TabIndex = 11;
             btnBoleto.Text = "\U0001f9fe Boleto";
             btnBoleto.UseVisualStyleBackColor = true;
+            btnBoleto.Click += btnBoleto_Click;
             // 
             // btnPix
             // 
@@ -400,6 +403,7 @@
             btnPix.TabIndex = 10;
             btnPix.Text = "❖ PIX";
             btnPix.UseVisualStyleBackColor = true;
+            btnPix.Click += btnPix_Click;
             // 
             // btnCartao
             // 
@@ -409,6 +413,7 @@
             btnCartao.TabIndex = 9;
             btnCartao.Text = "💳 Cartão";
             btnCartao.UseVisualStyleBackColor = true;
+            btnCartao.Click += btnCartao_Click;
             // 
             // btnDinheiro
             // 
@@ -418,6 +423,7 @@
             btnDinheiro.TabIndex = 8;
             btnDinheiro.Text = "💵 Dinheiro";
             btnDinheiro.UseVisualStyleBackColor = true;
+            btnDinheiro.Click += btnDinheiro_Click;
             // 
             // lblFormaPagamento
             // 
@@ -518,6 +524,7 @@
             btnFinalizarVenda.TabIndex = 3;
             btnFinalizarVenda.Text = "✅ Finalizar venda";
             btnFinalizarVenda.UseVisualStyleBackColor = false;
+            btnFinalizarVenda.Click += btnFinalizarVenda_Click;
             // 
             // btnConsultarPreco
             // 
@@ -600,8 +607,10 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(btnAplicarDesconto);
+            panel2.Controls.Add(rdbPorcentagem);
+            panel2.Controls.Add(rdbValor);
             panel2.Controls.Add(txtDesconto);
-            panel2.Controls.Add(lblValorDesconto);
             panel2.Controls.Add(lblSubTotalRecebido);
             panel2.Controls.Add(lblDesconto);
             panel2.Controls.Add(lblRetornoTotal);
@@ -613,25 +622,39 @@
             panel2.Size = new Size(233, 188);
             panel2.TabIndex = 0;
             // 
+            // rdbPorcentagem
+            // 
+            rdbPorcentagem.AutoSize = true;
+            rdbPorcentagem.Location = new Point(84, 94);
+            rdbPorcentagem.Name = "rdbPorcentagem";
+            rdbPorcentagem.Size = new Size(109, 19);
+            rdbPorcentagem.TabIndex = 20;
+            rdbPorcentagem.TabStop = true;
+            rdbPorcentagem.Text = "Porcentagem %";
+            rdbPorcentagem.UseVisualStyleBackColor = true;
+            // 
+            // rdbValor
+            // 
+            rdbValor.AutoSize = true;
+            rdbValor.Location = new Point(11, 92);
+            rdbValor.Name = "rdbValor";
+            rdbValor.Size = new Size(67, 19);
+            rdbValor.TabIndex = 19;
+            rdbValor.TabStop = true;
+            rdbValor.Text = "Valor R$";
+            rdbValor.UseVisualStyleBackColor = true;
+            // 
             // txtDesconto
             // 
-            txtDesconto.Location = new Point(81, 93);
+            txtDesconto.Location = new Point(83, 58);
             txtDesconto.Name = "txtDesconto";
             txtDesconto.Size = new Size(68, 23);
             txtDesconto.TabIndex = 18;
             // 
-            // lblValorDesconto
-            // 
-            lblValorDesconto.AutoSize = true;
-            lblValorDesconto.Location = new Point(172, 96);
-            lblValorDesconto.Name = "lblValorDesconto";
-            lblValorDesconto.Size = new Size(0, 15);
-            lblValorDesconto.TabIndex = 17;
-            // 
             // lblSubTotalRecebido
             // 
             lblSubTotalRecebido.AutoSize = true;
-            lblSubTotalRecebido.Location = new Point(172, 55);
+            lblSubTotalRecebido.Location = new Point(172, 35);
             lblSubTotalRecebido.Name = "lblSubTotalRecebido";
             lblSubTotalRecebido.Size = new Size(0, 15);
             lblSubTotalRecebido.TabIndex = 16;
@@ -640,7 +663,7 @@
             // 
             lblDesconto.AutoSize = true;
             lblDesconto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDesconto.Location = new Point(3, 96);
+            lblDesconto.Location = new Point(5, 61);
             lblDesconto.Name = "lblDesconto";
             lblDesconto.Size = new Size(58, 15);
             lblDesconto.TabIndex = 15;
@@ -651,7 +674,7 @@
             lblRetornoTotal.AutoSize = true;
             lblRetornoTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRetornoTotal.ForeColor = Color.FromArgb(0, 192, 0);
-            lblRetornoTotal.Location = new Point(149, 150);
+            lblRetornoTotal.Location = new Point(123, 159);
             lblRetornoTotal.Name = "lblRetornoTotal";
             lblRetornoTotal.Size = new Size(0, 20);
             lblRetornoTotal.TabIndex = 14;
@@ -660,7 +683,7 @@
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotal.Location = new Point(9, 152);
+            lblTotal.Location = new Point(11, 160);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(54, 20);
             lblTotal.TabIndex = 13;
@@ -670,7 +693,7 @@
             // 
             lblSubTotal.AutoSize = true;
             lblSubTotal.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSubTotal.Location = new Point(3, 55);
+            lblSubTotal.Location = new Point(3, 35);
             lblSubTotal.Name = "lblSubTotal";
             lblSubTotal.Size = new Size(54, 15);
             lblSubTotal.TabIndex = 13;
@@ -829,6 +852,16 @@
             btnConsultarVendas.Text = "🔍 Consultar Venda";
             btnConsultarVendas.UseVisualStyleBackColor = true;
             // 
+            // btnAplicarDesconto
+            // 
+            btnAplicarDesconto.Location = new Point(46, 121);
+            btnAplicarDesconto.Name = "btnAplicarDesconto";
+            btnAplicarDesconto.Size = new Size(126, 23);
+            btnAplicarDesconto.TabIndex = 21;
+            btnAplicarDesconto.Text = "Aplicar desconto";
+            btnAplicarDesconto.UseVisualStyleBackColor = true;
+            btnAplicarDesconto.Click += btnAplicarDesconto_Click;
+            // 
             // frmPainelVendas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -916,7 +949,6 @@
         private Button btnCartao;
         private Button btnDinheiro;
         private Label lblFormaPagamento;
-        private Label lblValorDesconto;
         private Label lblSubTotalRecebido;
         private TextBox txtValorRecebido;
         private Button btnFinalizarVenda;
@@ -924,7 +956,7 @@
         private Button btnLimparVenda;
         private Button btnAdicionarNovaVenda;
         private TextBox txtDesconto;
-        private Label label7;
+        private Label lblRetornoTroco;
         private Label lblCaixa;
         private PictureBox pcbUsuario;
         private Label lblNomeOperador;
@@ -934,5 +966,9 @@
         private Button btnNovaVenda;
         private Label lblRetornoEstoque;
         private Label lblRetornoCodigo;
+        private GroupBox groupBox1;
+        private RadioButton rdbPorcentagem;
+        private RadioButton rdbValor;
+        private Button btnAplicarDesconto;
     }
 }
