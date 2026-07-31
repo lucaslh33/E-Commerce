@@ -76,6 +76,7 @@
             txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
+            btnAplicarDesconto = new Button();
             rdbPorcentagem = new RadioButton();
             rdbValor = new RadioButton();
             txtDesconto = new TextBox();
@@ -98,7 +99,6 @@
             btnProdutos = new Button();
             btnCLientes = new Button();
             btnConsultarVendas = new Button();
-            btnAplicarDesconto = new Button();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             panel1.SuspendLayout();
@@ -622,6 +622,16 @@
             panel2.Size = new Size(233, 188);
             panel2.TabIndex = 0;
             // 
+            // btnAplicarDesconto
+            // 
+            btnAplicarDesconto.Location = new Point(46, 121);
+            btnAplicarDesconto.Name = "btnAplicarDesconto";
+            btnAplicarDesconto.Size = new Size(126, 23);
+            btnAplicarDesconto.TabIndex = 21;
+            btnAplicarDesconto.Text = "Aplicar desconto";
+            btnAplicarDesconto.UseVisualStyleBackColor = true;
+            btnAplicarDesconto.Click += btnAplicarDesconto_Click;
+            // 
             // rdbPorcentagem
             // 
             rdbPorcentagem.AutoSize = true;
@@ -851,16 +861,6 @@
             btnConsultarVendas.TabIndex = 1;
             btnConsultarVendas.Text = "🔍 Consultar Venda";
             btnConsultarVendas.UseVisualStyleBackColor = true;
-            // 
-            // btnAplicarDesconto
-            // 
-            btnAplicarDesconto.Location = new Point(46, 121);
-            btnAplicarDesconto.Name = "btnAplicarDesconto";
-            btnAplicarDesconto.Size = new Size(126, 23);
-            btnAplicarDesconto.TabIndex = 21;
-            btnAplicarDesconto.Text = "Aplicar desconto";
-            btnAplicarDesconto.UseVisualStyleBackColor = true;
-            btnAplicarDesconto.Click += btnAplicarDesconto_Click;
             // 
             // frmPainelVendas
             // 
