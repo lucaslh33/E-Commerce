@@ -38,8 +38,28 @@ namespace Ecommerce
                 {
                     try
                     {
+
+                        int enderecoId;
+                        string sqlEndereco = "SELECT TOP 1 id FROM tblendereco WHERE cliente_id = @cliente_id ORDER BY id DESC";
+
+                        using (SqlCommand cmdEndereco = new SqlCommand(sqlEndereco, con, transaction))
+                        {
+                            cmdEndereco.Parameters.AddWithValue("@cliente_id", clienteId);
+                            object resultado = cmdEndereco.ExecuteScalar();
+
+                            if (resultado == null)
+                            {
+                                MessageBox.Show("Este cliente não possui endereço cadastrado. Cadastre um endereço antes de finalizar a venda.",
+                                    "Endereço não encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                transaction.Rollback();
+                                return false;
+                            }
+
+                            enderecoId = Convert.ToInt32(resultado);
+                        }
+
                         string sqlPedido = @"INSERT INTO tblpedido (cliente_id, data_pedido, subtotal, desconto, total, endereco_id, forma_pagamento_id, status) 
-                        OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
+                                           OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
 
                         int pedidoId;
 
@@ -51,7 +71,7 @@ namespace Ecommerce
                             cmdPedido.Parameters.AddWithValue("@subtotal", subtotal);
                             cmdPedido.Parameters.AddWithValue("@desconto", descontoAplicado);
                             cmdPedido.Parameters.AddWithValue("@total", ObterTotalVenda());
-                            cmdPedido.Parameters.AddWithValue("@endereco_id", 1);
+                            cmdPedido.Parameters.AddWithValue("@endereco_id", enderecoId);
                             cmdPedido.Parameters.AddWithValue("@forma_pagamento_id", formaPagamento.Value);
 
                             pedidoId = Convert.ToInt32(cmdPedido.ExecuteScalar());

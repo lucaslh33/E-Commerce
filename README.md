@@ -1,166 +1,63 @@
-# 🛒 E-commerce Desktop
+# E-commerce Desktop
 
-Sistema de E-commerce Desktop desenvolvido em **C# (.NET Windows Forms)** utilizando **SQL Server** como banco de dados.
+Sistema desktop de gestão para e-commerce, desenvolvido em **C# (.NET / Windows Forms)** com **SQL Server** como banco de dados.
 
-O objetivo do projeto é simular um sistema utilizado por empresas para gerenciamento de clientes, produtos, fornecedores, categorias e vendas, aplicando conceitos utilizados no mercado de desenvolvimento de software.
+O projeto simula o back-office de uma loja online: cadastro de clientes, produtos, fornecedores e categorias, além de um módulo de PDV (ponto de venda) para registrar as vendas. A ideia é praticar, de ponta a ponta, o que se usa no dia a dia de um desenvolvedor back-end — modelagem de banco relacional, regras de negócio, transações e consumo de API.
 
----
+## Tecnologias
 
-## 🚀 Tecnologias utilizadas
+- C# / .NET (Windows Forms)
+- SQL Server + ADO.NET (Microsoft.Data.SqlClient)
+- API REST (ViaCEP) para consulta de endereço
+- Git / GitHub
 
-- C#
-- .NET Framework (Windows Forms)
-- SQL Server
-- ADO.NET
-- API REST (ViaCEP)
-- JSON
-- Git
-- GitHub
+## O que já está funcionando
 
----
+**Clientes, produtos, fornecedores e categorias**
+CRUD completo pra cada um, com exclusão lógica (soft delete) em vez de apagar o registro do banco — mantém histórico e evita quebrar vendas antigas que referenciam esses dados.
 
-## 📌 Funcionalidades
+**Endereços**
+Cadastro vinculado ao cliente, com preenchimento automático de rua, bairro, cidade e estado via API do ViaCEP a partir do CEP.
 
-### 👤 Clientes
+**PDV (ponto de venda)**
+- Busca de produto por código/nome/descrição
+- Carrinho com controle de quantidade
+- Aplicação de desconto (percentual ou valor fixo)
+- Seleção de forma de pagamento (Pix, cartão, boleto, dinheiro — com cálculo de troco)
+- Ao finalizar a venda, o pedido e os itens são gravados no banco dentro de uma transação: se algo falhar no meio do processo, tudo é desfeito (rollback), garantindo que não fique nenhum dado gravado pela metade
 
-- Cadastro de clientes
-- Consulta de clientes
-- Alteração de dados
-- Exclusão lógica (Soft Delete)
-- Cadastro de endereço
-- Busca automática de endereço via ViaCEP
+**Banco de dados**
+Modelagem relacional com chaves estrangeiras entre clientes, endereços, produtos, categorias, fornecedores, pedidos e itens de pedido. Uso de trigger para baixa automática de estoque quando um item de venda é inserido.
 
-### 📦 Produtos
+## Em desenvolvimento
 
-- Cadastro de produtos
-- Consulta de produtos
-- Alteração de produtos
-- Exclusão lógica
-- Controle de estoque
-- Relacionamento com fornecedor e categoria
+- Refinar o pagamento no cartão (hoje a forma é registrada, mas ainda não guardo detalhes como parcelas)
+- Upload de imagem dos produtos
+- Tela de login e controle de permissões
+- Relatórios e dashboard de vendas
+- Emissão/impressão de comprovante
 
-### 🏢 Fornecedores
-
-- Cadastro
-- Consulta
-- Alteração
-- Exclusão lógica
-
-### 🏷 Categorias
-
-- Cadastro
-- Consulta
-- Alteração
-- Exclusão lógica
-
-### 🛒 Pedidos
-
-- Criação de pedidos
-- Associação de clientes
-- Associação de endereço
-- Inclusão de produtos
-
-### 💳 PDV (Em desenvolvimento)
-
-- Pesquisa rápida de produtos
-- Carrinho de compras
-- Alteração de quantidade
-- Cálculo automático do total
-- Finalização da venda
-- Baixa automática de estoque
-
----
-
-## 🗄 Banco de Dados
-
-O projeto utiliza SQL Server com:
-
-- Procedures
-- Triggers
-- Transactions
-- Foreign Keys
-- Constraints
-- Relacionamentos
-- Soft Delete
-
----
-
-## 🌐 Integração com API
-
-Atualmente o sistema realiza integração com a API pública do ViaCEP.
-
-Funcionalidades:
-
-- Busca automática do endereço
-- Preenchimento de:
-  - Rua
-  - Bairro
-  - Cidade
-  - Estado
-
----
-
-## 📂 Estrutura do Projeto
+## Estrutura do projeto
 
 ```
 Ecommerce
-│
 ├── Clientes
+├── Endereços
 ├── Produtos
 ├── Categorias
 ├── Fornecedores
-├── Endereços
-├── Pedidos
-├── PDV
-├── Banco de Dados
-└── API ViaCEP
+├── PDV / Pedidos
+└── Banco de Dados (SQL Server)
 ```
 
----
+## Sobre o projeto
 
-## 🎯 Objetivos do Projeto
+Este é meu principal projeto de portfólio enquanto curso Técnico em Desenvolvimento de Sistemas no SENAC (conclusão prevista maio/2027). Ele existe pra eu praticar programação orientada a objetos, banco de dados relacional e boas práticas de back-end de forma aplicada — não só em exercícios isolados, mas num sistema com regras de negócio reais.
 
-Este projeto foi desenvolvido com o objetivo de praticar:
+Fico corrigindo e evoluindo aos poucos, então commits recentes costumam ser onde a coisa mais interessante está acontecendo.
 
-- Programação Orientada a Objetos
-- Desenvolvimento Desktop
-- Banco de Dados Relacional
-- SQL Server
-- ADO.NET
-- Integração com APIs REST
-- Boas práticas de programação
-- Organização de código
-- Versionamento com Git
-
----
-
-## 📸 Imagens
-
-Em breve serão adicionadas capturas de tela do sistema.
-
----
-
-## 📈 Próximas implementações
-
-- [ ] Upload de imagens dos produtos
-- [x] Integração com ViaCEP
-- [ ] Login de usuários
-- [ ] Controle de permissões
-- [ ] Relatórios
-- [ ] Dashboard
-- [ ] Impressão de comprovante
-- [ ] Exportação para PDF
-- [ ] Melhorias na interface
-- [ ] Finalização do módulo PDV
-
----
-
-## 👨‍💻 Autor
+## Autor
 
 **Lucas Henrique Silva Pereira**
 
-LinkedIn:
-https://www.linkedin.com/in/lucas-henrique-78a76a381
-
-GitHub:
-https://github.com/lucaslh33
+[LinkedIn](https://www.linkedin.com/in/lucas-henrique-78a76a381) · [GitHub](https://github.com/lucaslh33)
