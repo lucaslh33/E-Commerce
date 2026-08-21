@@ -6,6 +6,7 @@ namespace Ecommerce
 {
     class ItemVenda
     {
+        public int IdProduto { get; set; }
         public string Codigo { get; set; }
 
         public string Nome { get; set; }

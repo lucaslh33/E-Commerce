@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPainelVendas));
             panel4 = new Panel();
             mskData = new MaskedTextBox();
@@ -76,6 +77,8 @@
             txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
+            lblRetornoCliente = new Label();
+            lblCliente = new Label();
             btnAplicarDesconto = new Button();
             rdbPorcentagem = new RadioButton();
             rdbValor = new RadioButton();
@@ -99,6 +102,7 @@
             btnProdutos = new Button();
             btnCLientes = new Button();
             btnConsultarVendas = new Button();
+            timer1 = new System.Windows.Forms.Timer(components);
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pcbUsuario).BeginInit();
             panel1.SuspendLayout();
@@ -134,17 +138,18 @@
             // 
             mskData.BackColor = Color.FromArgb(37, 50, 75);
             mskData.ForeColor = Color.White;
-            mskData.Location = new Point(745, 16);
-            mskData.Mask = "00/00/0000 90:00";
+            mskData.Location = new Point(725, 16);
+            mskData.Mask = "00/00/0000 90:00:00";
             mskData.Name = "mskData";
-            mskData.Size = new Size(100, 23);
+            mskData.Size = new Size(114, 23);
             mskData.TabIndex = 5;
             mskData.ValidatingType = typeof(DateTime);
+            mskData.MaskInputRejected += mskData_MaskInputRejected;
             // 
             // lblNomeOperador
             // 
             lblNomeOperador.AutoSize = true;
-            lblNomeOperador.Location = new Point(646, 25);
+            lblNomeOperador.Location = new Point(596, 27);
             lblNomeOperador.Name = "lblNomeOperador";
             lblNomeOperador.Size = new Size(0, 15);
             lblNomeOperador.TabIndex = 5;
@@ -152,7 +157,7 @@
             // lblReceberCaixa
             // 
             lblReceberCaixa.AutoSize = true;
-            lblReceberCaixa.Location = new Point(626, 7);
+            lblReceberCaixa.Location = new Point(576, 9);
             lblReceberCaixa.Name = "lblReceberCaixa";
             lblReceberCaixa.Size = new Size(0, 15);
             lblReceberCaixa.TabIndex = 4;
@@ -160,7 +165,7 @@
             // lblOperador
             // 
             lblOperador.AutoSize = true;
-            lblOperador.Location = new Point(586, 24);
+            lblOperador.Location = new Point(536, 26);
             lblOperador.Name = "lblOperador";
             lblOperador.Size = new Size(60, 15);
             lblOperador.TabIndex = 3;
@@ -169,7 +174,7 @@
             // lblCaixa
             // 
             lblCaixa.AutoSize = true;
-            lblCaixa.Location = new Point(586, 5);
+            lblCaixa.Location = new Point(536, 7);
             lblCaixa.Name = "lblCaixa";
             lblCaixa.Size = new Size(38, 15);
             lblCaixa.TabIndex = 2;
@@ -178,7 +183,7 @@
             // pcbUsuario
             // 
             pcbUsuario.Image = (Image)resources.GetObject("pcbUsuario.Image");
-            pcbUsuario.Location = new Point(693, 5);
+            pcbUsuario.Location = new Point(678, 7);
             pcbUsuario.Name = "pcbUsuario";
             pcbUsuario.Size = new Size(40, 44);
             pcbUsuario.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -227,14 +232,14 @@
             panel8.Controls.Add(pcbProduto);
             panel8.Location = new Point(6, 70);
             panel8.Name = "panel8";
-            panel8.Size = new Size(593, 121);
+            panel8.Size = new Size(593, 131);
             panel8.TabIndex = 3;
             // 
             // lblRetornoEstoque
             // 
             lblRetornoEstoque.AutoSize = true;
             lblRetornoEstoque.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblRetornoEstoque.Location = new Point(472, 84);
+            lblRetornoEstoque.Location = new Point(472, 90);
             lblRetornoEstoque.Name = "lblRetornoEstoque";
             lblRetornoEstoque.Size = new Size(0, 15);
             lblRetornoEstoque.TabIndex = 14;
@@ -262,7 +267,7 @@
             // 
             lblEstoque.AutoSize = true;
             lblEstoque.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblEstoque.Location = new Point(420, 83);
+            lblEstoque.Location = new Point(420, 90);
             lblEstoque.Name = "lblEstoque";
             lblEstoque.Size = new Size(52, 15);
             lblEstoque.TabIndex = 11;
@@ -346,9 +351,9 @@
             panel7.Controls.Add(btnCartao);
             panel7.Controls.Add(btnDinheiro);
             panel7.Controls.Add(lblFormaPagamento);
-            panel7.Location = new Point(605, 197);
+            panel7.Location = new Point(605, 207);
             panel7.Name = "panel7";
-            panel7.Size = new Size(233, 289);
+            panel7.Size = new Size(233, 279);
             panel7.TabIndex = 1;
             // 
             // lblRetornoTroco
@@ -443,9 +448,9 @@
             panel6.Controls.Add(btnCancelarItem);
             panel6.Controls.Add(dgvItemVenda);
             panel6.Controls.Add(lbItensVenda);
-            panel6.Location = new Point(7, 197);
+            panel6.Location = new Point(7, 207);
             panel6.Name = "panel6";
-            panel6.Size = new Size(593, 289);
+            panel6.Size = new Size(593, 279);
             panel6.TabIndex = 2;
             // 
             // lblRetornoQuantidade
@@ -607,6 +612,8 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(lblRetornoCliente);
+            panel2.Controls.Add(lblCliente);
             panel2.Controls.Add(btnAplicarDesconto);
             panel2.Controls.Add(rdbPorcentagem);
             panel2.Controls.Add(rdbValor);
@@ -619,12 +626,31 @@
             panel2.Controls.Add(lblResumoVenda);
             panel2.Location = new Point(605, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(233, 188);
+            panel2.Size = new Size(233, 198);
             panel2.TabIndex = 0;
+            // 
+            // lblRetornoCliente
+            // 
+            lblRetornoCliente.AutoSize = true;
+            lblRetornoCliente.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblRetornoCliente.Location = new Point(50, 35);
+            lblRetornoCliente.Name = "lblRetornoCliente";
+            lblRetornoCliente.Size = new Size(0, 15);
+            lblRetornoCliente.TabIndex = 23;
+            // 
+            // lblCliente
+            // 
+            lblCliente.AutoSize = true;
+            lblCliente.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCliente.Location = new Point(9, 34);
+            lblCliente.Name = "lblCliente";
+            lblCliente.Size = new Size(46, 15);
+            lblCliente.TabIndex = 22;
+            lblCliente.Text = "Cliente:";
             // 
             // btnAplicarDesconto
             // 
-            btnAplicarDesconto.Location = new Point(46, 121);
+            btnAplicarDesconto.Location = new Point(50, 139);
             btnAplicarDesconto.Name = "btnAplicarDesconto";
             btnAplicarDesconto.Size = new Size(126, 23);
             btnAplicarDesconto.TabIndex = 21;
@@ -635,7 +661,7 @@
             // rdbPorcentagem
             // 
             rdbPorcentagem.AutoSize = true;
-            rdbPorcentagem.Location = new Point(84, 94);
+            rdbPorcentagem.Location = new Point(88, 112);
             rdbPorcentagem.Name = "rdbPorcentagem";
             rdbPorcentagem.Size = new Size(109, 19);
             rdbPorcentagem.TabIndex = 20;
@@ -646,7 +672,7 @@
             // rdbValor
             // 
             rdbValor.AutoSize = true;
-            rdbValor.Location = new Point(11, 92);
+            rdbValor.Location = new Point(15, 110);
             rdbValor.Name = "rdbValor";
             rdbValor.Size = new Size(67, 19);
             rdbValor.TabIndex = 19;
@@ -656,7 +682,7 @@
             // 
             // txtDesconto
             // 
-            txtDesconto.Location = new Point(83, 58);
+            txtDesconto.Location = new Point(87, 76);
             txtDesconto.Name = "txtDesconto";
             txtDesconto.Size = new Size(68, 23);
             txtDesconto.TabIndex = 18;
@@ -664,7 +690,7 @@
             // lblSubTotalRecebido
             // 
             lblSubTotalRecebido.AutoSize = true;
-            lblSubTotalRecebido.Location = new Point(172, 35);
+            lblSubTotalRecebido.Location = new Point(176, 53);
             lblSubTotalRecebido.Name = "lblSubTotalRecebido";
             lblSubTotalRecebido.Size = new Size(0, 15);
             lblSubTotalRecebido.TabIndex = 16;
@@ -673,7 +699,7 @@
             // 
             lblDesconto.AutoSize = true;
             lblDesconto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDesconto.Location = new Point(5, 61);
+            lblDesconto.Location = new Point(9, 79);
             lblDesconto.Name = "lblDesconto";
             lblDesconto.Size = new Size(58, 15);
             lblDesconto.TabIndex = 15;
@@ -684,7 +710,7 @@
             lblRetornoTotal.AutoSize = true;
             lblRetornoTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRetornoTotal.ForeColor = Color.FromArgb(0, 192, 0);
-            lblRetornoTotal.Location = new Point(123, 159);
+            lblRetornoTotal.Location = new Point(121, 171);
             lblRetornoTotal.Name = "lblRetornoTotal";
             lblRetornoTotal.Size = new Size(0, 20);
             lblRetornoTotal.TabIndex = 14;
@@ -693,7 +719,7 @@
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotal.Location = new Point(11, 160);
+            lblTotal.Location = new Point(9, 172);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(54, 20);
             lblTotal.TabIndex = 13;
@@ -703,7 +729,7 @@
             // 
             lblSubTotal.AutoSize = true;
             lblSubTotal.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSubTotal.Location = new Point(3, 35);
+            lblSubTotal.Location = new Point(7, 53);
             lblSubTotal.Name = "lblSubTotal";
             lblSubTotal.Size = new Size(54, 15);
             lblSubTotal.TabIndex = 13;
@@ -713,7 +739,7 @@
             // 
             lblResumoVenda.AutoSize = true;
             lblResumoVenda.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblResumoVenda.Location = new Point(3, 7);
+            lblResumoVenda.Location = new Point(46, 7);
             lblResumoVenda.Name = "lblResumoVenda";
             lblResumoVenda.Size = new Size(118, 17);
             lblResumoVenda.TabIndex = 1;
@@ -862,6 +888,12 @@
             btnConsultarVendas.Text = "🔍 Consultar Venda";
             btnConsultarVendas.UseVisualStyleBackColor = true;
             // 
+            // timer1
+            // 
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += timer1_Tick;
+            // 
             // frmPainelVendas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -970,5 +1002,8 @@
         private RadioButton rdbPorcentagem;
         private RadioButton rdbValor;
         private Button btnAplicarDesconto;
+        private Label lblCliente;
+        private Label lblRetornoCliente;
+        private System.Windows.Forms.Timer timer1;
     }
 }

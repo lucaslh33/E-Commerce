@@ -23,105 +23,136 @@ namespace Ecommerce
 
 
 
+        private void AdicionarItensPedido()
+        {
+
+        }
+
+        private bool SalvarVenda()
+        {
+            Conexao conexao = new Conexao();
+
+            using (SqlConnection con = conexao.Conectar())
+            {
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        string sqlPedido = @"INSERT INTO tblpedido (cliente_id, data_pedido, subtotal, desconto, total, endereco_id, forma_pagamento_id, status) 
+                        OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
+
+                        int pedidoId;
+
+                        using (SqlCommand cmdPedido = new SqlCommand(sqlPedido, con, transaction))
+                        {
+                            decimal subtotal = itens.Sum(x => x.Total);
+                            cmdPedido.Parameters.AddWithValue("@cliente_id", (object)clienteId ?? DBNull.Value);
+                            cmdPedido.Parameters.AddWithValue("@data_pedido", DateTime.Now);
+                            cmdPedido.Parameters.AddWithValue("@subtotal", subtotal);
+                            cmdPedido.Parameters.AddWithValue("@desconto", descontoAplicado);
+                            cmdPedido.Parameters.AddWithValue("@total", ObterTotalVenda());
+                            cmdPedido.Parameters.AddWithValue("@endereco_id", 1);
+                            cmdPedido.Parameters.AddWithValue("@forma_pagamento_id", formaPagamento.Value);
+
+                            pedidoId = Convert.ToInt32(cmdPedido.ExecuteScalar());
+                        }
+
+                        string sqlItem = @"INSERT INTO tblitempedido (pedido_id, produto_id, quantidade, preco)
+                                           VALUES (@pedido_id, @produto_id, @quantidade, @preco);";
+
+                        foreach (var item in itens)
+                        {
+                            using (SqlCommand cmdItem = new SqlCommand(sqlItem, con, transaction))
+                            {
+                                cmdItem.Parameters.AddWithValue("@pedido_id", pedidoId);
+                                cmdItem.Parameters.AddWithValue("@produto_id", item.IdProduto); 
+                                cmdItem.Parameters.AddWithValue("@quantidade", item.Quantidade);
+                                cmdItem.Parameters.AddWithValue("@preco", item.Preco);
+
+                                cmdItem.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                        return true;
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("Erro ao gravar pedido no banco de dados: " + ex.Message, "Erro SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+        }
+
         private void ConcluirVenda()
         {
             try
             {
+                
                 if (itens.Count == 0)
                 {
                     MessageBox.Show("Adicione pelo menos um item à venda.", "Venda vazia!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (formaPagamento == null)
+                if (clienteId == null)
                 {
-                    MessageBox.Show("Selecione um forma de pagamento", "Pagamento!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Selecione um cliente antes de finalizar a venda.", "Cliente não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                if (formaPagamento == null)
+                {
+                    MessageBox.Show("Selecione uma forma de pagamento.", "Pagamento!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                decimal total = ObterTotalVenda();
+
+                
                 if (formaPagamento == 5)
                 {
-                    if (string.IsNullOrWhiteSpace(txtValorRecebido.Text))
+                    if (string.IsNullOrWhiteSpace(txtValorRecebido.Text) || !decimal.TryParse(txtValorRecebido.Text, out decimal valorRecebido))
                     {
-                        MessageBox.Show("Informe o valor recebido!");
+                        MessageBox.Show("Informe um valor válido recebido em dinheiro.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txtValorRecebido.Focus();
                         return;
                     }
-                    decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
-                    decimal total = ObterTotalVenda();
+
+                    if (valorRecebido < total)
+                    {
+                        MessageBox.Show("Valor recebido é insuficiente.", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    
+                    if (!SalvarVenda()) return;
+
+                    
                     decimal troco = valorRecebido - total;
                     lblRetornoTroco.Text = troco.ToString("C2");
-
-                    if (valorRecebido < ObterTotalVenda())
-                    {
-                        MessageBox.Show("Valor recebido insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    MessageBox.Show($"Deve retornar {troco} ao cliente!", "Venda realizada!");
-                    itens.Clear();
-                    AtualizarGrid();
-                    LimparTela();
+                    MessageBox.Show($"Venda concluída! Troco a retornar: {troco:C2}", "Venda Realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-                if (formaPagamento == 1) //☑️
+                else
                 {
-                    if (string.IsNullOrWhiteSpace(txtValorRecebido.Text))
-                    {
-                        MessageBox.Show("Informe o valor recebido!");
-                        return;
-                    }
-                    decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
-                    decimal total = ObterTotalVenda();
+                    
+                    if (!SalvarVenda()) return;
 
-                    if (valorRecebido < ObterTotalVenda())
-                    {
-                        MessageBox.Show("Valor recebido insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
-                    itens.Clear();
-                    AtualizarGrid();
-                    LimparTela();
-                }
-
-                if (formaPagamento == 2) //☑️
-                {
-                    decimal valorRecebido = Convert.ToDecimal(txtValorRecebido.Text);
-                    decimal total = ObterTotalVenda();
                     lblRetornoTroco.Text = "R$ 0,00";
-
-                    if (valorRecebido < ObterTotalVenda())
-                    {
-                        MessageBox.Show("Limite do cartão insuficiente", "Erro no pagamento", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
-                    }
-                    itens.Clear();
-                    AtualizarGrid();
-                    LimparTela();
-
-
+                    MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                if (formaPagamento == 4)
-                {
-
-                    decimal total = ObterTotalVenda();
-                    lblRetornoTroco.Text = "R$ 0,00";
-
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso");
-                    itens.Clear();
-                    AtualizarGrid();
-                    LimparTela();
-                }
+                
+                itens.Clear();
+                AtualizarGrid();
+                LimparTela();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao realizar pagamento", "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                MessageBox.Show("Erro ao realizar pagamento: " + ex.Message, "Erro!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -198,6 +229,7 @@ namespace Ecommerce
             txtDesconto.Clear();
             txtValorRecebido.Clear();
 
+
             lblRetornoProduto.Text = "";
             lblRetornoCategoria.Text = "";
             lblRetornoCodigo.Text = "";
@@ -207,6 +239,7 @@ namespace Ecommerce
             lblRetornoTotal.Text = "0,00";
             lblSubTotalRecebido.Text = "0,00";
             lblRetornoQuantidade.Text = "0";
+            lblRetornoCliente.Text = "";
 
             ProdutoSelecionado = null;
 
@@ -255,6 +288,7 @@ namespace Ecommerce
             if (itemExistente == null)
             {
                 ItemVenda item = new ItemVenda();
+                item.IdProduto = Convert.ToInt32(ProdutoSelecionado["ID_PRODUTO"]);
                 item.Codigo = ProdutoSelecionado["CÓDIGO"].ToString();
                 item.Nome = ProdutoSelecionado["NOME"].ToString();
                 item.Categoria = ProdutoSelecionado["CATEGORIA"].ToString();
@@ -289,7 +323,7 @@ namespace Ecommerce
                 }
 
                 Conexao conexao = new Conexao();
-                string sql = "SELECT p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO', p.estoque as 'ESTOQUE' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro OR p.estoque LIKE @filtro) AND p.status_ativo = 'A'";
+                string sql = "SELECT p.id AS 'ID_PRODUTO', p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO', p.estoque as 'ESTOQUE' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.id LIKE @filtro OR p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro OR p.estoque LIKE @filtro) AND p.status_ativo = 'A'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -348,6 +382,10 @@ namespace Ecommerce
             txtCodigoBarras.Text = "Digite o código de barras";
             txtCodigoBarras.ForeColor = Color.Gray;
 
+            mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+            timer1.Interval = 1000;
+            timer1.Start();
+
 
         }
 
@@ -394,11 +432,17 @@ namespace Ecommerce
                 txtCodigoBarras.Focus();
             }
         }
-
+        private int? clienteId = null;
+        private string? nomeCliente = null;
         private void btnCLientes_Click(object sender, EventArgs e)
         {
             frmConsultarClientes frmConsultarClientes = new frmConsultarClientes();
-            frmConsultarClientes.ShowDialog();
+            if (frmConsultarClientes.ShowDialog() == DialogResult.OK)
+            {
+                clienteId = frmConsultarClientes.ClienteSelecionadoId;
+                nomeCliente = frmConsultarClientes.ClienteSelecionadoNome;
+                lblRetornoCliente.Text = nomeCliente;
+            }
         }
 
         private void btnProdutos_MouseClick(object sender, MouseEventArgs e)
@@ -440,6 +484,7 @@ namespace Ecommerce
                     itens.Remove(itemExistente);
 
                 }
+
                 AtualizarGrid();
             }
 
@@ -481,12 +526,15 @@ namespace Ecommerce
 
         private void btnCartao_Click(object sender, EventArgs e)
         {
-            frmCartao frmCartao = new frmCartao();
-            frmCartao.ShowDialog();
+            ObterTotalVenda();
+            frmCartao frmCartao = new frmCartao(ObterTotalVenda());
 
-            if (frmCartao.DialogResult == DialogResult.OK)
+            if (frmCartao.ShowDialog() == DialogResult.OK)
             {
+                PagamentoCartao pagamento = frmCartao.Pagamento;
+
                 formaPagamento = 2;
+
                 SelecionarPagamento(btnCartao);
             }
         }
@@ -506,6 +554,7 @@ namespace Ecommerce
 
         private void btnFinalizarVenda_Click(object sender, EventArgs e)
         {
+            
             ConcluirVenda();
         }
 
@@ -514,6 +563,14 @@ namespace Ecommerce
             AplicarDesconto();
         }
 
-        
+        private void mskData_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
     }
 }

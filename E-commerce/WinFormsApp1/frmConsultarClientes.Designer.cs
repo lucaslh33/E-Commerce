@@ -67,6 +67,7 @@
             dgvConsultaCliente.Size = new Size(557, 418);
             dgvConsultaCliente.TabIndex = 2;
             dgvConsultaCliente.CellContentClick += dgvConsultaCliente_CellContentClick;
+            dgvConsultaCliente.CellDoubleClick += dgvConsultaCliente_CellDoubleClick;
             // 
             // contextMenu
             // 

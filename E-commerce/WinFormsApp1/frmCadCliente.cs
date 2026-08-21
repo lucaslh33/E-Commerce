@@ -46,7 +46,7 @@ namespace Ecommerce
             if (senha.Length < 6)
             {
                 MessageBox.Show("A senha dever ter no mínimo 6 caracteres");
-               
+
             }
 
 
@@ -128,6 +128,11 @@ namespace Ecommerce
         private async void mskCep_Leave(object sender, EventArgs e)
         {
             await BuscarCEP();
+        }
+
+        private void frmCadCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

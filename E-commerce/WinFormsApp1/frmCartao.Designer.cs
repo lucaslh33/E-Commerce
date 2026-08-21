@@ -85,7 +85,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(12, 306);
+            label5.Location = new Point(12, 305);
             label5.Name = "label5";
             label5.Size = new Size(96, 15);
             label5.TabIndex = 4;
@@ -94,7 +94,7 @@
             // lblRetornoValorCompra
             // 
             lblRetornoValorCompra.AutoSize = true;
-            lblRetornoValorCompra.Location = new Point(12, 333);
+            lblRetornoValorCompra.Location = new Point(12, 334);
             lblRetornoValorCompra.Name = "lblRetornoValorCompra";
             lblRetornoValorCompra.Size = new Size(0, 15);
             lblRetornoValorCompra.TabIndex = 5;

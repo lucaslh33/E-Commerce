@@ -16,12 +16,14 @@ namespace Ecommerce
             InitializeComponent();
         }
 
+
+
         public DataTable CarregarCliente()
         {
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = ("SELECT tblcliente.id AS CÓDIGO, nome AS NOME, rua AS RUA, email AS EMAIL FROM tblcliente INNER JOIN tblendereco ON tblcliente.id = tblendereco.cliente_id WHERE (nome LIKE @filtro OR rua LIKE @filtro OR email LIKE @filtro) AND status_ativo = 'A' ");
+                string sql = ("SELECT tblcliente.id AS CÓDIGO, nome AS NOME, rua AS RUA, email AS EMAIL FROM tblcliente INNER JOIN tblendereco ON tblcliente.id = tblendereco.cliente_id WHERE (tblcliente.id LIKE @filtro OR nome LIKE @filtro OR rua LIKE @filtro OR email LIKE @filtro) AND status_ativo = 'A' ");
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -93,6 +95,23 @@ namespace Ecommerce
         private void dgvConsultaCliente_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        public int? ClienteSelecionadoId { get; private set; }
+        public string? ClienteSelecionadoNome { get; private set; }
+        private void dgvConsultaCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            ClienteSelecionadoId = Convert.ToInt32(
+                dgvConsultaCliente.Rows[e.RowIndex].Cells["CÓDIGO"].Value);
+            ClienteSelecionadoNome = Convert.ToString(dgvConsultaCliente.Rows[e.RowIndex].Cells["NOME"].Value);
+
+
+
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }
