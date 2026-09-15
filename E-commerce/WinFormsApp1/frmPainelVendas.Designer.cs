@@ -865,6 +865,7 @@
             btnProdutos.TabIndex = 3;
             btnProdutos.Text = "🛍️ Produtos";
             btnProdutos.UseVisualStyleBackColor = true;
+            btnProdutos.Click += btnProdutos_Click;
             btnProdutos.MouseClick += btnProdutos_MouseClick;
             // 
             // btnCLientes

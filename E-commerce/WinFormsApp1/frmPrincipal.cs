@@ -97,5 +97,7 @@ namespace Ecommerce
             frmConsultarProdutoInativo frmConsultarProdutoInativo = new frmConsultarProdutoInativo();
             frmConsultarProdutoInativo.ShowDialog();
         }
+
+        
     }
 }

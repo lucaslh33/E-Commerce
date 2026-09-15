@@ -85,7 +85,7 @@ namespace Ecommerce
                             using (SqlCommand cmdItem = new SqlCommand(sqlItem, con, transaction))
                             {
                                 cmdItem.Parameters.AddWithValue("@pedido_id", pedidoId);
-                                cmdItem.Parameters.AddWithValue("@produto_id", item.IdProduto); 
+                                cmdItem.Parameters.AddWithValue("@produto_id", item.IdProduto);
                                 cmdItem.Parameters.AddWithValue("@quantidade", item.Quantidade);
                                 cmdItem.Parameters.AddWithValue("@preco", item.Preco);
 
@@ -95,7 +95,7 @@ namespace Ecommerce
 
                         transaction.Commit();
                         return true;
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -111,7 +111,7 @@ namespace Ecommerce
         {
             try
             {
-                
+
                 if (itens.Count == 0)
                 {
                     MessageBox.Show("Adicione pelo menos um item à venda.", "Venda vazia!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -132,7 +132,7 @@ namespace Ecommerce
 
                 decimal total = ObterTotalVenda();
 
-                
+
                 if (formaPagamento == 5)
                 {
                     if (string.IsNullOrWhiteSpace(txtValorRecebido.Text) || !decimal.TryParse(txtValorRecebido.Text, out decimal valorRecebido))
@@ -148,24 +148,24 @@ namespace Ecommerce
                         return;
                     }
 
-                    
+
                     if (!SalvarVenda()) return;
 
-                    
+
                     decimal troco = valorRecebido - total;
                     lblRetornoTroco.Text = troco.ToString("C2");
                     MessageBox.Show($"Venda concluída! Troco a retornar: {troco:C2}", "Venda Realizada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    
+
                     if (!SalvarVenda()) return;
 
                     lblRetornoTroco.Text = "R$ 0,00";
                     MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                
+
                 itens.Clear();
                 AtualizarGrid();
                 LimparTela();
@@ -574,7 +574,7 @@ namespace Ecommerce
 
         private void btnFinalizarVenda_Click(object sender, EventArgs e)
         {
-            
+
             ConcluirVenda();
         }
 
@@ -591,6 +591,11 @@ namespace Ecommerce
         private void timer1_Tick(object sender, EventArgs e)
         {
             mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void btnProdutos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

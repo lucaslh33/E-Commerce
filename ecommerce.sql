@@ -2,6 +2,16 @@ CREATE DATABASE ecommerce
 
 USE ecommerce
 
+CREATE TABLE tblusuario (
+id INT PRIMARY KEY IDENTITY(1,1),
+nome VARCHAR(100) NOT NULL,
+email VARCHAR(100) UNIQUE NOT NULL,
+senha VARCHAR(255) NOT NULL,
+status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
+)
+
+INSERT INTO tblusuario (nome, email, senha) 
+VALUES ('Lucas', 'lucas@teste.com', 'COLE_O_HASH_AQUI');
 
 
 CREATE TABLE tblcliente (

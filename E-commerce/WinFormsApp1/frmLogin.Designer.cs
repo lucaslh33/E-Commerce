@@ -32,7 +32,7 @@
             pcbLogin = new PictureBox();
             lblLogin = new Label();
             lblSenha = new Label();
-            txtLogin = new TextBox();
+            txtEmail = new TextBox();
             txtSenha = new TextBox();
             btnLogin = new Button();
             lnkRecuperarSenha = new LinkLabel();
@@ -70,12 +70,12 @@
             lblSenha.TabIndex = 2;
             lblSenha.Text = "Senha: ";
             // 
-            // txtLogin
+            // txtEmail
             // 
-            txtLogin.Location = new Point(323, 96);
-            txtLogin.Name = "txtLogin";
-            txtLogin.Size = new Size(222, 23);
-            txtLogin.TabIndex = 3;
+            txtEmail.Location = new Point(323, 96);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(222, 23);
+            txtEmail.TabIndex = 3;
             // 
             // txtSenha
             // 
@@ -93,6 +93,7 @@
             btnLogin.TabIndex = 5;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
             // lnkRecuperarSenha
             // 
@@ -132,6 +133,7 @@
             chkMostrarSenha.TabIndex = 9;
             chkMostrarSenha.Text = "Mostrar Senha";
             chkMostrarSenha.UseVisualStyleBackColor = true;
+            chkMostrarSenha.CheckedChanged += chkMostrarSenha_CheckedChanged;
             // 
             // frmLogin
             // 
@@ -144,7 +146,7 @@
             Controls.Add(lnkRecuperarSenha);
             Controls.Add(btnLogin);
             Controls.Add(txtSenha);
-            Controls.Add(txtLogin);
+            Controls.Add(txtEmail);
             Controls.Add(lblSenha);
             Controls.Add(lblLogin);
             Controls.Add(pcbLogin);
@@ -161,7 +163,7 @@
         private PictureBox pcbLogin;
         private Label lblLogin;
         private Label lblSenha;
-        private TextBox txtLogin;
+        private TextBox txtEmail;
         private TextBox txtSenha;
         private Button btnLogin;
         private LinkLabel lnkRecuperarSenha;
