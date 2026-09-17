@@ -640,7 +640,6 @@
             cmbEndereco.Name = "cmbEndereco";
             cmbEndereco.Size = new Size(216, 23);
             cmbEndereco.TabIndex = 25;
-            cmbEndereco.SelectedIndexChanged += cmbEndereco_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -888,7 +887,6 @@
             btnProdutos.TabIndex = 3;
             btnProdutos.Text = "🛍️ Produtos";
             btnProdutos.UseVisualStyleBackColor = true;
-            btnProdutos.Click += btnProdutos_Click;
             btnProdutos.MouseClick += btnProdutos_MouseClick;
             // 
             // btnCLientes

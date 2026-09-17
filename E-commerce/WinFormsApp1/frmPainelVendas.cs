@@ -41,7 +41,7 @@ namespace Ecommerce
                     try
                     {
 
-                        int enderecoId;
+                        /*int enderecoId;
                         string sqlEndereco = "SELECT TOP 1 id FROM tblendereco WHERE cliente_id = @cliente_id ORDER BY id DESC";
 
                         using (SqlCommand cmdEndereco = new SqlCommand(sqlEndereco, con, transaction))
@@ -63,10 +63,20 @@ namespace Ecommerce
 
                             
 
+                        }*/
+
+                        if (cmbEndereco.SelectedItem == null)
+                        {
+                            MessageBox.Show("Selecione um endereço antes de finalizar a venda.", "Endereço não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            transaction.Rollback();
+                            return false;
                         }
+                        dynamic enderecoSelecionado = cmbEndereco.SelectedItem;
+                        int enderecoId = enderecoSelecionado.Id;
 
                         string sqlPedido = @"INSERT INTO tblpedido (cliente_id, data_pedido, subtotal, desconto, total, endereco_id, forma_pagamento_id, status) 
                                            OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
+
 
                         int pedidoId;
 
@@ -84,6 +94,26 @@ namespace Ecommerce
                             
 
                             pedidoId = Convert.ToInt32(cmdPedido.ExecuteScalar());
+                        }
+
+
+                        if (formaPagamento == 2 && pagamentoCartaoSelecionado != null)
+                        {
+                            string sqlCartao = @"INSERT INTO tblpagamento_cartao (pedido_id, tipo, nome_titular, ultimos_digitos)
+                         VALUES (@pedido_id, @tipo, @nome_titular, @ultimos_digitos);";
+
+                            using (SqlCommand cmdCartao = new SqlCommand(sqlCartao, con, transaction))
+                            {
+                                string numero = pagamentoCartaoSelecionado.NumeroCartao.Replace(" ", "");
+                                string ultimosDigitos = numero.Length >= 4 ? numero.Substring(numero.Length - 4) : numero;
+
+                                cmdCartao.Parameters.AddWithValue("@pedido_id", pedidoId);
+                                cmdCartao.Parameters.AddWithValue("@tipo", pagamentoCartaoSelecionado.Tipo.ToString());
+                                cmdCartao.Parameters.AddWithValue("@nome_titular", pagamentoCartaoSelecionado.NomeTitular);
+                                cmdCartao.Parameters.AddWithValue("@ultimos_digitos", ultimosDigitos);
+
+                                cmdCartao.ExecuteNonQuery();
+                            }
                         }
 
                         string sqlItem = @"INSERT INTO tblitempedido (pedido_id, produto_id, quantidade, preco)
@@ -276,6 +306,11 @@ namespace Ecommerce
             descontoAplicado = 0;
             formaPagamento = null;
 
+            clienteId = null;
+            nomeCliente = null;
+            cmbEndereco.Items.Clear();
+
+
             rdbPorcentagem.Checked = false;
             rdbValor.Checked = false;
 
@@ -283,6 +318,8 @@ namespace Ecommerce
             btnCartao.BackColor = SystemColors.Control;
             btnBoleto.BackColor = SystemColors.Control;
             btnDinheiro.BackColor = SystemColors.Control;
+
+            pagamentoCartaoSelecionado = null;
         }
 
         private void AtualizarSubTotal()
@@ -503,6 +540,9 @@ namespace Ecommerce
                             Endereco = $"{reader["rua"]},{reader["numero"]} - {reader["bairro"]} - {reader["cidade"]}/{reader["estado"]} - CEP: {reader["cep"]}"
                         });
                     }
+                    
+                    if (cmbEndereco.Items.Count > 0)
+                        cmbEndereco.SelectedIndex = 0;
                 }
             }
             cmbEndereco.DisplayMember = "Endereco";
@@ -588,17 +628,16 @@ namespace Ecommerce
             SelecionarPagamento(btnPix);
         }
 
+        private PagamentoCartao pagamentoCartaoSelecionado = null;
+
         private void btnCartao_Click(object sender, EventArgs e)
         {
-            ObterTotalVenda();
             frmCartao frmCartao = new frmCartao(ObterTotalVenda());
 
             if (frmCartao.ShowDialog() == DialogResult.OK)
             {
-                PagamentoCartao pagamento = frmCartao.Pagamento;
-
+                pagamentoCartaoSelecionado = frmCartao.Pagamento;
                 formaPagamento = 2;
-
                 SelecionarPagamento(btnCartao);
             }
         }
@@ -637,14 +676,6 @@ namespace Ecommerce
             mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-        private void btnProdutos_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbEndereco_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
+        
     }
 }

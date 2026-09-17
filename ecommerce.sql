@@ -133,6 +133,16 @@ FOREIGN KEY (forma_pagamento_id) REFERENCES tblformapagamento(id)
 
 )
 
+CREATE TABLE tblpagamento_cartao (
+id INT PRIMARY KEY IDENTITY,
+pedido_id INT NOT NULL,
+tipo VARCHAR(10) NOT NULL,
+nome_titular VARCHAR(100) NOT NULL,
+ultimos_digitos CHAR(4) NOT NULL,
+CONSTRAINT FK_PagamentoCartao_Pedido
+FOREIGN KEY (pedido_id) REFERENCES tblpedido(id)
+);
+
 CREATE TABLE tblitempedido (
 id INT PRIMARY KEY IDENTITY,
 pedido_id INT NOT NULL,
