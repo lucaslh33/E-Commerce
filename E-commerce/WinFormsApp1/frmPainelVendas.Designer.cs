@@ -77,6 +77,8 @@
             txtCodigoBarras = new TextBox();
             lblAdicionarProdutoVenda = new Label();
             panel2 = new Panel();
+            cmbEndereco = new ComboBox();
+            label1 = new Label();
             lblRetornoCliente = new Label();
             lblCliente = new Label();
             btnAplicarDesconto = new Button();
@@ -351,9 +353,9 @@
             panel7.Controls.Add(btnCartao);
             panel7.Controls.Add(btnDinheiro);
             panel7.Controls.Add(lblFormaPagamento);
-            panel7.Location = new Point(605, 207);
+            panel7.Location = new Point(606, 266);
             panel7.Name = "panel7";
-            panel7.Size = new Size(233, 279);
+            panel7.Size = new Size(233, 219);
             panel7.TabIndex = 1;
             // 
             // lblRetornoTroco
@@ -612,6 +614,8 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(cmbEndereco);
+            panel2.Controls.Add(label1);
             panel2.Controls.Add(lblRetornoCliente);
             panel2.Controls.Add(lblCliente);
             panel2.Controls.Add(btnAplicarDesconto);
@@ -626,8 +630,27 @@
             panel2.Controls.Add(lblResumoVenda);
             panel2.Location = new Point(605, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(233, 198);
+            panel2.Size = new Size(233, 257);
             panel2.TabIndex = 0;
+            // 
+            // cmbEndereco
+            // 
+            cmbEndereco.FormattingEnabled = true;
+            cmbEndereco.Location = new Point(11, 78);
+            cmbEndereco.Name = "cmbEndereco";
+            cmbEndereco.Size = new Size(216, 23);
+            cmbEndereco.TabIndex = 25;
+            cmbEndereco.SelectedIndexChanged += cmbEndereco_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(9, 62);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 15);
+            label1.TabIndex = 24;
+            label1.Text = "Endereço:";
             // 
             // lblRetornoCliente
             // 
@@ -650,7 +673,7 @@
             // 
             // btnAplicarDesconto
             // 
-            btnAplicarDesconto.Location = new Point(50, 139);
+            btnAplicarDesconto.Location = new Point(46, 191);
             btnAplicarDesconto.Name = "btnAplicarDesconto";
             btnAplicarDesconto.Size = new Size(126, 23);
             btnAplicarDesconto.TabIndex = 21;
@@ -661,7 +684,7 @@
             // rdbPorcentagem
             // 
             rdbPorcentagem.AutoSize = true;
-            rdbPorcentagem.Location = new Point(88, 112);
+            rdbPorcentagem.Location = new Point(84, 164);
             rdbPorcentagem.Name = "rdbPorcentagem";
             rdbPorcentagem.Size = new Size(109, 19);
             rdbPorcentagem.TabIndex = 20;
@@ -672,7 +695,7 @@
             // rdbValor
             // 
             rdbValor.AutoSize = true;
-            rdbValor.Location = new Point(15, 110);
+            rdbValor.Location = new Point(11, 162);
             rdbValor.Name = "rdbValor";
             rdbValor.Size = new Size(67, 19);
             rdbValor.TabIndex = 19;
@@ -682,7 +705,7 @@
             // 
             // txtDesconto
             // 
-            txtDesconto.Location = new Point(87, 76);
+            txtDesconto.Location = new Point(83, 128);
             txtDesconto.Name = "txtDesconto";
             txtDesconto.Size = new Size(68, 23);
             txtDesconto.TabIndex = 18;
@@ -690,7 +713,7 @@
             // lblSubTotalRecebido
             // 
             lblSubTotalRecebido.AutoSize = true;
-            lblSubTotalRecebido.Location = new Point(176, 53);
+            lblSubTotalRecebido.Location = new Point(172, 105);
             lblSubTotalRecebido.Name = "lblSubTotalRecebido";
             lblSubTotalRecebido.Size = new Size(0, 15);
             lblSubTotalRecebido.TabIndex = 16;
@@ -699,7 +722,7 @@
             // 
             lblDesconto.AutoSize = true;
             lblDesconto.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDesconto.Location = new Point(9, 79);
+            lblDesconto.Location = new Point(5, 131);
             lblDesconto.Name = "lblDesconto";
             lblDesconto.Size = new Size(58, 15);
             lblDesconto.TabIndex = 15;
@@ -710,7 +733,7 @@
             lblRetornoTotal.AutoSize = true;
             lblRetornoTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblRetornoTotal.ForeColor = Color.FromArgb(0, 192, 0);
-            lblRetornoTotal.Location = new Point(121, 171);
+            lblRetornoTotal.Location = new Point(117, 223);
             lblRetornoTotal.Name = "lblRetornoTotal";
             lblRetornoTotal.Size = new Size(0, 20);
             lblRetornoTotal.TabIndex = 14;
@@ -719,7 +742,7 @@
             // 
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTotal.Location = new Point(9, 172);
+            lblTotal.Location = new Point(5, 224);
             lblTotal.Name = "lblTotal";
             lblTotal.Size = new Size(54, 20);
             lblTotal.TabIndex = 13;
@@ -729,7 +752,7 @@
             // 
             lblSubTotal.AutoSize = true;
             lblSubTotal.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblSubTotal.Location = new Point(7, 53);
+            lblSubTotal.Location = new Point(5, 105);
             lblSubTotal.Name = "lblSubTotal";
             lblSubTotal.Size = new Size(54, 15);
             lblSubTotal.TabIndex = 13;
@@ -1006,5 +1029,7 @@
         private Label lblCliente;
         private Label lblRetornoCliente;
         private System.Windows.Forms.Timer timer1;
+        private ComboBox cmbEndereco;
+        private Label label1;
     }
 }

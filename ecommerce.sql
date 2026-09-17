@@ -13,6 +13,16 @@ status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 INSERT INTO tblusuario (nome, email, senha) 
 VALUES ('Lucas', 'lucas@teste.com', 'COLE_O_HASH_AQUI');
 
+SELECT * FROM tblusuario
+
+SELECT senha, LEN(senha)
+FROM tblusuario
+WHERE email = 'lucas@teste.com';
+
+
+UPDATE tblusuario 
+SET senha = '$2a$11$e5J3mpXI9a40V.P1u1zS9.vb/uEfY.YJQLWLlkXHYyU/d3u1P5zca' 
+WHERE email = 'lucas@teste.com'
 
 CREATE TABLE tblcliente (
 id INT PRIMARY KEY IDENTITY(1,1),

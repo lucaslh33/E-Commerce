@@ -120,5 +120,10 @@ namespace Ecommerce
         {
             Close();
         }
+
+        private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

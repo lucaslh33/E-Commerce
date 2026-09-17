@@ -27,9 +27,11 @@ namespace Ecommerce
         {
 
         }
+        
 
         private bool SalvarVenda()
         {
+
             Conexao conexao = new Conexao();
 
             using (SqlConnection con = conexao.Conectar())
@@ -45,7 +47,9 @@ namespace Ecommerce
                         using (SqlCommand cmdEndereco = new SqlCommand(sqlEndereco, con, transaction))
                         {
                             cmdEndereco.Parameters.AddWithValue("@cliente_id", clienteId);
+
                             object resultado = cmdEndereco.ExecuteScalar();
+
 
                             if (resultado == null)
                             {
@@ -56,12 +60,16 @@ namespace Ecommerce
                             }
 
                             enderecoId = Convert.ToInt32(resultado);
+
+                            
+
                         }
 
                         string sqlPedido = @"INSERT INTO tblpedido (cliente_id, data_pedido, subtotal, desconto, total, endereco_id, forma_pagamento_id, status) 
                                            OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
 
                         int pedidoId;
+
 
                         using (SqlCommand cmdPedido = new SqlCommand(sqlPedido, con, transaction))
                         {
@@ -73,6 +81,7 @@ namespace Ecommerce
                             cmdPedido.Parameters.AddWithValue("@total", ObterTotalVenda());
                             cmdPedido.Parameters.AddWithValue("@endereco_id", enderecoId);
                             cmdPedido.Parameters.AddWithValue("@forma_pagamento_id", formaPagamento.Value);
+                            
 
                             pedidoId = Convert.ToInt32(cmdPedido.ExecuteScalar());
                         }
@@ -88,6 +97,7 @@ namespace Ecommerce
                                 cmdItem.Parameters.AddWithValue("@produto_id", item.IdProduto);
                                 cmdItem.Parameters.AddWithValue("@quantidade", item.Quantidade);
                                 cmdItem.Parameters.AddWithValue("@preco", item.Preco);
+
 
                                 cmdItem.ExecuteNonQuery();
                             }
@@ -407,6 +417,9 @@ namespace Ecommerce
             timer1.Start();
 
 
+
+
+
         }
 
         private void txtCodigoBarras_Enter(object sender, EventArgs e)
@@ -462,7 +475,38 @@ namespace Ecommerce
                 clienteId = frmConsultarClientes.ClienteSelecionadoId;
                 nomeCliente = frmConsultarClientes.ClienteSelecionadoNome;
                 lblRetornoCliente.Text = nomeCliente;
+                CarregarEnderecos();
             }
+        }
+
+        private int? enderecoId =null;
+        private void CarregarEnderecos()
+        {
+            cmbEndereco.Items.Clear();
+
+            string sql = @"SELECT id, rua, numero, bairro, cidade, estado, cep FROM tblendereco WHERE cliente_id = @cliente_id ORDER BY id DESC";
+
+            Conexao conexao = new Conexao();
+
+            using (SqlConnection con = conexao.Conectar())
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@cliente_id", clienteId);
+
+                using(SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        cmbEndereco.Items.Add(new
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Endereco = $"{reader["rua"]},{reader["numero"]} - {reader["bairro"]} - {reader["cidade"]}/{reader["estado"]} - CEP: {reader["cep"]}"
+                        });
+                    }
+                }
+            }
+            cmbEndereco.DisplayMember = "Endereco";
+            cmbEndereco.ValueMember = "id";
         }
 
         private void btnProdutos_MouseClick(object sender, MouseEventArgs e)
@@ -596,6 +640,11 @@ namespace Ecommerce
         private void btnProdutos_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cmbEndereco_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }
