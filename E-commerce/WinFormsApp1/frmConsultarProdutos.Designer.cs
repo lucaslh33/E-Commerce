@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             grbConsultarProdutos = new GroupBox();
+            picProduto = new PictureBox();
             dgvConsultarProduto = new DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             editarToolStripMenuItem = new ToolStripMenuItem();
@@ -37,12 +38,14 @@
             txtPesquisa = new TextBox();
             lblPesquisa = new Label();
             grbConsultarProdutos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picProduto).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).BeginInit();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // grbConsultarProdutos
             // 
+            grbConsultarProdutos.Controls.Add(picProduto);
             grbConsultarProdutos.Controls.Add(dgvConsultarProduto);
             grbConsultarProdutos.Controls.Add(txtPesquisa);
             grbConsultarProdutos.Controls.Add(lblPesquisa);
@@ -52,6 +55,16 @@
             grbConsultarProdutos.TabIndex = 1;
             grbConsultarProdutos.TabStop = false;
             grbConsultarProdutos.Text = "Consultar Produtos: ";
+            // 
+            // picProduto
+            // 
+            picProduto.Location = new Point(462, 76);
+            picProduto.Name = "picProduto";
+            picProduto.Size = new Size(101, 32);
+            picProduto.SizeMode = PictureBoxSizeMode.Zoom;
+            picProduto.TabIndex = 3;
+            picProduto.TabStop = false;
+            picProduto.Visible = false;
             // 
             // dgvConsultarProduto
             // 
@@ -114,6 +127,7 @@
             Load += frmConsultarProdutos_Load;
             grbConsultarProdutos.ResumeLayout(false);
             grbConsultarProdutos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picProduto).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvConsultarProduto).EndInit();
             contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
@@ -128,5 +142,8 @@
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem editarToolStripMenuItem;
         private ToolStripMenuItem removerToolStripMenuItem;
+        private PictureBox picProduto;
+
+       
     }
 }

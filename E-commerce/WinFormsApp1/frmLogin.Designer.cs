@@ -94,6 +94,7 @@
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
+            btnLogin.Enter += btnLogin_Enter;
             // 
             // lnkRecuperarSenha
             // 

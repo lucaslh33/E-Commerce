@@ -338,6 +338,7 @@
             pcbProduto.Location = new Point(12, 9);
             pcbProduto.Name = "pcbProduto";
             pcbProduto.Size = new Size(128, 104);
+            pcbProduto.SizeMode = PictureBoxSizeMode.Zoom;
             pcbProduto.TabIndex = 0;
             pcbProduto.TabStop = false;
             // 

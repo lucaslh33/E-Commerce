@@ -74,19 +74,24 @@ namespace Ecommerce
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void chkMostrarSenha_CheckedChanged(object sender, EventArgs e)
         {
             if (chkMostrarSenha.Checked)
             {
-                txtSenha.PasswordChar = '\0'; 
+                txtSenha.PasswordChar = '\0';
             }
             else
             {
-                txtSenha.PasswordChar = '*'; 
+                txtSenha.PasswordChar = '*';
             }
+        }
+
+        private void btnLogin_Enter(object sender, EventArgs e)
+        {
+            btnLogin.Enabled = true;
         }
     }
 }

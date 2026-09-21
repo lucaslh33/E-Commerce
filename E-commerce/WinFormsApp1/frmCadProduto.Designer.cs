@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             grbInformacoes = new GroupBox();
+            btnSelecionarImagens1 = new Button();
             btnCancelar = new Button();
             btnCadastrar = new Button();
             txtMarca = new TextBox();
@@ -74,6 +75,7 @@
             // 
             // grbInformacoes
             // 
+            grbInformacoes.Controls.Add(btnSelecionarImagens1);
             grbInformacoes.Controls.Add(btnCancelar);
             grbInformacoes.Controls.Add(btnCadastrar);
             grbInformacoes.Controls.Add(txtMarca);
@@ -107,14 +109,24 @@
             grbInformacoes.Controls.Add(lblNome);
             grbInformacoes.Location = new Point(12, 4);
             grbInformacoes.Name = "grbInformacoes";
-            grbInformacoes.Size = new Size(815, 397);
+            grbInformacoes.Size = new Size(815, 411);
             grbInformacoes.TabIndex = 0;
             grbInformacoes.TabStop = false;
             grbInformacoes.Text = "Informações";
             // 
+            // btnSelecionarImagens1
+            // 
+            btnSelecionarImagens1.Location = new Point(473, 330);
+            btnSelecionarImagens1.Name = "btnSelecionarImagens1";
+            btnSelecionarImagens1.Size = new Size(133, 23);
+            btnSelecionarImagens1.TabIndex = 32;
+            btnSelecionarImagens1.Text = "Selecionar Imagens";
+            btnSelecionarImagens1.UseVisualStyleBackColor = true;
+            btnSelecionarImagens1.Click += btnSelecionarImagens1_Click;
+            // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(6, 343);
+            btnCancelar.Location = new Point(0, 372);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(113, 33);
             btnCancelar.TabIndex = 31;
@@ -124,7 +136,7 @@
             // 
             // btnCadastrar
             // 
-            btnCadastrar.Location = new Point(692, 343);
+            btnCadastrar.Location = new Point(696, 372);
             btnCadastrar.Name = "btnCadastrar";
             btnCadastrar.Size = new Size(113, 33);
             btnCadastrar.TabIndex = 30;
@@ -153,6 +165,7 @@
             picImagem3.Location = new Point(631, 149);
             picImagem3.Name = "picImagem3";
             picImagem3.Size = new Size(133, 175);
+            picImagem3.SizeMode = PictureBoxSizeMode.Zoom;
             picImagem3.TabIndex = 27;
             picImagem3.TabStop = false;
             // 
@@ -161,6 +174,7 @@
             picImagem2.Location = new Point(473, 149);
             picImagem2.Name = "picImagem2";
             picImagem2.Size = new Size(133, 175);
+            picImagem2.SizeMode = PictureBoxSizeMode.Zoom;
             picImagem2.TabIndex = 26;
             picImagem2.TabStop = false;
             // 
@@ -169,6 +183,7 @@
             picImagem1.Location = new Point(315, 149);
             picImagem1.Name = "picImagem1";
             picImagem1.Size = new Size(133, 175);
+            picImagem1.SizeMode = PictureBoxSizeMode.Zoom;
             picImagem1.TabIndex = 25;
             picImagem1.TabStop = false;
             // 
@@ -439,5 +454,6 @@
         private Label lblMarca;
         private Button btnCancelar;
         private Button btnCadastrar;
+        private Button btnSelecionarImagens1;
     }
 }

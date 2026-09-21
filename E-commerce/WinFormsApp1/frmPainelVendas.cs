@@ -320,6 +320,7 @@ namespace Ecommerce
             btnDinheiro.BackColor = SystemColors.Control;
 
             pagamentoCartaoSelecionado = null;
+            pcbProduto.Image = null;
         }
 
         private void AtualizarSubTotal()
@@ -390,7 +391,7 @@ namespace Ecommerce
                 }
 
                 Conexao conexao = new Conexao();
-                string sql = "SELECT p.id AS 'ID_PRODUTO', p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO', p.estoque as 'ESTOQUE' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.id LIKE @filtro OR p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro OR p.estoque LIKE @filtro) AND p.status_ativo = 'A'";
+                string sql = "SELECT p.id AS 'ID_PRODUTO', p.ean AS 'CÓDIGO', p.nome AS 'NOME', c.nome AS 'CATEGORIA', p.descricao 'DESCRIÇÃO', p.marca AS 'MARCA', p.preco AS 'PREÇO', p.estoque as 'ESTOQUE' , p.imagem1 AS 'IMAGEM1' FROM tblproduto p INNER JOIN  tblcategoria c ON p.categoria_id = c.id WHERE (p.id LIKE @filtro OR p.ean LIKE @filtro OR p.nome LIKE @filtro OR p.descricao LIKE @filtro OR p.preco LIKE @filtro OR p.estoque LIKE @filtro) AND p.status_ativo = 'A'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -415,6 +416,18 @@ namespace Ecommerce
                             lblRetornoCategoria.Text = dt.Rows[0]["CATEGORIA"].ToString();
                             lblRetornoCodigo.Text = dt.Rows[0]["CÓDIGO"].ToString();
                             lblRetornoEstoque.Text = dt.Rows[0]["ESTOQUE"].ToString();
+
+                            object valorImagem = dt.Rows[0]["IMAGEM1"];
+
+                            if (valorImagem == null || valorImagem == DBNull.Value)
+                            {
+                                pcbProduto.Image = null;
+                            }
+                            else
+                            {
+                                string caminhoCompleto = Path.Combine(Application.StartupPath, "Imagens", "Produtos", valorImagem.ToString());
+                                pcbProduto.Image = File.Exists(caminhoCompleto) ? Image.FromFile(caminhoCompleto) : null;
+                            }
 
                             return true;
                         }

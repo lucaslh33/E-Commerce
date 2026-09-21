@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Ecommerce
 {
@@ -16,14 +17,14 @@ namespace Ecommerce
             InitializeComponent();
         }
 
-     
+
 
         public DataTable CarregarProduto()
         {
             try
             {
                 Conexao conexao = new Conexao();
-                string sql = "SELECT ean AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA', estoque AS 'ESTOQUE' FROM tblproduto WHERE (ean LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro or estoque LIKE @filtro) AND status_ativo = 'A'";
+                string sql = "SELECT id AS 'ID', ean AS 'CÓDIGO', nome AS 'NOME', descricao AS 'DESCRIÇÂO', marca AS 'MARCA', estoque AS 'ESTOQUE' FROM tblproduto WHERE (ean LIKE @filtro OR nome LIKE @filtro OR descricao LIKE @filtro or estoque LIKE @filtro) AND status_ativo = 'A'";
 
                 using (SqlConnection con = conexao.Conectar())
                 {
@@ -49,20 +50,26 @@ namespace Ecommerce
         private void frmConsultarProdutos_Load(object sender, EventArgs e)
         {
             CarregarProduto();
-           
+
+            if (dgvConsultarProduto.Columns.Contains("ID"))
+                dgvConsultarProduto.Columns["ID"].Visible = false;
+
+            if (dgvConsultarProduto.Columns.Contains("IMAGEM1"))
+                dgvConsultarProduto.Columns["IMAGEM1"].Visible = false;
+
         }
 
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
             CarregarProduto();
-            
+
         }
 
         private void removerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                string id = Convert.ToString(dgvConsultarProduto.CurrentRow.Cells["CÓDIGO"].Value);
+                string id = Convert.ToString(dgvConsultarProduto.CurrentRow.Cells["ID"].Value);
 
                 DialogResult result = MessageBox.Show($"Tem certeza que deseja remover o produto: {dgvConsultarProduto.CurrentRow.Cells["NOME"].Value}", "Confirmação de remoção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -91,7 +98,28 @@ namespace Ecommerce
 
         private void dgvConsultarProduto_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-   
+
+        }
+
+        private void dgvConsultarProduto_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvConsultarProduto.CurrentRow == null) return;
+
+            object valorImagem = dgvConsultarProduto.CurrentRow.Cells["IMAGEM1"].Value;
+
+            if (valorImagem == null || valorImagem == DBNull.Value)
+            {
+                picProduto.Image = null;
+                return;
+            }
+
+            string nomeArquivo = valorImagem.ToString();
+            string caminhoCompleto = Path.Combine(Application.StartupPath, "Imagens", "Produtos", nomeArquivo);
+
+            if (File.Exists(caminhoCompleto))
+                picProduto.Image = Image.FromFile(caminhoCompleto);
+            else
+                picProduto.Image = null;
         }
     }
 }
