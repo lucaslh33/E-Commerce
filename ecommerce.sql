@@ -260,7 +260,7 @@ BEGIN
 		SELECT ISNULL(SUM(quantidade * preco), 0 )
 		From tblitempedido
 		WHERE pedido_id = tblpedido.id
-	)
+	) - desconto
 	WHERE id IN (
 	SELECT pedido_id FROM inserted
 	UNION
