@@ -98,6 +98,10 @@ namespace Ecommerce
             frmConsultarProdutoInativo.ShowDialog();
         }
 
-        
+        private void relatoriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRelatorio frmRelatorio = new frmRelatorio();
+            frmRelatorio.ShowDialog();
+        }
     }
 }

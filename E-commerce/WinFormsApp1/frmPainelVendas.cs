@@ -27,7 +27,7 @@ namespace Ecommerce
         {
 
         }
-        
+
 
         private bool SalvarVenda()
         {
@@ -91,7 +91,7 @@ namespace Ecommerce
                             cmdPedido.Parameters.AddWithValue("@total", ObterTotalVenda());
                             cmdPedido.Parameters.AddWithValue("@endereco_id", enderecoId);
                             cmdPedido.Parameters.AddWithValue("@forma_pagamento_id", formaPagamento.Value);
-                            
+
 
                             pedidoId = Convert.ToInt32(cmdPedido.ExecuteScalar());
                         }
@@ -309,6 +309,7 @@ namespace Ecommerce
             clienteId = null;
             nomeCliente = null;
             cmbEndereco.Items.Clear();
+            cmbEndereco.Text = "";
 
 
             rdbPorcentagem.Checked = false;
@@ -529,7 +530,7 @@ namespace Ecommerce
             }
         }
 
-        private int? enderecoId =null;
+        private int? enderecoId = null;
         private void CarregarEnderecos()
         {
             cmbEndereco.Items.Clear();
@@ -543,7 +544,7 @@ namespace Ecommerce
             {
                 cmd.Parameters.AddWithValue("@cliente_id", clienteId);
 
-                using(SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -553,7 +554,7 @@ namespace Ecommerce
                             Endereco = $"{reader["rua"]},{reader["numero"]} - {reader["bairro"]} - {reader["cidade"]}/{reader["estado"]} - CEP: {reader["cep"]}"
                         });
                     }
-                    
+
                     if (cmbEndereco.Items.Count > 0)
                         cmbEndereco.SelectedIndex = 0;
                 }
@@ -689,6 +690,10 @@ namespace Ecommerce
             mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-        
+        private void btnRelatorio_Click(object sender, EventArgs e)
+        {
+            frmRelatorio frmRelatorio = new frmRelatorio();
+            frmRelatorio.ShowDialog();
+        }
     }
 }

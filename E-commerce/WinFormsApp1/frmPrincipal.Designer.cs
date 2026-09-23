@@ -141,28 +141,28 @@
             // clienteToolStripMenuItem
             // 
             clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            clienteToolStripMenuItem.Size = new Size(180, 22);
+            clienteToolStripMenuItem.Size = new Size(139, 22);
             clienteToolStripMenuItem.Text = "Clientes";
             clienteToolStripMenuItem.Click += clienteToolStripMenuItem_Click;
             // 
             // fornecedorToolStripMenuItem
             // 
             fornecedorToolStripMenuItem.Name = "fornecedorToolStripMenuItem";
-            fornecedorToolStripMenuItem.Size = new Size(180, 22);
+            fornecedorToolStripMenuItem.Size = new Size(139, 22);
             fornecedorToolStripMenuItem.Text = "Fornecedors";
             fornecedorToolStripMenuItem.Click += fornecedorToolStripMenuItem_Click;
             // 
             // produtoToolStripMenuItem
             // 
             produtoToolStripMenuItem.Name = "produtoToolStripMenuItem";
-            produtoToolStripMenuItem.Size = new Size(180, 22);
+            produtoToolStripMenuItem.Size = new Size(139, 22);
             produtoToolStripMenuItem.Text = "Produtos";
             produtoToolStripMenuItem.Click += produtoToolStripMenuItem_Click;
             // 
             // categoriaToolStripMenuItem1
             // 
             categoriaToolStripMenuItem1.Name = "categoriaToolStripMenuItem1";
-            categoriaToolStripMenuItem1.Size = new Size(180, 22);
+            categoriaToolStripMenuItem1.Size = new Size(139, 22);
             categoriaToolStripMenuItem1.Text = "Categorias";
             categoriaToolStripMenuItem1.Click += categoriaToolStripMenuItem1_Click;
             // 
@@ -171,6 +171,7 @@
             relatoriosToolStripMenuItem.Name = "relatoriosToolStripMenuItem";
             relatoriosToolStripMenuItem.Size = new Size(71, 20);
             relatoriosToolStripMenuItem.Text = "Relatórios";
+            relatoriosToolStripMenuItem.Click += relatoriosToolStripMenuItem_Click;
             // 
             // vendasToolStripMenuItem
             // 

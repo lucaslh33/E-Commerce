@@ -868,6 +868,7 @@
             btnRelatorio.TabIndex = 5;
             btnRelatorio.Text = "📈 Relatórios";
             btnRelatorio.UseVisualStyleBackColor = true;
+            btnRelatorio.Click += btnRelatorio_Click;
             // 
             // btnCaixa
             // 
