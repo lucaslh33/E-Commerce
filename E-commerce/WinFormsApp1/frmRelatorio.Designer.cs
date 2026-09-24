@@ -37,6 +37,7 @@
             dgvRelatorioVendas = new DataGridView();
             lblTotalVendas = new Label();
             lblQuantidadePedidos = new Label();
+            cmbTipoRelatorio = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvRelatorioVendas).BeginInit();
             SuspendLayout();
             // 
@@ -52,14 +53,14 @@
             // 
             // dtpInicio
             // 
-            dtpInicio.Location = new Point(86, 72);
+            dtpInicio.Location = new Point(86, 106);
             dtpInicio.Name = "dtpInicio";
             dtpInicio.Size = new Size(228, 23);
             dtpInicio.TabIndex = 7;
             // 
             // dtpFim
             // 
-            dtpFim.Location = new Point(414, 72);
+            dtpFim.Location = new Point(414, 106);
             dtpFim.Name = "dtpFim";
             dtpFim.Size = new Size(200, 23);
             dtpFim.TabIndex = 8;
@@ -67,7 +68,7 @@
             // lblDataInicial
             // 
             lblDataInicial.AutoSize = true;
-            lblDataInicial.Location = new Point(12, 78);
+            lblDataInicial.Location = new Point(12, 112);
             lblDataInicial.Name = "lblDataInicial";
             lblDataInicial.Size = new Size(68, 15);
             lblDataInicial.TabIndex = 9;
@@ -76,7 +77,7 @@
             // lblDataFinal
             // 
             lblDataFinal.AutoSize = true;
-            lblDataFinal.Location = new Point(346, 78);
+            lblDataFinal.Location = new Point(346, 112);
             lblDataFinal.Name = "lblDataFinal";
             lblDataFinal.Size = new Size(62, 15);
             lblDataFinal.TabIndex = 10;
@@ -84,7 +85,7 @@
             // 
             // btnGerarRelatorio
             // 
-            btnGerarRelatorio.Location = new Point(12, 101);
+            btnGerarRelatorio.Location = new Point(12, 77);
             btnGerarRelatorio.Name = "btnGerarRelatorio";
             btnGerarRelatorio.Size = new Size(105, 23);
             btnGerarRelatorio.TabIndex = 11;
@@ -108,24 +109,33 @@
             lblTotalVendas.AutoSize = true;
             lblTotalVendas.Location = new Point(12, 614);
             lblTotalVendas.Name = "lblTotalVendas";
-            lblTotalVendas.Size = new Size(76, 15);
+            lblTotalVendas.Size = new Size(0, 15);
             lblTotalVendas.TabIndex = 13;
-            lblTotalVendas.Text = "Total Vendas:";
             // 
             // lblQuantidadePedidos
             // 
             lblQuantidadePedidos.AutoSize = true;
             lblQuantidadePedidos.Location = new Point(483, 614);
             lblQuantidadePedidos.Name = "lblQuantidadePedidos";
-            lblQuantidadePedidos.Size = new Size(117, 15);
+            lblQuantidadePedidos.Size = new Size(0, 15);
             lblQuantidadePedidos.TabIndex = 14;
-            lblQuantidadePedidos.Text = "Quantidade Pedidos:";
+            // 
+            // cmbTipoRelatorio
+            // 
+            cmbTipoRelatorio.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbTipoRelatorio.FormattingEnabled = true;
+            cmbTipoRelatorio.Location = new Point(123, 77);
+            cmbTipoRelatorio.Name = "cmbTipoRelatorio";
+            cmbTipoRelatorio.Size = new Size(191, 23);
+            cmbTipoRelatorio.TabIndex = 15;
+            cmbTipoRelatorio.SelectedIndexChanged += cmbTipoRelatorio_SelectedIndexChanged;
             // 
             // frmRelatorio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(637, 674);
+            Controls.Add(cmbTipoRelatorio);
             Controls.Add(lblQuantidadePedidos);
             Controls.Add(lblTotalVendas);
             Controls.Add(dgvRelatorioVendas);
@@ -137,6 +147,7 @@
             Controls.Add(lblRelatorio);
             Name = "frmRelatorio";
             Text = "frmRelatorio";
+            Load += frmRelatorio_Load;
             ((System.ComponentModel.ISupportInitialize)dgvRelatorioVendas).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -152,5 +163,6 @@
         private DataGridView dgvRelatorioVendas;
         private Label lblTotalVendas;
         private Label lblQuantidadePedidos;
+        private ComboBox cmbTipoRelatorio;
     }
 }
