@@ -1,63 +1,88 @@
 # E-commerce Desktop
 
-Sistema desktop de gestão para e-commerce, desenvolvido em **C# (.NET / Windows Forms)** com **SQL Server** como banco de dados.
+Aplicativo desktop de gestão para uma loja, desenvolvido como projeto de estudo e portfólio. O sistema reúne cadastros, consulta de endereços, ponto de venda (PDV), controle de estoque e relatórios em uma aplicação Windows.
 
-O projeto simula o back-office de uma loja online: cadastro de clientes, produtos, fornecedores e categorias, além de um módulo de PDV (ponto de venda) para registrar as vendas. A ideia é praticar, de ponta a ponta, o que se usa no dia a dia de um desenvolvedor back-end — modelagem de banco relacional, regras de negócio, transações e consumo de API.
+> Os pagamentos são simulados. O projeto não processa transações reais e não deve receber dados reais de cartão.
 
 ## Tecnologias
 
-- C# / .NET (Windows Forms)
-- SQL Server + ADO.NET (Microsoft.Data.SqlClient)
-- API REST (ViaCEP) para consulta de endereço
-- Git / GitHub
+- C# e .NET 10 para Windows Forms
+- SQL Server e ADO.NET (`Microsoft.Data.SqlClient`)
+- BCrypt para verificação de senhas
+- API ViaCEP para consulta de endereços por CEP
 
-## O que já está funcionando
+## Funcionalidades
 
-**Clientes, produtos, fornecedores e categorias**
-CRUD completo pra cada um, com exclusão lógica (soft delete) em vez de apagar o registro do banco — mantém histórico e evita quebrar vendas antigas que referenciam esses dados.
+- Login de usuário com senha armazenada como hash BCrypt.
+- Cadastro, consulta, edição e exclusão lógica de clientes, produtos, fornecedores e categorias.
+- Cadastro de endereços associados a clientes e preenchimento de rua, bairro, cidade e estado pelo ViaCEP.
+- PDV com busca de produtos, carrinho, quantidades, descontos, seleção de cliente/endereço e registro de pedidos.
+- Cadastro de até três imagens por produto, armazenadas localmente.
+- Registro de formas de pagamento demonstrativas: Pix, cartão, boleto e dinheiro, com cálculo de troco para dinheiro.
+- Relatórios de vendas por período, produtos mais vendidos, vendas por forma de pagamento e estoque baixo.
+- Persistência do pedido e dos itens em uma transação SQL; o banco possui um gatilho para baixar o estoque.
 
-**Endereços**
-Cadastro vinculado ao cliente, com preenchimento automático de rua, bairro, cidade e estado via API do ViaCEP a partir do CEP.
+## Estrutura
 
-**PDV (ponto de venda)**
-- Busca de produto por código/nome/descrição
-- Carrinho com controle de quantidade
-- Aplicação de desconto (percentual ou valor fixo)
-- Seleção de forma de pagamento (Pix, cartão, boleto, dinheiro — com cálculo de troco)
-- Ao finalizar a venda, o pedido e os itens são gravados no banco dentro de uma transação: se algo falhar no meio do processo, tudo é desfeito (rollback), garantindo que não fique nenhum dado gravado pela metade
-
-**Banco de dados**
-Modelagem relacional com chaves estrangeiras entre clientes, endereços, produtos, categorias, fornecedores, pedidos e itens de pedido. Uso de trigger para baixa automática de estoque quando um item de venda é inserido.
-
-## Em desenvolvimento
-
-- Refinar o pagamento no cartão (hoje a forma é registrada, mas ainda não guardo detalhes como parcelas)
-- Upload de imagem dos produtos
-- Tela de login e controle de permissões
-- Relatórios e dashboard de vendas
-- Emissão/impressão de comprovante
-
-## Estrutura do projeto
-
-```
-Ecommerce
-├── Clientes
-├── Endereços
-├── Produtos
-├── Categorias
-├── Fornecedores
-├── PDV / Pedidos
-└── Banco de Dados (SQL Server)
+```text
+E-Commerce/
+├── ecommerce.sql
+└── E-commerce/
+    ├── E-commerce.slnx
+    └── WinFormsApp1/
+        ├── Ecommerce.csproj
+        ├── Program.cs
+        ├── Conexão.cs
+        ├── frm*.cs
+        └── ...
 ```
 
-## Sobre o projeto
+Os formulários WinForms contêm as telas e parte das operações de banco de dados. O arquivo `ecommerce.sql` reúne a estrutura do banco, procedimentos, gatilhos e consultas de exemplo.
 
-Este é meu principal projeto de portfólio enquanto curso Técnico em Desenvolvimento de Sistemas no SENAC (conclusão prevista maio/2027). Ele existe pra eu praticar programação orientada a objetos, banco de dados relacional e boas práticas de back-end de forma aplicada — não só em exercícios isolados, mas num sistema com regras de negócio reais.
+## Requisitos
 
-Fico corrigindo e evoluindo aos poucos, então commits recentes costumam ser onde a coisa mais interessante está acontecendo.
+- Windows
+- SDK do .NET 10
+- SQL Server acessível pela máquina
+- Permissão para criar/usar o banco `ecommerce`
+
+## Configuração local
+
+1. Clone o repositório:
+
+   ```powershell
+   git clone https://github.com/lucaslh33/E-Commerce.git
+   cd E-Commerce
+   ```
+
+2. Configure a conexão com o SQL Server em `E-commerce/WinFormsApp1/Conexão.cs`. A configuração atual usa o servidor local (`localhost`), o banco `ecommerce` e autenticação integrada do Windows. Ajuste o servidor e o método de autenticação para o seu ambiente.
+
+3. Prepare o banco `ecommerce` usando `ecommerce.sql` no SQL Server Management Studio. **O script está em evolução e ainda não é um instalador de execução única:** as instruções `CREATE PROCEDURE` precisam estar em lotes separados (`GO`), e a consulta de relatório ao final depende das variáveis `@dataInicio` e `@dataFim`. Revise e execute o arquivo por seções; não o rode em um banco com dados importantes sem conferir os comandos de exemplo.
+
+4. Garanta que exista um usuário ativo em `tblusuario` com senha compatível com BCrypt. Use uma conta de teste; não reutilize uma senha pessoal.
+
+5. Restaure as dependências e inicie o aplicativo:
+
+   ```powershell
+   dotnet run --project .\E-commerce\WinFormsApp1\Ecommerce.csproj
+   ```
+
+## Escopo e limitações atuais
+
+- Pix, boleto e cartão são apenas formas registradas pelo aplicativo; não há integração com banco, adquirente ou serviço de pagamento.
+- A tela de cartão solicita número, validade e CVV para a simulação. Embora o banco guarde somente os últimos dígitos, use exclusivamente dados fictícios.
+- O campo de conexão está definido no código e inclui `TrustServerCertificate=True`, adequado apenas para desenvolvimento local controlado. Não use essa configuração como padrão de produção.
+- A opção débito da tela de cartão ainda é registrada no banco como cartão de crédito; a distinção precisa ser corrigida antes de usar o relatório por forma de pagamento para essa comparação.
+- A configuração do banco e as instruções de inicialização ainda precisam ser consolidadas em um processo reproduzível.
+
+## Próximas melhorias
+
+- Separar acesso a dados e regras de negócio dos formulários para facilitar manutenção e testes.
+- Adicionar testes automatizados para descontos, estoque e totalização de pedidos.
+- Centralizar a configuração do banco fora do código-fonte.
+- Finalizar a preparação automatizada do banco e documentar uma conta de demonstração segura.
+- Integrar um provedor de pagamentos antes de qualquer uso com transações reais.
 
 ## Autor
 
-**Lucas Henrique Silva Pereira**
-
-[LinkedIn](https://www.linkedin.com/in/lucas-henrique-78a76a381) · [GitHub](https://github.com/lucaslh33)
+Lucas Henrique Silva Pereira · [GitHub](https://github.com/lucaslh33) · [LinkedIn](https://linkedin.com/in/lucas-henrique-78a76a381)
