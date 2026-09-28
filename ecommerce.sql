@@ -13,7 +13,7 @@ status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 INSERT INTO tblusuario (nome, email, senha) 
 VALUES ('Lucas', 'lucas@teste.com', 'COLE_O_HASH_AQUI');
 
-SELECT * FROM tblusuario
+
 
 SELECT senha, LEN(senha)
 FROM tblusuario
@@ -189,7 +189,7 @@ EXEC sp_CadastrarProduto
     @fornecedor_id = 1,
     @categoria_id = 1;
 
-select * from tblproduto
+
 
 CREATE PROCEDURE sp_CriarPedido
     @cliente_id INT,
@@ -272,16 +272,4 @@ EXEC sp_settriggerorder
 	@order = 'First',
 	@stmttype = 'INSERT'
 
-SELECT 
-    p.id AS 'Pedido',
-    c.nome AS 'Cliente',
-    p.data_pedido AS 'Data',
-    p.subtotal AS 'Subtotal',
-    p.desconto AS 'Desconto',
-    p.total AS 'Total',
-    fp.descricao AS 'Pagamento'
-FROM tblpedido p
-INNER JOIN tblcliente c ON p.cliente_id = c.id
-LEFT JOIN tblformapagamento fp ON p.forma_pagamento_id = fp.id
-WHERE p.data_pedido BETWEEN @dataInicio AND @dataFim
-ORDER BY p.data_pedido DESC
+

@@ -239,6 +239,12 @@ namespace Ecommerce
                     return;
                 }
 
+                if(valor < 0)
+                {
+                    MessageBox.Show("O desconto não pode ser negativo!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 if (rdbPorcentagem.Checked)
                 {
                     descontoAplicado = total * (valor / 100m);
