@@ -41,30 +41,6 @@ namespace Ecommerce
                     try
                     {
 
-                        /*int enderecoId;
-                        string sqlEndereco = "SELECT TOP 1 id FROM tblendereco WHERE cliente_id = @cliente_id ORDER BY id DESC";
-
-                        using (SqlCommand cmdEndereco = new SqlCommand(sqlEndereco, con, transaction))
-                        {
-                            cmdEndereco.Parameters.AddWithValue("@cliente_id", clienteId);
-
-                            object resultado = cmdEndereco.ExecuteScalar();
-
-
-                            if (resultado == null)
-                            {
-                                MessageBox.Show("Este cliente não possui endereço cadastrado. Cadastre um endereço antes de finalizar a venda.",
-                                    "Endereço não encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                transaction.Rollback();
-                                return false;
-                            }
-
-                            enderecoId = Convert.ToInt32(resultado);
-
-                            
-
-                        }*/
-
                         if (cmbEndereco.SelectedItem == null)
                         {
                             MessageBox.Show("Selecione um endereço antes de finalizar a venda.", "Endereço não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -239,7 +215,7 @@ namespace Ecommerce
                     return;
                 }
 
-                if(valor < 0)
+                if (valor < 0)
                 {
                     MessageBox.Show("O desconto não pode ser negativo!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
@@ -454,15 +430,7 @@ namespace Ecommerce
             }
         }
 
-        private void dgvItemVenda_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
-
-        private void txtCodigoBarras_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void frmPainelVendas_Load(object sender, EventArgs e)
         {
@@ -472,10 +440,6 @@ namespace Ecommerce
             mskData.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             timer1.Interval = 1000;
             timer1.Start();
-
-
-
-
 
         }
 

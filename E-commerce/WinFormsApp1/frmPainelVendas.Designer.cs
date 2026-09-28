@@ -499,7 +499,7 @@
             dgvItemVenda.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvItemVenda.Size = new Size(571, 219);
             dgvItemVenda.TabIndex = 1;
-            dgvItemVenda.CellContentClick += dgvItemVenda_CellContentClick;
+
             // 
             // lbItensVenda
             // 
@@ -597,7 +597,7 @@
             txtCodigoBarras.Name = "txtCodigoBarras";
             txtCodigoBarras.Size = new Size(456, 29);
             txtCodigoBarras.TabIndex = 1;
-            txtCodigoBarras.TextChanged += txtCodigoBarras_TextChanged;
+
             txtCodigoBarras.Enter += txtCodigoBarras_Enter;
             txtCodigoBarras.KeyDown += txtCodigoBarras_KeyDown;
             txtCodigoBarras.Leave += txtCodigoBarras_Leave;

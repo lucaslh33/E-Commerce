@@ -82,7 +82,7 @@ namespace Ecommerce
 
             try
             {
-                using(SqlConnection con = conexao.Conectar())
+                using (SqlConnection con = conexao.Conectar())
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.Parameters.AddWithValue("@dataInicio", dtpInicio.Value.Date);
@@ -103,7 +103,7 @@ namespace Ecommerce
             {
                 MessageBox.Show("Erro ao gerar relatório: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-                                
+
         }
 
         private void GerarRelatorioFormaPagamento()
@@ -121,7 +121,7 @@ namespace Ecommerce
 
             try
             {
-                using(SqlConnection con = conexao.Conectar())
+                using (SqlConnection con = conexao.Conectar())
                 using (SqlCommand cmd = new SqlCommand(sql, con))
                 {
                     cmd.Parameters.AddWithValue("@dataInicio", dtpInicio.Value.Date);
@@ -135,7 +135,7 @@ namespace Ecommerce
 
                     decimal totalGeral = dt.AsEnumerable().Sum(r => Convert.ToDecimal(r["Total Recebido"]));
                     lblTotalVendas.Text = "Total Geral: " + totalGeral.ToString("C2");
-                    lblQuantidadePedidos.Text = "Formas de pagamento: " + dt.Rows.Count; 
+                    lblQuantidadePedidos.Text = "Formas de pagamento: " + dt.Rows.Count;
                 }
             }
             catch (Exception ex)
