@@ -1,7 +1,7 @@
 CREATE DATABASE ecommerce
-
+GO
 USE ecommerce
-
+GO
 CREATE TABLE tblusuario (
 id INT PRIMARY KEY IDENTITY(1,1),
 nome VARCHAR(100) NOT NULL,
@@ -9,20 +9,7 @@ email VARCHAR(100) UNIQUE NOT NULL,
 senha VARCHAR(255) NOT NULL,
 status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
-
-INSERT INTO tblusuario (nome, email, senha) 
-VALUES ('Lucas', 'lucas@teste.com', 'COLE_O_HASH_AQUI');
-
-
-
-SELECT senha, LEN(senha)
-FROM tblusuario
-WHERE email = 'lucas@teste.com';
-
-
-UPDATE tblusuario 
-SET senha = '$2a$11$e5J3mpXI9a40V.P1u1zS9.vb/uEfY.YJQLWLlkXHYyU/d3u1P5zca' 
-WHERE email = 'lucas@teste.com'
+GO
 
 CREATE TABLE tblcliente (
 id INT PRIMARY KEY IDENTITY(1,1),
@@ -35,6 +22,7 @@ telefone VARCHAR(15),
 senha VARCHAR(255) NOT NULL,
 status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
+GO
 
 CREATE TABLE tblfornecedor (
 id INT PRIMARY KEY IDENTITY(1,1),
@@ -53,14 +41,14 @@ estado CHAR(2),
 observacoes VARCHAR(MAX),
 status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
-
+GO
 CREATE TABLE tblcategoria(
 id INT PRIMARY KEY IDENTITY,
 nome VARCHAR(100) NOT NULL,
 descricao VARCHAR(255),
 status_ativo CHAR(1) NOT NULL DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
-
+GO
 
 CREATE TABLE tblendereco(
 id INT PRIMARY KEY IDENTITY,
@@ -75,7 +63,7 @@ cep CHAR(9) NOT NULL,
 observacoes VARCHAR(MAX)
 )
 
-
+GO
 
 CREATE TABLE tblproduto (
 id INT PRIMARY KEY IDENTITY,
@@ -98,6 +86,8 @@ categoria_id INT NOT NULL FOREIGN KEY REFERENCES tblcategoria(id),
 status_ativo CHAR(1) DEFAULT 'A' CHECK (status_ativo IN ('A','I'))
 )
 
+GO
+
 CREATE TABLE tblformapagamento (
 id INT PRIMARY KEY IDENTITY,
 descricao VARCHAR(50) NOT NULL,
@@ -111,6 +101,7 @@ VALUES
 ('Boleto'),
 ('Dinheiro');
 
+GO
 
 CREATE TABLE tblpedido (
 id INT PRIMARY KEY IDENTITY,
@@ -133,6 +124,8 @@ FOREIGN KEY (forma_pagamento_id) REFERENCES tblformapagamento(id)
 
 )
 
+GO
+
 CREATE TABLE tblpagamento_cartao (
 id INT PRIMARY KEY IDENTITY,
 pedido_id INT NOT NULL,
@@ -142,6 +135,8 @@ ultimos_digitos CHAR(4) NOT NULL,
 CONSTRAINT FK_PagamentoCartao_Pedido
 FOREIGN KEY (pedido_id) REFERENCES tblpedido(id)
 );
+
+GO
 
 CREATE TABLE tblitempedido (
 id INT PRIMARY KEY IDENTITY,
@@ -158,6 +153,8 @@ CONSTRAINT FK_ItemPedido_Produto
 FOREIGN KEY (produto_id) REFERENCES tblproduto(id)
 )
 
+GO
+
 CREATE TABLE tblenvio (
 id INT PRIMARY KEY IDENTITY,
 pedido_id INT NOT NULL FOREIGN KEY REFERENCES tblpedido(id),
@@ -170,6 +167,8 @@ data_entrega DATETIME,
 status VARCHAR(30) DEFAULT 'Aguardando' 
 )
 
+GO
+
 CREATE PROCEDURE sp_CadastrarProduto
 	@nome VARCHAR(100),
 	@preco DECIMAL(10,2),
@@ -181,14 +180,6 @@ BEGIN
 	INSERT INTO tblproduto (nome, preco, estoque, fornecedor_id, categoria_id)
 	VALUES (@nome, @preco, @estoque, @fornecedor_id, @categoria_id)
 END
-
-EXEC sp_CadastrarProduto
-    @nome = 'Headset Gamer',
-    @preco = 299.90,
-    @estoque = 15,
-    @fornecedor_id = 1,
-    @categoria_id = 1;
-
 
 
 CREATE PROCEDURE sp_CriarPedido
@@ -204,10 +195,7 @@ BEGIN
     SELECT @pedido_id AS pedido_id
 END
 
-EXEC sp_CriarPedido
-    @cliente_id = 1,
-    @endereco_id = 1,
-    @forma_pagamento_id = 1;
+GO
 
 CREATE PROCEDURE sp_AdicionarItemPedido
 	@pedido_id INT,
@@ -224,13 +212,8 @@ BEGIN
 	INSERT INTO tblitempedido (pedido_id ,produto_id, quantidade, preco)
 	VALUES (@pedido_id, @produto_id, @quantidade, @preco)
 END
-EXEC sp_AdicionarItemPedido
-    @pedido_id = 1,
-    @produto_id = 1,
-    @quantidade = 2;
-SELECT * FROM tblpedido
-SELECT * FROM tblitempedido
-SELECT * FROM tblproduto
+
+GO
 
 CREATE TRIGGER trg_BaixarEstoque
 ON tblitempedido
@@ -250,6 +233,8 @@ BEGIN
 		END
 END
 
+GO
+
 CREATE TRIGGER trg_AtualizarTotalPedido
 ON tblitemPedido
 AFTER INSERT, DELETE, UPDATE
@@ -267,9 +252,3 @@ BEGIN
 	SELECT pedido_id FROM deleted
 	)
 END
-EXEC sp_settriggerorder
-	@triggername = 'trg_BaixarEstoque',
-	@order = 'First',
-	@stmttype = 'INSERT'
-
-
