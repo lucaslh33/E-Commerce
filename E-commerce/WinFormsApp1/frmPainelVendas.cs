@@ -73,7 +73,7 @@ namespace Ecommerce
                         }
 
 
-                        if (formaPagamento == 2 && pagamentoCartaoSelecionado != null)
+                        if ((formaPagamento == 2 || formaPagamento == 3) && pagamentoCartaoSelecionado != null)
                         {
                             string sqlCartao = @"INSERT INTO tblpagamento_cartao (pedido_id, tipo, nome_titular, ultimos_digitos)
                          VALUES (@pedido_id, @tipo, @nome_titular, @ultimos_digitos);";
@@ -631,7 +631,7 @@ namespace Ecommerce
             if (frmCartao.ShowDialog() == DialogResult.OK)
             {
                 pagamentoCartaoSelecionado = frmCartao.Pagamento;
-                formaPagamento = 2;
+                formaPagamento = pagamentoCartaoSelecionado.Tipo == TipoCartao.Credito ? 2: 3;
                 SelecionarPagamento(btnCartao);
             }
         }
