@@ -1,28 +1,30 @@
 # E-commerce Desktop
 
-Aplicativo desktop de gestão para uma loja, desenvolvido como projeto de estudo e portfólio. O sistema reúne cadastros, consulta de endereços, ponto de venda (PDV), controle de estoque e relatórios em uma aplicação Windows.
+Aplicativo desktop para gestão de uma loja, desenvolvido em C# com Windows Forms e SQL Server como projeto de estudo e portfólio.
 
-> Os pagamentos são simulados. O projeto não processa transações reais e não deve receber dados reais de cartão.
-
-## Tecnologias
-
-- C# e .NET 10 para Windows Forms
-- SQL Server e ADO.NET (`Microsoft.Data.SqlClient`)
-- BCrypt para verificação de senhas
-- API ViaCEP para consulta de endereços por CEP
+> **Projeto demonstrativo:** os pagamentos são simulados. Não há integração com banco ou operadora, então use apenas dados fictícios no formulário de cartão.
 
 ## Funcionalidades
 
-- Login de usuário com senha armazenada como hash BCrypt.
-- Cadastro, consulta, edição e exclusão lógica de clientes, produtos, fornecedores e categorias.
-- Cadastro de endereços associados a clientes e preenchimento de rua, bairro, cidade e estado pelo ViaCEP.
-- PDV com busca de produtos, carrinho, quantidades, descontos, seleção de cliente/endereço e registro de pedidos.
+- Login com verificação de senha usando BCrypt.
+- Cadastro, consulta, edição e desativação de clientes, produtos, fornecedores e categorias.
+- Cadastro de endereços de clientes e preenchimento de endereço pelo CEP usando a API ViaCEP.
 - Cadastro de até três imagens por produto, armazenadas localmente.
-- Registro de formas de pagamento demonstrativas: Pix, cartão, boleto e dinheiro, com cálculo de troco para dinheiro.
-- Relatórios de vendas por período, produtos mais vendidos, vendas por forma de pagamento e estoque baixo.
-- Persistência do pedido e dos itens em uma transação SQL; o banco possui um gatilho para baixar o estoque.
+- PDV com busca de produtos, carrinho, seleção de cliente e endereço, descontos percentuais ou por valor e registro de pedidos.
+- O desconto é validado e limpo quando os itens do carrinho são alterados.
+- Formas de pagamento demonstrativas: Pix, crédito, débito, boleto e dinheiro. Para dinheiro, o sistema calcula o troco.
+- Relatórios de vendas por período, produtos mais vendidos, formas de pagamento e estoque baixo.
+- Pedido e itens gravados em uma transação SQL. Gatilhos do banco recalculam os totais e baixam o estoque, impedindo a venda quando não há quantidade suficiente.
 
-## Estrutura
+## Tecnologias
+
+- C# e .NET 10 com Windows Forms.
+- SQL Server e ADO.NET (`Microsoft.Data.SqlClient`).
+- `BCrypt.Net-Next` para verificação de senhas.
+- API ViaCEP para consulta de endereços.
+- Newtonsoft.Json para leitura de respostas JSON.
+
+## Estrutura do repositório
 
 ```text
 E-Commerce/
@@ -37,16 +39,17 @@ E-Commerce/
         └── ...
 ```
 
-Os formulários WinForms contêm as telas e parte das operações de banco de dados. O arquivo `ecommerce.sql` reúne a estrutura do banco, procedimentos, gatilhos e consultas de exemplo.
+O arquivo `ecommerce.sql`, na raiz, cria o banco, as tabelas, procedimentos armazenados e gatilhos. Os formulários da pasta `WinFormsApp1` contêm as telas e parte das operações com o banco.
 
 ## Requisitos
 
-- Windows
-- SDK do .NET 10
-- SQL Server acessível pela máquina
-- Permissão para criar/usar o banco `ecommerce`
+- Windows.
+- SDK do .NET 10.
+- SQL Server.
+- SQL Server Management Studio (SSMS) para executar o script do banco.
+- Internet para consultar endereços pela API ViaCEP.
 
-## Configuração local
+## Como executar
 
 1. Clone o repositório:
 
@@ -55,33 +58,46 @@ Os formulários WinForms contêm as telas e parte das operações de banco de da
    cd E-Commerce
    ```
 
-2. Configure a conexão com o SQL Server em `E-commerce/WinFormsApp1/Conexão.cs`. A configuração atual usa o servidor local (`localhost`), o banco `ecommerce` e autenticação integrada do Windows. Ajuste o servidor e o método de autenticação para o seu ambiente.
+2. Inicie uma instância do SQL Server. No SSMS, abra e execute `ecommerce.sql`.
 
-3. Prepare o banco `ecommerce` usando `ecommerce.sql` no SQL Server Management Studio. **O script está em evolução e ainda não é um instalador de execução única:** as instruções `CREATE PROCEDURE` precisam estar em lotes separados (`GO`), e a consulta de relatório ao final depende das variáveis `@dataInicio` e `@dataFim`. Revise e execute o arquivo por seções; não o rode em um banco com dados importantes sem conferir os comandos de exemplo.
+   O script cria o banco `ecommerce` quando ele ainda não existe, cria tabelas ausentes, insere as formas de pagamento padrão sem duplicá-las e cria ou atualiza procedimentos e gatilhos. **Ele não atualiza a estrutura de tabelas que já existem.** Se você já tiver um banco `ecommerce`, confira a estrutura e faça backup antes de executar o script.
 
-4. Garanta que exista um usuário ativo em `tblusuario` com senha compatível com BCrypt. Use uma conta de teste; não reutilize uma senha pessoal.
+3. Confira a conexão em `E-commerce/WinFormsApp1/Conexão.cs`. O valor publicado usa o servidor `localhost`, o banco `ecommerce` e autenticação integrada do Windows. Ajuste o servidor para a sua instalação local.
 
-5. Restaure as dependências e inicie o aplicativo:
+4. Crie um usuário de teste. O script não cria uma conta de login. Gere um hash BCrypt localmente usando a dependência do projeto:
+
+   ```csharp
+   string hash = BCrypt.Net.BCrypt.EnhancedHashPassword("SuaSenhaDeTeste");
+   Console.WriteLine(hash);
+   ```
+
+   Em seguida, use o hash gerado para inserir uma conta de teste no banco:
+
+   ```sql
+   INSERT INTO dbo.tblusuario (nome, email, senha, status_ativo)
+   VALUES ('Usuário de teste', 'teste@exemplo.com', 'COLE_AQUI_O_HASH_GERADO', 'A');
+   ```
+
+   Use uma senha temporária que não seja utilizada em outros serviços.
+
+5. Execute o aplicativo a partir da pasta do repositório:
 
    ```powershell
    dotnet run --project .\E-commerce\WinFormsApp1\Ecommerce.csproj
    ```
 
-## Escopo e limitações atuais
+## Escopo e limitações
 
-- Pix, boleto e cartão são apenas formas registradas pelo aplicativo; não há integração com banco, adquirente ou serviço de pagamento.
-- A tela de cartão solicita número, validade e CVV para a simulação. Embora o banco guarde somente os últimos dígitos, use exclusivamente dados fictícios.
-- O campo de conexão está definido no código e inclui `TrustServerCertificate=True`, adequado apenas para desenvolvimento local controlado. Não use essa configuração como padrão de produção.
-- A opção débito da tela de cartão ainda é registrada no banco como cartão de crédito; a distinção precisa ser corrigida antes de usar o relatório por forma de pagamento para essa comparação.
-- A configuração do banco e as instruções de inicialização ainda precisam ser consolidadas em um processo reproduzível.
+- Pix, cartão e boleto são registrados apenas para demonstração. O sistema não processa pagamentos reais.
+- A tela de cartão solicita dados para a simulação, mas o banco armazena somente tipo, nome do titular e últimos quatro dígitos. Não informe dados reais.
+- A string de conexão está definida no código e contém `TrustServerCertificate=True`, configuração usada aqui para desenvolvimento local. Não use essa configuração como padrão para produção.
+- O script inicializa objetos ausentes, mas não substitui um sistema de migrações para alterar tabelas existentes.
 
 ## Próximas melhorias
 
-- Separar acesso a dados e regras de negócio dos formulários para facilitar manutenção e testes.
+- Separar as regras de negócio e o acesso a dados dos formulários.
 - Adicionar testes automatizados para descontos, estoque e totalização de pedidos.
-- Centralizar a configuração do banco fora do código-fonte.
-- Finalizar a preparação automatizada do banco e documentar uma conta de demonstração segura.
-- Integrar um provedor de pagamentos antes de qualquer uso com transações reais.
+- Mover a configuração da conexão para um arquivo de configuração local, fora do código-fonte.
 
 ## Autor
 
