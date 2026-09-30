@@ -51,7 +51,7 @@ namespace Ecommerce
                         int enderecoId = enderecoSelecionado.Id;
 
                         string sqlPedido = @"INSERT INTO tblpedido (cliente_id, data_pedido, subtotal, desconto, total, endereco_id, forma_pagamento_id, status) 
-                                           OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Concluído');";
+                                           OUTPUT INSERTED.id VALUES (@cliente_id, @data_pedido, @subtotal, @desconto, @total, @endereco_id, @forma_pagamento_id, 'Pendente');";
 
 
                         int pedidoId;
@@ -178,7 +178,7 @@ namespace Ecommerce
                     if (!SalvarVenda()) return;
 
                     lblRetornoTroco.Text = "R$ 0,00";
-                    MessageBox.Show("Pagamento realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Pedido registrado como pendente. O pagamento é simulado.", "Venda registrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
 
@@ -328,6 +328,13 @@ namespace Ecommerce
 
         private void AtualizarGrid()
         {
+
+            descontoAplicado = 0;
+            txtDesconto.Clear();
+            rdbPorcentagem.Checked = false;
+            rdbValor.Checked = false;
+
+
             dgvItemVenda.DataSource = null;
             dgvItemVenda.DataSource = itens;
 
