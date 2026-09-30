@@ -221,27 +221,37 @@ namespace Ecommerce
                     return;
                 }
 
+                decimal descontoCalculado;
+
                 if (rdbPorcentagem.Checked)
                 {
-                    descontoAplicado = total * (valor / 100m);
-                }
+                    if (valor > 100m)
+                    {
+                        MessageBox.Show("O desconto percentual não pode passar de 100%.");
+                        return;
+                    }
 
+                    descontoCalculado = total * (valor / 100m);
+                }
                 else if (rdbValor.Checked)
                 {
-                    descontoAplicado = valor;
+                    descontoCalculado = valor;
                 }
-
                 else
                 {
-                    MessageBox.Show("Selecione o tipo de desconto.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Selecione o tipo de desconto.", "Atenção!",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                if (descontoAplicado > total)
+                if (descontoCalculado > total)
                 {
-                    MessageBox.Show("O desconto não pode ser maior que o valor total da venda.", "Erro ao aplicar o desconto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("O desconto não pode ser maior que o valor total da venda.",
+                        "Erro ao aplicar o desconto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                descontoAplicado = descontoCalculado;
 
 
 
